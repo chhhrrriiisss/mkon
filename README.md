@@ -10,10 +10,6 @@ MkON is a completely modular control panel UI for Telemachus. The UI is designed
 - Go to your KSP Folder/Game Data/Telemachus/Plugins/PluginData/Telemachus folder and delete the existing contents.
 - Copy the contents of the MkON project into the above folder.
 
-## How to use
-
-_Coming soon_
-
 ## Features
 
 - Over 30 different buttons, dials, screens, scales and controls.
