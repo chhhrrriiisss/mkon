@@ -19,7 +19,7 @@ MkON is a completely modular control panel UI for Telemachus. The UI is designed
 
 ## Disclaimer
 
-This project is very much a work in progress and as such there is no current release. Optimization will focus exclusively on tablets and desktops/laptops first, before moving onto true mobile optimization. Currently tested working environments include:
+This project is very much a work in progress and as such there is no current release. Optimization will focus exclusively on tablets and desktops/laptops first. Currently tested working environments include:
 
 - Chrome, Safari, Firefox on Windows/OSX for desktops and laptops.
 - Chrome, Safari for iPad 4.
