@@ -1,0 +1,117 @@
+<p><a href="http://html5boilerplate.com">HTML5 Boilerplate homepage</a> | <a href="TOC.md">Documentation
+table of contents</a></p>
+<h1 id="the-html">The HTML</h1>
+<h2 id="conditional-html-classes">Conditional <code>html</code> classes</h2>
+<p>A series of IE conditional comments apply the relevant IE-specific classes to
+the <code>html</code> tag. This provides one method of specifying CSS fixes for specific
+legacy versions of IE. While you may or may not choose to use this technique in
+your project code, HTML5 Boilerplate&#39;s default CSS does not rely on it.</p>
+<p>When using the conditional classes technique, applying classes to the <code>html</code>
+element has several benefits:</p>
+<ul>
+<li>It avoids a <a href="http://webforscher.wordpress.com/2010/05/20/ie-6-slowing-down-ie-8/">file blocking
+issue</a>
+discovered by Stoyan Stefanov and Markus Leptien.</li>
+<li>It avoids the need for an empty comment that also fixes the above issue.</li>
+<li>CMSes like WordPress and Drupal use the body class more heavily. This makes
+integrating there a touch simpler.</li>
+<li>It still validates as HTML5.</li>
+<li>It uses the same element as Modernizr (and Dojo). That feels nice.</li>
+<li>It can improve the clarity of code in multi-developer teams.</li>
+</ul>
+<h2 id="the-no-js-class">The <code>no-js</code> class</h2>
+<p>Allows you to more easily explicitly add custom styles when JavaScript is
+disabled (<code>no-js</code>) or enabled (<code>js</code>). More here: <a href="http://paulirish.com/2009/avoiding-the-fouc-v3/">Avoiding the
+FOUC</a>.</p>
+<h2 id="the-order-of-meta-tags-and-title-">The order of meta tags, and <code>&lt;title&gt;</code></h2>
+<p>As recommended by <a href="http://www.whatwg.org/specs/web-apps/current-work/complete/semantics.html#charset">the HTML5
+spec</a>
+(4.2.5.5 Specifying the document&#39;s character encoding), add your charset
+declaration early (before any ASCII art ;) to avoid a potential
+<a href="http://code.google.com/p/doctype-mirror/wiki/ArticleUtf7">encoding-related security
+issue</a> in IE. It
+should come in the first <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/semantics.html#charset">1024
+bytes</a>.</p>
+<p>The charset should also come before the <code>&lt;title&gt;</code> tag, due to <a href="http://code.google.com/p/doctype-mirror/wiki/ArticleUtf7">potential XSS
+vectors</a>.</p>
+<p>The meta tag for compatibility mode <a href="http://h5bp.com/f" title="Defining Document Compatibility - MSDN">needs to be before all elements except
+title and meta</a>.
+And that same meta tag can only be invoked for Google Chrome Frame if it is
+within the <a href="http://code.google.com/p/chromium/issues/detail?id=23003">first 1024
+bytes</a>.</p>
+<h2 id="x-ua-compatible">X-UA-Compatible</h2>
+<p>This makes sure the latest version of IE is used in versions of IE that contain
+multiple rendering engines. Even if a site visitor is using IE8 or IE9, it&#39;s
+possible that they&#39;re not using the latest rendering engine their browser
+contains. To fix this, use:</p>
+<pre><code class="lang-html">&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;</code></pre>
+<p>The <code>meta</code> tag tells the IE rendering engine it should use the latest, or edge,
+version of the IE rendering environment.</p>
+<p>This <code>meta</code> tag ensures that anyone browsing your site in IE is treated to the
+best possible user experience that their browser can offer.</p>
+<p>This line breaks validation. To avoid this edge case issue it is recommended
+that you <strong>remove this line and use the <code>.htaccess</code></strong> (or other server config)
+to send these headers instead. You also might want to read <a href="http://groups.google.com/group/html5boilerplate/browse_thread/thread/6d1b6b152aca8ed2">Validating:
+X-UA-Compatible</a>.</p>
+<p>If you are serving your site on a non-standard port, you will need to set this
+header on the server-side. This is because the IE preference option &#39;Display
+intranet sites in Compatibility View&#39; is checked by default.</p>
+<h2 id="mobile-viewport">Mobile viewport</h2>
+<p>There are a few different options that you can use with the <a href="https://docs.google.com/present/view?id=dkx3qtm_22dxsrgcf4" title="Viewport and
+Media Queries - The Complete Idiot&#39;s Guide"><code>viewport</code> meta
+tag</a>. You can find out more in <a href="http://j.mp/mobileviewport">the
+Apple developer docs</a>. HTML5 Boilerplate comes with
+a simple setup that strikes a good balance for general use cases.</p>
+<pre><code class="lang-html">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</code></pre>
+<h2 id="favicons-and-touch-icon">Favicons and Touch Icon</h2>
+<p>The shortcut icons should be put in the root directory of your site. HTML5
+Boilerplate comes with a default set of icons (include favicon and one Apple
+Touch Icon) that you can use as a baseline to create your own.</p>
+<p>Please refer to the more detailed description in the <a href="extend.md">Extend section</a>
+of these docs.</p>
+<h2 id="modernizr">Modernizr</h2>
+<p>HTML5 Boilerplate uses a custom build of Modernizr.</p>
+<p><a href="http://modernizr.com">Modernizr</a> is a JavaScript library which adds classes to
+the <code>html</code> element based on the results of feature test and which ensures that
+all browsers can make use of HTML5 elements (as it includes the HTML5 Shiv).
+This allows you to target parts of your CSS and JavaScript based on the
+features supported by a browser.</p>
+<p>In general, in order to keep page load times to a minimum, it&#39;s best to call
+any JavaScript at the end of the page because if a script is slow to load
+from an external server it may cause the whole page to hang. That said, the
+Modernizr script <em>needs</em> to run <em>before</em> the browser begins rendering the page,
+so that browsers lacking support for some of the new HTML5 elements are able to
+handle them properly. Therefore the Modernizr script is the only JavaScript
+file synchronously loaded at the top of the document.</p>
+<h2 id="the-content-area">The content area</h2>
+<p>The central part of the boilerplate template is pretty much empty. This is
+intentional, in order to make the boilerplate suitable for both web page and
+web app development.</p>
+<h3 id="google-chrome-frame">Google Chrome Frame</h3>
+<p>The main content area of the boilerplate includes a prompt to install Chrome
+Frame (which no longer requires administrative rights) for users of IE 6. If
+you intended to support IE 6, then you should remove the snippet of code.</p>
+<h3 id="google-cdn-for-jquery">Google CDN for jQuery</h3>
+<p>The Google CDN version of the jQuery JavaScript library is referenced towards
+the bottom of the page using a protocol-independent path (read more about this
+in the <a href="faq.md">FAQ</a>). A local fallback of jQuery is included for rare instances
+when the CDN version might not be available, and to facilitate offline
+development.</p>
+<p>Regardless of which JavaScript library you choose to use, it is well worth the
+time and effort to look up and reference the Google CDN (Content Delivery
+Network) version. Your users may already have this version cached in their
+browsers, and Google&#39;s CDN is likely to deliver the asset faster than your
+server.</p>
+<h3 id="google-analytics-tracking-code">Google Analytics Tracking Code</h3>
+<p>Finally, an optimized version of the latest Google Analytics tracking code is
+included. Google recommends that this script be placed at the top of the page.
+Factors to consider: if you place this script at the top of the page, you’ll be
+able to count users who don’t fully load the page, and you’ll incur the max
+number of simultaneous connections of the browser.</p>
+<p>Further information:</p>
+<ul>
+<li><a href="http://mathiasbynens.be/notes/async-analytics-snippet">Optimizing the asynchronous Google Analytics
+snippet</a>.</li>
+<li><a href="http://code.google.com/apis/analytics/docs/tracking/asyncTracking.html">Tracking Site Activity - Google
+Analytics</a>.</li>
+</ul>

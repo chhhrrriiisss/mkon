@@ -1,0 +1,419 @@
+/*! gridster.js - v0.2.1 - 2013-10-28
+* http://gridster.net/
+* Copyright (c) 2013 ducksboard; Licensed MIT */
+
+.gridster {
+    position:relative;
+}
+
+.gridster > * {
+    margin: 0 auto;
+    -webkit-transition: height .4s;
+    -moz-transition: height .4s;
+    -o-transition: height .4s;
+    -ms-transition: height .4s;
+    transition: height .4s;
+}
+
+.gridster .gs-w {
+    z-index: 2;
+    position: absolute;
+}
+
+.ready .gs-w:not(.preview-holder) {
+    -webkit-transition: opacity .3s, left .3s, top .3s;
+    -moz-transition: opacity .3s, left .3s, top .3s;
+    -o-transition: opacity .3s, left .3s, top .3s;
+    transition: opacity .3s, left .3s, top .3s;
+}
+
+.ready .gs-w:not(.preview-holder),
+.ready .resize-preview-holder {
+    -webkit-transition: opacity .3s, left .3s, top .3s, width .3s, height .3s;
+    -moz-transition: opacity .3s, left .3s, top .3s, width .3s, height .3s;
+    -o-transition: opacity .3s, left .3s, top .3s, width .3s, height .3s;
+    transition: opacity .3s, left .3s, top .3s, width .3s, height .3s;
+}
+
+.gridster .preview-holder {
+    z-index: 1;
+    position: relative;
+    .border-radius(3px);
+    background-color: #f2e600;   
+    border:2px #fff dashed;
+    opacity: 0.4;
+    .box-sizing(border-box);
+    padding:20px;
+
+}
+
+.gridster .player-revert {
+    z-index: 10!important;
+    -webkit-transition: left .3s, top .3s!important;
+    -moz-transition: left .3s, top .3s!important;
+    -o-transition: left .3s, top .3s!important;
+    transition:  left .3s, top .3s!important;
+}
+
+.gridster .dragging,
+.gridster .resizing {
+    z-index: 10!important;
+    -webkit-transition: all 0s !important;
+    -moz-transition: all 0s !important;
+    -o-transition: all 0s !important;
+    transition: all 0s !important;
+}
+
+
+.gs-resize-handle {
+    position: absolute;
+    z-index: 1;
+}
+
+.gs-resize-handle-both {
+    width: 20px;
+    height: 20px;
+    bottom: -8px;
+    right: -8px;
+    background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pg08IS0tIEdlbmVyYXRvcjogQWRvYmUgRmlyZXdvcmtzIENTNiwgRXhwb3J0IFNWRyBFeHRlbnNpb24gYnkgQWFyb24gQmVhbGwgKGh0dHA6Ly9maXJld29ya3MuYWJlYWxsLmNvbSkgLiBWZXJzaW9uOiAwLjYuMSAgLS0+DTwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DTxzdmcgaWQ9IlVudGl0bGVkLVBhZ2UlMjAxIiB2aWV3Qm94PSIwIDAgNiA2IiBzdHlsZT0iYmFja2dyb3VuZC1jb2xvcjojZmZmZmZmMDAiIHZlcnNpb249IjEuMSINCXhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbDpzcGFjZT0icHJlc2VydmUiDQl4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjZweCIgaGVpZ2h0PSI2cHgiDT4NCTxnIG9wYWNpdHk9IjAuMzAyIj4NCQk8cGF0aCBkPSJNIDYgNiBMIDAgNiBMIDAgNC4yIEwgNCA0LjIgTCA0LjIgNC4yIEwgNC4yIDAgTCA2IDAgTCA2IDYgTCA2IDYgWiIgZmlsbD0iIzAwMDAwMCIvPg0JPC9nPg08L3N2Zz4=');
+    background-position: top left;
+    background-repeat: no-repeat;
+    cursor: se-resize;
+    z-index: 20;
+}
+
+.gs-resize-handle-x {
+    top: 0;
+    bottom: 13px;
+    right: -5px;
+    width: 10px;
+    cursor: e-resize;
+}
+
+.gs-resize-handle-y {
+    left: 0;
+    right: 13px;
+    bottom: -5px;
+    height: 10px;
+    cursor: s-resize;
+}
+
+.gs-w:hover .gs-resize-handle,
+.resizing .gs-resize-handle {
+    opacity: 1;
+}
+
+.gs-resize-handle,
+.gs-w.dragging .gs-resize-handle {
+    opacity: 0;
+}
+
+.gs-resize-disabled .gs-resize-handle {
+    display: none!important;
+}
+
+[data-max-sizex="1"] .gs-resize-handle-x,
+[data-max-sizey="1"] .gs-resize-handle-y,
+[data-max-sizey="1"][data-max-sizex="1"] .gs-resize-handle {
+    display: none !important;
+}
+
+/* Uncomment this if you set helper : "clone" in draggable options */
+/*.gridster .player {
+  opacity:0;
+}
+*/
+
+
+
+
+/* Jquery Alerts CSS */
+
+.alertify,
+.alertify-show,
+.alertify-log {
+    -webkit-transition: all 500ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+       -moz-transition: all 500ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+        -ms-transition: all 500ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+         -o-transition: all 500ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+            transition: all 500ms cubic-bezier(0.175, 0.885, 0.320, 1.275); /* easeOutBack */
+}
+.alertify-hide {
+    -webkit-transition: all 250ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+       -moz-transition: all 250ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+        -ms-transition: all 250ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+         -o-transition: all 250ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+            transition: all 250ms cubic-bezier(0.600, -0.280, 0.735, 0.045); /* easeInBack */
+}
+.alertify-log-hide {
+    -webkit-transition: all 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+       -moz-transition: all 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+        -ms-transition: all 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+         -o-transition: all 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+            transition: all 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045); /* easeInBack */
+}
+.alertify-cover {
+    position: fixed; z-index: 5000;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background-color:white;
+    filter:alpha(opacity=0);
+    opacity:0;
+}
+    .alertify-cover-hidden {
+        display: none;
+    }
+.alertify {
+    position: fixed; z-index: 99999;
+    top: 50%; left: 50%;
+    width: 550px;
+    margin-top:-100px;
+    margin-left: -275px;
+    opacity: 1;
+}
+    .alertify-hidden {
+        -webkit-transform: translate(0,-150px);
+           -moz-transform: translate(0,-150px);
+            -ms-transform: translate(0,-150px);
+             -o-transform: translate(0,-150px);
+                transform: translate(0,-150px);
+        opacity: 0;
+        display: none;
+    }
+    /* overwrite display: none; for everything except IE6-8 */
+    :root *> .alertify-hidden {
+        display: block;
+        visibility: hidden;
+    }
+.alertify-logs {
+    position: fixed;
+    z-index: 15;
+    bottom: 10px;
+    right: 10px;
+    width: 300px;
+
+}
+.alertify-logs-hidden {
+    display: none;
+}
+    .alertify-log {
+        display: block;
+        margin-top: 10px;
+        position: relative;
+        right: -300px;
+        opacity: 0;
+    }
+    .alertify-log-show {
+        right: 0;
+        opacity: 1;
+    }
+    .alertify-log-hide {
+        -webkit-transform: translate(300px, 0);
+           -moz-transform: translate(300px, 0);
+            -ms-transform: translate(300px, 0);
+             -o-transform: translate(300px, 0);
+                transform: translate(300px, 0);
+        opacity: 0;
+    }
+    .alertify-dialog {
+        padding: 25px;
+    }
+        .alertify-resetFocus {
+            border: 0;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+        .alertify-inner {
+            text-align: center;
+        }
+        .alertify-text {
+            margin-bottom: 15px;
+            width: 100%;
+            -webkit-box-sizing: border-box;
+               -moz-box-sizing: border-box;
+                    box-sizing: border-box;
+            font-size: 100%;
+        }
+        .alertify-buttons {
+        }
+            .alertify-button,
+            .alertify-button:hover,
+            .alertify-button:active,
+            .alertify-button:visited {
+                background: none;
+                text-decoration: none;
+                border: none;
+                /* line-height and font-size for input button */
+                line-height: 1.5;
+                font-size: 100%;
+                display: inline-block;
+                cursor: pointer;
+                margin-left: 5px;
+            }
+
+@media only screen and (max-width: 680px) {
+    .alertify,
+    .alertify-logs {
+        width: 90%;
+        -webkit-box-sizing: border-box;
+           -moz-box-sizing: border-box;
+                box-sizing: border-box;
+    }
+    .alertify {
+        left: 5%;
+        margin: 0;
+    }
+}
+
+/**
+ * Twitter Bootstrap Look and Feel
+ * Based on http://twitter.github.com/bootstrap/
+ */
+.alertify,
+.alertify-log {
+    font-family: sans-serif;
+}
+.alertify {
+    background: #FFF;
+
+    border-radius: 6px;
+    box-shadow: 0 3px 7px rgba(0,0,0,.3);
+    -webkit-background-clip: padding;     /* Safari 4? Chrome 6? */
+       -moz-background-clip: padding;     /* Firefox 3.6 */
+            background-clip: padding-box; /* Firefox 4, Safari 5, Opera 10, IE 9 */
+
+    .displayStyle();  
+
+    background: rgba(170,170,170,.85);
+
+
+}
+
+
+.alertify-dialog {
+    padding: 0;
+      
+}
+    .alertify-inner {
+        text-align: left;
+    }
+        .alertify-message {
+            padding: 15px;
+            margin: 0;
+        }
+        .alertify-text-wrapper {
+            padding: 0 15px;
+            border-bottom::0px;
+        }
+            .alertify-text {
+
+                font-size:.5em;
+                color: #555;
+                border-radius: 4px;
+                padding: 8px;
+                background-color: #FFF;
+                border: 1px solid #CCC;
+                box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            }
+            .alertify-text:focus {
+                border-color: rgba(255,255,255,.8);
+                outline: 0;
+                box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(255,255,255,.6);
+            }
+
+        .alertify-buttons {
+            padding: 14px 15px 15px;
+            
+            border-top:0px;
+
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.2);
+            text-align: right;
+
+
+
+            .button {
+ 
+                                
+                width:120px;
+                height:50px;
+                padding-top:.25em;
+                font-size:.8em;
+                margin-right:8px;
+                z-index:15;
+                .border-radius(.3em);
+
+                &:last-child {
+                    margin-right:0px;
+                }
+
+                &.red, &.green {
+                    color:#333;
+                }
+
+                &:after {
+                    display:none;
+                }
+
+                &:before {
+                    display:none;
+                }
+
+            }
+
+        }
+       
+
+.alertify-logs {
+        bottom:0px;
+    right:0px;
+    margin:5px;
+    padding:0;
+    width:19%;
+
+}
+.alertify-log {
+
+
+    text-align:center;
+    
+    padding: 8px 14px;
+
+    .displayStyle();  
+ font-size:1.2em;
+ font-weight:100;
+ .text-shadow(none);
+ border-width:1px;
+ .border-radius(3px);
+    i {
+/*        position:absolute;
+        left:5%;
+        top:50%;
+        margin-top:-9px;*/
+        padding-right:5px;
+    }
+
+    b {
+        .opacity(50);
+    }
+
+
+
+
+}
+    .alertify-log-error {
+        color: #B94A48;
+        background: #F2DEDE;
+        border: 1px solid #EED3D7;
+    }
+    .alertify-log-success {
+        color: #468847;
+        background: #DFF0D8;
+        border: 1px solid #D6E9C6;
+    }
+
+
+/* End Custom Alert Box CSS */

@@ -1,0 +1,266 @@
+/* Retina ----------- */
+@media only screen and (-Webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5) {	
+	.s {
+		background-image: url(@sprite2x) !important;
+		-webkit-background-size: @sprite-w @sprite-h;
+		   -moz-background-size: @sprite-w @sprite-h;
+		        background-size: @sprite-w @sprite-h;
+	}
+
+	.n {
+		background-image: url(@numbers2x) !important;
+		-webkit-background-size: @numbers-w @numbers-h;
+		   -moz-background-size: @numbers-w @numbers-h;
+		        background-size: @numbers-w @numbers-h;
+	}
+}
+
+/* Ultra Small (portrait and landscape) ----------- */
+@media only screen and (min-width : 0px) and (max-width : 320px) {
+	.smallPhones();
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+	.phones();
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width : 321px) {
+	.phones();
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 640px) {
+	.phones();
+}
+
+/* Small Tablets ----------- */
+@media only screen and (min-width : 640px)  and (max-width : 768px) {
+	.smallTablets();
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+	.tablets();
+}
+
+/* iPads (landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+	.tablets();
+}
+
+/* iPads (portrait) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+	.tablets();
+}
+
+/* Tablets ----------- */
+@media only screen and (min-width : 768px)  and (max-width : 1140px) {
+	.tablets();
+}
+
+/* Desktops and laptops ----------- */
+@media only screen and (min-width : 1140px) {
+	.desktops();
+}
+
+/* Large screens ----------- */
+@media only screen and (min-width : 1600px) {
+	.largeDesktops();
+}
+
+@media only screen and (max-width : 769px) {
+
+	header {
+
+		&.locked {
+
+	        top:-60px;
+
+	        &:hover, &:focus {
+	            top:0px;
+
+	            .hitbox {
+	                height:25px;
+	                bottom:-25px;
+	            }
+	        }
+    	}
+        
+
+		nav {
+			ul {
+
+				li.link {
+
+					display:none;
+					
+					&.mobile {
+						display:inline-block;
+						width:100%;
+						text-align:center;
+						margin:0;
+					}
+				}
+
+				
+
+				
+			}
+		}
+	}
+
+}
+
+
+@media only screen and (min-width : 769px) {
+
+	header {
+
+
+		nav {
+			ul {
+
+				li.link {
+
+					display:inline-block;
+					
+					&.mobile {
+						display:none;
+
+					}
+				}
+
+				
+
+				
+			}
+		}
+	}
+}
+
+.largeDesktops() {
+
+	#moduleList {
+
+		.addModule {
+
+			.moduleFilter {
+				width: (100% / 8) - @moduleMargins !important;
+			}
+
+			ul {
+
+				li.item {
+	                width: (100% / 8) - @moduleMargins !important;
+	            }
+	        }
+	    }
+    }
+
+}
+
+.desktops() {
+
+	#moduleList {
+
+		.addModule {
+
+			.moduleFilter {
+				width: (100% / 6) - @moduleMargins !important;
+			}
+
+			ul {
+
+				li.item {
+	                width: (100% / 6) - @moduleMargins !important;
+	            }
+	        }
+	    }
+    }
+
+}
+.tablets() {
+
+
+	#moduleList {
+
+		.addModule {
+			
+			.moduleFilter {
+				width: (100% / 5) - @moduleMargins !important;
+			}
+
+			ul {
+
+				li.item {
+	                width: (100% / 5) - @moduleMargins !important;
+	            }
+	        }
+	    }
+    }
+}
+
+.smallTablets() {
+
+	
+	#moduleList {
+
+		.addModule {
+
+			.moduleFilter {
+				width: (100% / 4) - @moduleMargins !important;
+			}
+
+			ul {
+
+				li.item {
+	                width: (100% / 4) - @moduleMargins !important; 
+	            }
+	        }
+	    }
+    }
+}
+
+
+.phones() {
+
+	#moduleList {
+
+		.addModule {
+
+			.moduleFilter {
+				width: (100% / 2) - @moduleMargins !important;
+			}
+
+			ul {
+
+				li.item {
+	                width: (100% / 2) - @moduleMargins !important; 
+	            }
+	        }
+	    }
+    }
+}
+
+.smallPhones() {
+
+	
+	#moduleList {
+
+		.addModule {
+
+			.moduleFilter {
+				width: (100% / 1) - @moduleMargins !important;
+			}
+
+			ul {
+
+				li.item {
+	                width: (100% / 1) - @moduleMargins !important; 
+	            }
+	        }
+	    }
+    }
+}

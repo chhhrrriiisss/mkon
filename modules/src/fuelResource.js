@@ -1,0 +1,44 @@
+function init(startCol, startRow, url) {
+
+	var id = MKON.FNC.randomString(5)	
+	var req = ['r.resource[LiquidFuel]','r.resourceMax[LiquidFuel]'];
+
+	// register a new module
+	var mod = new MKON.module('Fuel Resource', 'Resource', id, req,
+
+	//handle data function
+	function() {   
+
+		var t = $('#'+this.id);
+
+		var fuel = MKON.CONTENT.getVariable(req[0]);
+		var maxFuel = MKON.CONTENT.getVariable(req[1]);
+		var perc = MKON.FNC.toFixed( (fuel/maxFuel)*100, 2 );
+		fuel = MKON.FNC.toFixed(fuel, 2);
+		maxFuel = MKON.FNC.toFixed(maxFuel, 0);
+		
+		var target = t.find('.data-fuel');
+
+		target.css('width', perc + '%');
+		target.attr('data-val', fuel);
+		target.parent().attr('data-val', maxFuel);
+
+		// t.find('.marker').css('left', perc + '%')	
+	
+	
+	}
+	);
+
+	// content for insertion to gridster
+	var content =   '<li id="' + id + '" data-row="1" data-col="1" data-link="' + url + '" data-sizex="3" data-sizey="1">\
+					<div class="options"><div class="remove"><i class="fa fa-times"></i></div></div>\
+					<div class="content"><div class="resource-bar"><h3>LIQUID FUEL</H3><div class="s resource" data-val="0"><div class="s value data-fuel" data-val="0"></div></div></div></div></li>';
+
+	content = { html: content, x:3, y:1, col: startCol, row: startRow };
+
+	MKON.CONTENT.addModule(mod, content);
+
+	;
+	//updateAPIString();
+
+}
