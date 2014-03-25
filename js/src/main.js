@@ -6,14 +6,34 @@ $(window).resize(function() {
     MKON.LAYOUT.resize();
 });
 
-
 $(window).load(function() {
 
+    // if (!isMobile) {
+
+    //     $('#removeZone').on('mouseenter', function(e) {
+
+    //         $(this).addClass('hover');
+    //         console.log('entered remove zone');
+
+    //     });
+
+    //     $('#removeZone').on('mouseleave', function(e) {
+
+    //         $(this).removeClass('hover');
+    //         console.log('left remove zone');
+
+    //     });
+
+    // }
+
+
     $('body').fadeIn('slow');
+
     MKON.init();
     //MKON.LAYOUT.openList();
 
     alertify.set({ buttonReverse: true });
+
 
     // Add Modules Open Button
     $('#openList').fastClick(function() {
@@ -220,9 +240,9 @@ var MKON = new Object();
 MKON = { 
 
     // Comms config
-    debug: true,
+    debug: false,
     controls: true, // set to false to disable remote control
-    rate: 50,
+    rate: 100,
     localStorageSupport: false,
     cacheString: 'MKON',
     datalink:  "ws://" + window.location.host + "/datalink",  
@@ -256,7 +276,9 @@ MKON = {
         paused: false,
         received: false,   
         overflowList: [],   
-        overflowActive: false,                   
+        overflowActive: false, 
+        overflowAttempts: 0,                  
+        maxOverflowAttempts: 100,
 
         init: function(datalink, defaults) {        
 
@@ -280,7 +302,7 @@ MKON = {
 
                         if (MKON.debug) { 
                             // only enable if you like spam
-                            //console.log("Received Data" + evt.data); 
+                            console.log("Received Data" + evt.data); 
                         };
 
                         MKON.CONTENT.filterData(evt.data);
@@ -333,14 +355,16 @@ MKON = {
 
         subscribe: function (v) {
 
-            if (this.active) {
-                
+            if (this.active) {                
+
                 if (MKON.debug) {  console.log('subscribing:' + v); };
 
                 ws.send(JSON.stringify({
                         "+": v
                 }));
+
             } else {
+
                 this.overflow(v,'+');
             }
         },
@@ -354,7 +378,9 @@ MKON = {
                 ws.send(JSON.stringify({
                         "-": v
                 }));
+
             }  else {
+
                 this.overflow(v,'-');
             }
         },
@@ -362,6 +388,7 @@ MKON = {
         command: function (c) { 
             
             if (MKON.controls) {
+
                 if (MKON.LAYOUT.locked && this.active) {
 
                     this.active = false; // wait for at least one reply per command    
@@ -369,7 +396,9 @@ MKON = {
                     ws.send(JSON.stringify({
                         "run": [ c ]
                     }));
+
                 } else {
+
                     this.overflow(c,'run');
                 }
             }
@@ -377,7 +406,8 @@ MKON = {
 
         // For stacking commands if the websocket server drops out
         overflow: function(data, type) {
-          
+            
+
             var entry = [ type, data ];
 
             this.overflowList.push(entry);
@@ -392,9 +422,13 @@ MKON = {
 
                     if (MKON.COMMS.active){
                         MKON.COMMS.clearOverflow();  
-                        MKON.COMMS.overflowActive = false;        
+                        MKON.COMMS.overflowActive = false; 
+                        MKON.COMMS.overflowAttempts = 0;       
+                    } else if (MKON.COMMS.overflowAttempts < MKON.COMMS.maxOverflowAttempts) {
+                        MKON.COMMS.overflowAttempts++;
+                        setTimeout(waitUntilActive, MKON.rate);
                     } else {
-                        setTimeout(waitUntilActive, MKON.rate[0]);
+                        console.log('Overflow timed out!');
                     }
                 }
 
@@ -440,6 +474,8 @@ MKON = {
         defaultRow: 100, // 100
         startCol: 100, // 100
         startRow: 100, // 100
+        currentWidget: '',
+        removeZone: $( document.getElementById('removeZone') ),
         lockUnlockWrapper: $( document.getElementById('lockUnlockWrapper') ),
         lockUnlockBtnIcon: $( document.getElementById('lockUnlockBtnIcon') ), 
         overlayWrapper: $( document.getElementById("overlayWrapper") ),
@@ -449,11 +485,13 @@ MKON = {
         header: $( $('header') ),
         currentLayout: [],
         prevLayout: false,
+        viewportWidth: 0,
+        viewportHeight: 0,
 
         init: function() {
 
             // Resize the gridster ul according to window size        
-            this.resize();
+            this.resize();            
             this.gridster = $("#gridster").gridster().data('gridster'); 
             this.setup();
             this.unlock();          
@@ -464,6 +502,8 @@ MKON = {
 
             // Offset fix for gridster's crappy margin config
             var windowWidth = $(window).width();
+            MKON.LAYOUT.viewportWidth = windowWidth;
+            MKON.LAYOUT.viewportHeight = $(window).height();
             var cols = (Math.floor(windowWidth/this.gridWidth) ) -1;
             var totalWidth = cols * this.gridWidth;
             var margins = (this.gridMargins*2) * cols;
@@ -471,6 +511,7 @@ MKON = {
             $('#gridsterWrapper').css('left', Math.abs(offsetX/2) + 'px');
 
             this.initGridster();    
+
         },
 
         setup: function() {
@@ -536,27 +577,65 @@ MKON = {
                 draggable: {
                         start: function(event, ui){ 
 
+                            MKON.LAYOUT.removeZoneAnimation('show');
+                            MKON.LAYOUT.currentWidget = $(event.target).parent(); 
+
+
+                                 
+                        },
+                        drag: function(event, ui) {
+                            
+                            var limit = parseInt(MKON.LAYOUT.viewportHeight - MKON.LAYOUT.removeZone.outerHeight());                          
+                            if (ui.pointer.top > limit) {
+                                MKON.LAYOUT.removeZone.addClass('hover');
+                   
+                            } else {
+                                MKON.LAYOUT.removeZone.removeClass('hover');
+                        
+                            }
+
                         },
                         stop: function(event, ui){ 
 
-                            
-                            var el = $(event.target).parent();
 
-                            var id = el.attr('id');
-                            var col = el.attr('data-col');
-                            var row = el.attr('data-row'); 
 
-                            //console.log(id + ' ' + col + ' ' + row);
-                           
-                            MKON.CONTENT.updateModule( id, col, row );
+                            if ($('#removeZone').hasClass('hover')) {
+
+                                // remove the module as its over the remove zone                   
+
+                                var el = MKON.LAYOUT.currentWidget;
+                                el.hide();
+                                MKON.CONTENT.removeModule(el);
+
+                            } else {
+
+                                // update the position on the grid
+                                var el = $(event.target).parent();
+
+                                var id = el.attr('id');
+                                var col = el.attr('data-col');
+                                var row = el.attr('data-row'); 
+
+                                //console.log(id + ' ' + col + ' ' + row);
+                               
+                                MKON.CONTENT.updateModule( id, col, row );
+
+
+                                
+                            }
+
 
                             setTimeout(function() { MKON.LAYOUT.save(); }, 100);
+                            MKON.LAYOUT.removeZone.removeClass('hover');
+                            MKON.LAYOUT.removeZoneAnimation('hide');
+
+                           
                         }
                 },
                 resize: {
                     enabled: true
                 },
-                min_cols: 3,
+                min_cols:3,         
                 serialize_params: function($w, wgd) {
                     return {
                         c: wgd.col,
@@ -614,9 +693,7 @@ MKON = {
 
             for (var i=0; i<MKON.CONTENT.activeVariables.length; i++) {
 
-                MKON.COMMS.unsubscribe( MKON.CONTENT.activeVariables[i][0] );
-                console.log(MKON.CONTENT.activeVariables[i][0]);
-
+               MKON.COMMS.unsubscribe( [ MKON.CONTENT.activeVariables[i][0] ] );               
             }
 
             this.checkLogo();
@@ -786,6 +863,17 @@ MKON = {
 
             } else if (direction == 'hide') {
                this.launchAnimation(this.logo, 'fadeOutDown', true); 
+            }
+
+        },   
+
+        removeZoneAnimation: function(direction) {     
+
+            if (direction == 'show') {
+                this.launchAnimation(this.removeZone, 'fadeInUp', false); 
+
+            } else if (direction == 'hide') {
+               this.launchAnimation(this.removeZone, 'fadeOutDown', true); 
             }
 
         },   

@@ -3,23 +3,24 @@ function init(startCol, startRow, url) {
 	var id = MKON.FNC.randomString(5)	
 	// var req = ['v.rcsValue', 'rcs'];
 	var com = ['f.brake'];
+	var req = ['v.brakeValue'];
 
 	// register a new module
-	var mod = new MKON.module('Brakes', 'Button', id, ['',''],
+	var mod = new MKON.module('Brakes', 'Button', id, req,
 
 	function() {   
 
-		// var t = $('#'+this.id);
+		var t = $('#'+this.id);
 
-		// var d = MKON.CONTENT.getVariable(req[1]);	
+		var d = MKON.CONTENT.getVariable(req);	
 
-		// if (d == 'True') {
-		// 	t.find('.button').removeClass('gray');
+		if (d == 'True') {
+			t.find('.button').removeClass('gray');
 		
-		// } else {
-		// 	t.find('.button').addClass('gray');
+		} else {
+			t.find('.button').addClass('gray');
 	
-		// }
+		}
 	
 	} );
 
@@ -33,6 +34,5 @@ function init(startCol, startRow, url) {
 	MKON.CONTENT.addModule(mod, content);
 
 	MKON.CONTENT.addHook(id, 'b', function() { MKON.COMMS.command(com[0]); });
-	// 
-	// updateAPIString();
+
 }

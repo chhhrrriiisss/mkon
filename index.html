@@ -22,7 +22,7 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
+        
         <!-- Start header hidden -->
         <header>
 
@@ -50,6 +50,8 @@
         
         <!-- Centre Logo -->
         <div id="logo" class="animated-slow"></div>
+
+        <div id="removeZone" class="animated-fast"> <i class="fa fa-trash-o fa-2x trash"></i></div>
 
         <!-- Overlay for lock/unlock state animation -->
         <div id="lockUnlockWrapper" class="lockUnlockWrapper animated-cubic"><i class="fa fa-unlock fa-5x"></i><i class="fa fa-lock fa-5x"></i></div>
@@ -369,6 +371,21 @@
                           </h4>
                           <h5 class="desc">
                             Rotating display showing current radar altitude.
+                          </h5>
+                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                            <i class="fa fa-plus">
+                            </i>
+                          </a>
+                        </li>
+
+                        <li class="item data-type-screen" data-name="Navball" data-type="screen" data-link="modules/navballScreen.min.js" style="background-image: url(modules/th/navballScreen.jpg);">
+                          <h4 class="title">
+                            Navball [ALPHA]
+                            <span class="type fa fa-list">
+                            </span>
+                          </h4>
+                          <h5 class="desc">
+                            Shows current craft heading, pitch and roll and also allows limited control.
                           </h5>
                           <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
                             <i class="fa fa-plus">

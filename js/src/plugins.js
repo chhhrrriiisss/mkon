@@ -22,6 +22,7 @@
 }());
 
 
+
 /*! gridster.js - v0.2.1 - 2013-10-28
 * http://gridster.net/
 * Copyright (c) 2013 ducksboard; Licensed MIT */
@@ -1032,6 +1033,8 @@
 
         return this;
     };
+
+
 
 
     /**

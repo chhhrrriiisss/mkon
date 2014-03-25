@@ -3,22 +3,24 @@ function init(startCol, startRow, url) {
 	var id = MKON.FNC.randomString(5)	
 	// var req = ['v.lightValue', 'lght'];
 	var com = ['f.gear'];
+	var req = ['v.gearValue'];
+
 	// register a new module
-	var mod = new MKON.module('GEAR', 'Button', id, ['',''], 
+	var mod = new MKON.module('GEAR', 'Button', id, req, 
 
 	function() {   
 
-		// var t = $('#'+this.id);
+		var t = $('#'+this.id);
 
-		// var d = MKON.CONTENT.getVariable(req[1]);	
+		var d = MKON.CONTENT.getVariable(req);	
 	
-		// if (d == 'True') {
-		// 	t.find('.button').removeClass('gray');
+		if (d == 'True') {
+			t.find('.button').removeClass('gray');
 		
-		// } else {
-		// 	t.find('.button').addClass('gray');
+		} else {
+			t.find('.button').addClass('gray');
 	
-		// }
+		}
 	
 	} );
 
@@ -32,6 +34,5 @@ function init(startCol, startRow, url) {
 	MKON.CONTENT.addModule(mod, content);
 
 	MKON.CONTENT.addHook(id, 'g', function() { MKON.COMMS.command(com[0]); });
-	// 
-	// updateAPIString();
+
 }
