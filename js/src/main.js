@@ -8,32 +8,11 @@ $(window).resize(function() {
 
 $(window).load(function() {
 
-    // if (!isMobile) {
-
-    //     $('#removeZone').on('mouseenter', function(e) {
-
-    //         $(this).addClass('hover');
-    //         console.log('entered remove zone');
-
-    //     });
-
-    //     $('#removeZone').on('mouseleave', function(e) {
-
-    //         $(this).removeClass('hover');
-    //         console.log('left remove zone');
-
-    //     });
-
-    // }
-
-
-    $('body').fadeIn('slow');
+    $('body').fadeIn('slow'); 
 
     MKON.init();
-    //MKON.LAYOUT.openList();
 
     alertify.set({ buttonReverse: true });
-
 
     // Add Modules Open Button
     $('#openList').fastClick(function() {
@@ -397,9 +376,15 @@ MKON = {
                         "run": [ c ]
                     }));
 
+                } else if (MKON.LAYOUT.locked) {
+
+                    // connection is idle and layout isnt locked
+                    this.overflow(c,'run');
+
                 } else {
 
-                    this.overflow(c,'run');
+                    // connection idle and layout unlocked - ignore
+
                 }
             }
         },
@@ -449,7 +434,7 @@ MKON = {
                     this.subscribe(v);
                 } else if (c == "-") {
                     this.unsubscribe(v);
-                } else if (c == "run") {
+                } else if (c == "run" && MKON.LAYOUT.locked) {
                     this.command(v);
                 } else if (c == "rate") {
                     this.rate(v);
@@ -1054,13 +1039,17 @@ MKON = {
         // Adds a retrieved module to the activeModules list
         addModule: function(mod, content) {
 
-            this.activeModules.push(mod);
+            if (mod != '') {
 
-            for (var i=0; i<mod.req.length; i++) {
+                this.activeModules.push(mod);            
 
-                if (mod.req[i] != '') {
-                    this.addVariable( [ mod.req[i] ] );
+                for (var i=0; i<mod.req.length; i++) {
+
+                    if (mod.req[i] != '') {
+                        this.addVariable( [ mod.req[i] ] );
+                    }
                 }
+
             }
 
             MKON.LAYOUT.add(content);
@@ -1157,7 +1146,7 @@ MKON = {
 
     },
 
-        // Miscellaneous Math & Utility Functions
+    // Miscellaneous Math & Utility Functions
     FNC: {
 
         zeroPad: function(num, places) {

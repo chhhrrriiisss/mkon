@@ -1010,10 +1010,6 @@ header:focus .hitbox {
   -ms-user-select: none;
   user-select: none;
 }
-#overlayWrapper:active,
-#overlayWrapper:focus {
-  cursor: url("../img/cursorAdd.gif"), auto;
-}
 #moduleList {
   width: 100%;
   height: 50%;

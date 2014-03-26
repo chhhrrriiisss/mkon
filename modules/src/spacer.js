@@ -28,10 +28,7 @@ function init(startCol, startRow, url) {
 
 	content = { html: content, x: 1, y: 1, col: startCol, row: startRow };
 
-	LAYOUT.add(content);
+	MKON.CONTENT.addModule('', content);
 	
-	// MKON.CONTENT.addModule(mod);
-
-	// 
-	// updateAPIString();
 }
+
