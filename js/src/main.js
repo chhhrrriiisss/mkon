@@ -6,6 +6,13 @@ $(window).resize(function() {
     MKON.LAYOUT.resize();
 });
 
+var isMobile = false;
+
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+    isMobile = true;
+    document.write('<script src="http://jsconsole.com/remote.js?A347700A-FD65-4F75-88B1-9E5E2AD4E7EB"></script>');    
+}
+
 $(window).load(function() {
 
     $('body').fadeIn('slow'); 
@@ -197,13 +204,8 @@ $(window).load(function() {
 
 });
 
-var isMobile = false;
 
-if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
-    isMobile = true;
-    document.write('<script src="http://jsconsole.com/remote.js?A347700A-FD65-4F75-88B1-9E5E2AD4E7EB"></script>');    
-}
-
+// Localstorage utility function
 Storage.prototype.setObj = function(key, obj) {
     var o = obj || 'Null';
     return this.setItem(key, JSON.stringify(o))
@@ -212,7 +214,6 @@ Storage.prototype.setObj = function(key, obj) {
 Storage.prototype.getObj = function(key) {
     return JSON.parse(this.getItem(key))
 }
-
 
 var MKON = new Object();
 

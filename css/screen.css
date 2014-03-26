@@ -2170,6 +2170,90 @@ header:focus .hitbox {
   text-shadow: 0px 0px 3px #91cc35;
   font-size: 1.3em;
 }
+.gridster ul li .content .screen.connection.red div.indicator span.inner {
+  background: #c34747;
+  -webkit-box-shadow: 0px 0px 15px rgba(195, 71, 71, 0.8);
+  -moz-box-shadow: 0px 0px 15px rgba(195, 71, 71, 0.8);
+  box-shadow: 0px 0px 15px rgba(195, 71, 71, 0.8);
+}
+.gridster ul li .content .screen.connection.green div.indicator span.inner {
+  background: #91cc35;
+  -webkit-box-shadow: 0px 0px 15px rgba(145, 204, 53, 0.5);
+  -moz-box-shadow: 0px 0px 15px rgba(145, 204, 53, 0.5);
+  box-shadow: 0px 0px 15px rgba(145, 204, 53, 0.5);
+}
+.gridster ul li .content .screen.connection.orange div.indicator span.inner {
+  background: #f67d1d;
+  -webkit-box-shadow: 0px 0px 15px rgba(246, 125, 29, 0.8);
+  -moz-box-shadow: 0px 0px 15px rgba(246, 125, 29, 0.8);
+  box-shadow: 0px 0px 15px rgba(246, 125, 29, 0.8);
+}
+.gridster ul li .content .screen.connection div.indicator {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.3);
+  left: 50%;
+  margin-left: -10px;
+  top: 50%;
+  margin-top: -10px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  position: relative;
+  -webkit-box-shadow: 0px 0px 5px #000000;
+  -moz-box-shadow: 0px 0px 5px #000000;
+  box-shadow: 0px 0px 5px #000000;
+}
+.gridster ul li .content .screen.connection div.indicator span.inner {
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  display: block;
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+  position: relative;
+  -webkit-border-radius: 0.8em;
+  -moz-border-radius: 0.8em;
+  border-radius: 0.8em;
+  background: #000;
+}
+.gridster ul li .content .screen.connection div.indicator span.inner span.highlight {
+  display: block;
+  width: 70%;
+  height: 70%;
+  top: 15%;
+  left: 15%;
+  position: relative;
+  -webkit-border-radius: 0.7em;
+  -moz-border-radius: 0.7em;
+  border-radius: 0.7em;
+  background: rgba(255, 255, 255, 0.25);
+}
+.gridster ul li .content .screen.connection h3 {
+  bottom: 24px;
+}
+.gridster ul li .content .screen.connection h3.data-status {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  left: 0px;
+  top: 75%;
+  margin-top: -15px;
+  bottom: 0px;
+  color: #91cc35;
+  -webkit-text-shadow: 0px 0px 3px #91cc35;
+  -moz-text-shadow: 0px 0px 3px #91cc35;
+  text-shadow: 0px 0px 3px #91cc35;
+  font-size: 1em;
+  letter-spacing: 0.1em;
+}
 .gridster ul li .content .screen.resource .item {
   width: 100%;
   display: block;

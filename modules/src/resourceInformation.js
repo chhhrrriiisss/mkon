@@ -18,8 +18,6 @@ function init(startCol, startRow, url) {
 
 		var temp = [];
 
-		console.log('FUEL:' + MKON.CONTENT.getVariable( req[0] ) );
-
 		var count = 0;
 
 		for (var i = 0; i<req.length; i+=2) {
