@@ -1809,19 +1809,35 @@ header {
                     }
 
                     &.connection {
-                     
+                        
+
 
                         &.red {
+
+                            div.radio {
+                                background-position:-238px -395px;
+                            }
+
+                            h3.data-status {
+                                color: @warningRed;
+
+                                .text-shadow(0px 0px 3px @warningRed);
+                            }
+
                             div.indicator {
                                 span.inner {
-                                    background:rgba(195,71,71,1);
+                                    background:@warningRed;
 
-                                    .box-shadow(0px 0px 15px rgba(195,71,71,.8));
+                                    .box-shadow(0px 0px 15px fade(@warningRed, 80%));
                                 }
                             }
                         }
 
                         &.green {
+
+                            div.radio {
+                                background-position:-117px -395px;
+                            }
                             
                             div.indicator {
                                 span.inner {
@@ -1834,13 +1850,42 @@ header {
 
                         &.orange {
 
-                            div.indicator {
-                                span.inner {
-                                    background: rgba(246,125,29,1);
+                            div.radio {
+                                background-position:-364px -395px;
 
-                                    .box-shadow(0px 0px 15px rgba(246,125,29,.8));
+                                .animation(fadeLoop 2s infinite);
+                                
+                            }
+
+                            h3.data-status {
+                                color: @amber;
+                                .text-shadow(0px 0px 3px @amber);
+                            }
+
+                            div.indicator {
+
+                                 .animation(fadeLoop 2s infinite);
+                               
+                                span.inner {
+                                    background: @amber;
+
+                                    .box-shadow(0px 0px 15px fade(@amber, 80%));
                                 }
                             }
+                        }
+
+                        div.radio {
+                            display:block;
+                            width:125px;
+                            height:120px;
+                            position:absolute;
+                            top:50%;
+                            left:50%;
+                            margin-left:-62.5px;
+                            margin-top:-60px;
+                            background-position:6px -395px;
+                            background-repeat:no-repeat;
+                            .at2x('../img/sprites.png');
                         }
 
                         div.indicator {
@@ -1851,7 +1896,7 @@ header {
                             left:50%;
                             margin-left:-10px;
                             top:50%;
-                            margin-top:-10px;
+                            margin-top:-30px;
                             .border-radius(20px);
                             position:relative;
                             .box-shadow(0px 0px 5px rgba(0,0,0,1));                            

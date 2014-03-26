@@ -2170,11 +2170,23 @@ header:focus .hitbox {
   text-shadow: 0px 0px 3px #91cc35;
   font-size: 1.3em;
 }
+.gridster ul li .content .screen.connection.red div.radio {
+  background-position: -238px -395px;
+}
+.gridster ul li .content .screen.connection.red h3.data-status {
+  color: #df422b;
+  -webkit-text-shadow: 0px 0px 3px #df422b;
+  -moz-text-shadow: 0px 0px 3px #df422b;
+  text-shadow: 0px 0px 3px #df422b;
+}
 .gridster ul li .content .screen.connection.red div.indicator span.inner {
-  background: #c34747;
-  -webkit-box-shadow: 0px 0px 15px rgba(195, 71, 71, 0.8);
-  -moz-box-shadow: 0px 0px 15px rgba(195, 71, 71, 0.8);
-  box-shadow: 0px 0px 15px rgba(195, 71, 71, 0.8);
+  background: #df422b;
+  -webkit-box-shadow: 0px 0px 15px rgba(223, 66, 43, 0.8);
+  -moz-box-shadow: 0px 0px 15px rgba(223, 66, 43, 0.8);
+  box-shadow: 0px 0px 15px rgba(223, 66, 43, 0.8);
+}
+.gridster ul li .content .screen.connection.green div.radio {
+  background-position: -117px -395px;
 }
 .gridster ul li .content .screen.connection.green div.indicator span.inner {
   background: #91cc35;
@@ -2182,11 +2194,57 @@ header:focus .hitbox {
   -moz-box-shadow: 0px 0px 15px rgba(145, 204, 53, 0.5);
   box-shadow: 0px 0px 15px rgba(145, 204, 53, 0.5);
 }
+.gridster ul li .content .screen.connection.orange div.radio {
+  background-position: -364px -395px;
+  -webkit-animation: fadeLoop 2s infinite;
+  /* Safari 4+ */
+  -moz-animation: fadeLoop 2s infinite;
+  /* Fx 5+ */
+  -o-animation: fadeLoop 2s infinite;
+  /* Opera 12+ */
+  animation: fadeLoop 2s infinite;
+  /* IE 10+ */
+}
+.gridster ul li .content .screen.connection.orange h3.data-status {
+  color: #f67d1d;
+  -webkit-text-shadow: 0px 0px 3px #f67d1d;
+  -moz-text-shadow: 0px 0px 3px #f67d1d;
+  text-shadow: 0px 0px 3px #f67d1d;
+}
+.gridster ul li .content .screen.connection.orange div.indicator {
+  -webkit-animation: fadeLoop 2s infinite;
+  /* Safari 4+ */
+  -moz-animation: fadeLoop 2s infinite;
+  /* Fx 5+ */
+  -o-animation: fadeLoop 2s infinite;
+  /* Opera 12+ */
+  animation: fadeLoop 2s infinite;
+  /* IE 10+ */
+}
 .gridster ul li .content .screen.connection.orange div.indicator span.inner {
   background: #f67d1d;
   -webkit-box-shadow: 0px 0px 15px rgba(246, 125, 29, 0.8);
   -moz-box-shadow: 0px 0px 15px rgba(246, 125, 29, 0.8);
   box-shadow: 0px 0px 15px rgba(246, 125, 29, 0.8);
+}
+.gridster ul li .content .screen.connection div.radio {
+  display: block;
+  width: 125px;
+  height: 120px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -62.5px;
+  margin-top: -60px;
+  background-position: 6px -395px;
+  background-repeat: no-repeat;
+  background-image: url('../img/sprites.png');
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-resolution: 1.5dppx) {
+  .gridster ul li .content .screen.connection div.radio {
+    background-image: url("../img/sprites@2x.png");
+    background-size: auto auto;
+  }
 }
 .gridster ul li .content .screen.connection div.indicator {
   display: block;
@@ -2196,7 +2254,7 @@ header:focus .hitbox {
   left: 50%;
   margin-left: -10px;
   top: 50%;
-  margin-top: -10px;
+  margin-top: -30px;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   border-radius: 20px;
@@ -4120,9 +4178,9 @@ header:focus .hitbox {
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .s {
     background-image: url('../img/sprites@2x.png') !important;
-    -webkit-background-size: 800px 400px !important;
-    -moz-background-size: 800px 400px !important;
-    background-size: 800px 400px !important;
+    -webkit-background-size: 800px 500px !important;
+    -moz-background-size: 800px 500px !important;
+    background-size: 800px 500px !important;
   }
   .n {
     background-image: url('../img/numbers@2x.png') !important;
@@ -4274,7 +4332,7 @@ header:focus .hitbox {
 @media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-resolution: 1.5dppx) {
   .s {
     background-image: url("../img/sprites@2x.png");
-    background-size: 800px 400px;
+    background-size: 800px 500px;
   }
 }
 .n {
@@ -4300,6 +4358,62 @@ header:focus .hitbox {
 }
 */
 /* Striped Gradients */
+@-webkit-keyframes fadeLoop {
+  0% {
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+  }
+  50% {
+    opacity: 1;
+    filter: alpha(opacity=100);
+  }
+  100% {
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+  }
+}
+@-moz-keyframes fadeLoop {
+  0% {
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+  }
+  50% {
+    opacity: 1;
+    filter: alpha(opacity=100);
+  }
+  100% {
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+  }
+}
+@-o-keyframes fadeLoop {
+  0% {
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+  }
+  50% {
+    opacity: 1;
+    filter: alpha(opacity=100);
+  }
+  100% {
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+  }
+}
+@keyframes fadeLoop {
+  0% {
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+  }
+  50% {
+    opacity: 1;
+    filter: alpha(opacity=100);
+  }
+  100% {
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+  }
+}
 @-webkit-keyframes backgroundLoop {
   0% {
     background-position: 0;

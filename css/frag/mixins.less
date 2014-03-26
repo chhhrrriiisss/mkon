@@ -41,7 +41,7 @@
 @sprites: '../img/sprites.png';
 
 @sprite-w: 800px;
-@sprite-h: 400px;
+@sprite-h: 500px;
 
 @numbers2x: '../img/numbers@2x.png';
 @numbers: '../img/numbers.png';
@@ -405,6 +405,36 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#66ffffff', e
    /* Other transform properties here */
 }
 
+
+@-webkit-keyframes fadeLoop {
+  0%   { .opacity(30); }
+  50% { .opacity(100);}
+  100% { .opacity(30);}
+}
+@-moz-keyframes fadeLoop {
+  0%   { .opacity(30);}
+  50% { .opacity(100);}
+  100% { .opacity(30); }
+}
+@-o-keyframes fadeLoop {
+  0%   { .opacity(30); }
+  50% { .opacity(100);}
+  100% { .opacity(30); }
+}
+@keyframes fadeLoop {
+  0%   { .opacity(30); }
+  50% { .opacity(100);}
+  100% { .opacity(30); }
+}
+
+
+.animation(@anim) 
+{
+   -webkit-animation: @anim; /* Safari 4+ */
+  -moz-animation:    @anim; /* Fx 5+ */
+  -o-animation:      @anim; /* Opera 12+ */
+  animation:         @anim; /* IE 10+ */
+}
 
 
 @-webkit-keyframes backgroundLoop {

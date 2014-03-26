@@ -225,7 +225,7 @@ MKON = {
     rate: 100,
     localStorageSupport: false,
     cacheString: 'MKON',
-    datalink:  "ws://" + window.location.host + "/datalink",  
+    datalink:  "ws://" + window.location.host + "/datalink",  //    datalink:  "ws://" + window.location.host + "/datalink",  
     defaults: { 
         "+": ['v.name', 'p.paused'],
         "rate": this.rate
