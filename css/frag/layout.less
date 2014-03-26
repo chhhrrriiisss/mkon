@@ -128,6 +128,12 @@ body {
     min-width:650px;
     display:none;
     overflow-y:hidden;
+
+    &:after {
+
+        display:none;
+        content: url('../img/noise.png') url('../img/grid.png') url('../img/logo.png') url('../modules/th/thumbnails.jpg');
+    }
 }
 
 /* Scrollbar CSS fixes */
@@ -792,6 +798,7 @@ header {
             li.item {
 
                 width: (100% / 6) - @moduleMargins; 
+                max-width:222px;
                 height:200px;
      
                 .opacity(60);
@@ -814,6 +821,8 @@ header {
                 font-size:1rem;
 
                 .d();
+
+                .t;
 
                 &:hover, &:focus {
                     cursor:move;

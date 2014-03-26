@@ -49,6 +49,12 @@
 @numbers-w: 88px;
 @numbers-h: 714px;
 
+@thumbnails: '../modules/th/thumbnails@2x.jpg';
+@thumbnails: '../modules/th/thumbnails.jpg';
+
+@thumbnails-w: 888px;
+@thumbnails-h: 1554px;
+
 .s {
   .at2x(@sprites, @sprite-w, @sprite-h);  
   background-repeat:no-repeat;
@@ -58,20 +64,11 @@
   .at2x(@numbers, @numbers-w, @numbers-h);  
    background-repeat:no-repeat;
 }
-/*
 
-.s {
-      background-image: url(@sprite) !important;
-      background-repeat:no-repeat;
+.t {
+  .at2x(@thumbnails, @thumbnails-w, @thumbnails-h);  
+   background-repeat:no-repeat;
 }
-
-.n {
-      background-image: url(@numbers) !important;
-      background-repeat:repeat-y;
-}
-*/
-
-
 
 // Overflow ellipsis
 .ellipsis(@declaration: ellipsis) {

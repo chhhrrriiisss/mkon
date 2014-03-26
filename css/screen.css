@@ -552,6 +552,10 @@ body {
   display: none;
   overflow-y: hidden;
 }
+body:after {
+  display: none;
+  content: url('../img/noise.png') url('../img/grid.png') url('../img/logo.png') url('../modules/th/thumbnails.jpg');
+}
 /* Scrollbar CSS fixes */
 /* Let's get this party started */
 ::-webkit-scrollbar {
@@ -1237,6 +1241,7 @@ header:focus .hitbox {
 }
 #moduleList .addModule ul li.item {
   width: 15.966666666666669%;
+  max-width: 222px;
   height: 200px;
   opacity: 0.6;
   filter: alpha(opacity=60);
@@ -1274,6 +1279,14 @@ header:focus .hitbox {
   /* Required to make elements draggable in old WebKit */
   -khtml-user-drag: element;
   -webkit-user-drag: element;
+  background-image: url('../modules/th/thumbnails.jpg');
+  background-repeat: no-repeat;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-resolution: 1.5dppx) {
+  #moduleList .addModule ul li.item {
+    background-image: url("../modules/th/thumbnails@2x.jpg");
+    background-size: 888px 1554px;
+  }
 }
 #moduleList .addModule ul li.item:hover,
 #moduleList .addModule ul li.item:focus {
@@ -4366,18 +4379,16 @@ header:focus .hitbox {
     background-size: 88px 714px;
   }
 }
-/*
-
-.s {
-      background-image: url(@sprite) !important;
-      background-repeat:no-repeat;
+.t {
+  background-image: url('../modules/th/thumbnails.jpg');
+  background-repeat: no-repeat;
 }
-
-.n {
-      background-image: url(@numbers) !important;
-      background-repeat:repeat-y;
+@media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-resolution: 1.5dppx) {
+  .t {
+    background-image: url("../modules/th/thumbnails@2x.jpg");
+    background-size: 888px 1554px;
+  }
 }
-*/
 /* Striped Gradients */
 @-webkit-keyframes fadeLoop {
   0% {
