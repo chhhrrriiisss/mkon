@@ -1,4 +1,4 @@
-# MkON
+![MkON](/logo.png "MkON")
 
 MkON is a completely modular control panel UI for [Telemachus](http://forum.kerbalspaceprogram.com/threads/24594-0-23-Telemachus-%E2%80%93-Telemetry-and-Flight-Control-in-the-Web-Browser-(2014-1-11)) (see below) and Kerbal Space Program.  The UI is designed to work on tablets and second monitors as an auxiliary display and is styled in the KSP aesthetic. It also allows a degree of control using pressable buttons, dials, meters and lots of data for number junkies.
 
@@ -17,7 +17,7 @@ MkON is a completely modular control panel UI for [Telemachus](http://forum.kerb
 - You need to download and install the latest release of [Telemachus v1.4.21.0](https://github.com/richardbunt/Telemachus/releases)
 - Go to your KSP Folder/Game Data/Telemachus/Plugins/PluginData/Telemachus folder and delete or move the existing contents to another folder.
 - Copy the contents of the MkON zip file into the above folder.
-- Load up KSP and Telemachus as you would normally - follow the [Telemachus user guide](https://github.com/richardbunt/Telemachus/wiki/User-Guide) in order to do that.
+- Load up KSP and open Telemachus as you would normally - follow the [Telemachus user guide](https://github.com/richardbunt/Telemachus/wiki/User-Guide).
 
 ## How to use
 
@@ -33,7 +33,7 @@ MkON is a completely modular control panel UI for [Telemachus](http://forum.kerb
 
 ## Disclaimer
 
-This project is very much a work in progress. Expect bugs, occasional slowness and wierd errors but mst of the time a refresh will fix it. Optimization will focus exclusively on tablets and desktops/laptops first. Currently tested working environments include:
+This project is very much a work in progress. Expect bugs, occasional slowness and wierd errors but most of the time a refresh will fix it. Optimization will focus exclusively on tablets and desktops/laptops first. Currently tested working environments include:
 
 - Chrome, Safari, Firefox on Windows/OSX for desktops and laptops.
 - Chrome, Safari for iPad 4.
