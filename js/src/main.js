@@ -228,8 +228,11 @@ MKON = {
     datalink:  "ws://" + window.location.host + "/datalink",  //    datalink:  "ws://" + window.location.host + "/datalink",  
     defaults: { 
         "+": ['v.name', 'p.paused'],
-        "rate": this.rate
+        "rate": this.rate,
+        "run": ['a.version']
     },
+    versionCheck: false,
+    requiredVersion: '1.4.21.0',
 
     init: function() {      
 
@@ -258,7 +261,7 @@ MKON = {
         overflowList: [],   
         overflowActive: false, 
         overflowAttempts: 0,                  
-        maxOverflowAttempts: 100,
+        maxOverflowAttempts: 100,        
 
         init: function(datalink, defaults) {        
 
@@ -286,6 +289,25 @@ MKON = {
                         };
 
                         MKON.CONTENT.filterData(evt.data);
+
+                        if (!MKON.versionCheck) { // if version hasnt been checked, but connection is active
+
+                            if (MKON.debug) {
+                                console.log('Telemachus version: ' + MKON.CONTENT.getVariable('a.version'));  
+                            }
+
+                            var v = MKON.CONTENT.getVariable('a.version');
+                            
+                            if (v == MKON.requiredVersion) {
+                                
+                                if (MKON.debug) { console.log('Version is ok.');  }                                 
+                            } else {
+                                alertify.error("Version mismatch");
+                            }
+
+                            MKON.versionCheck = true;
+                        }
+
                         MKON.COMMS.active = true;
                     };  
 
@@ -312,6 +334,19 @@ MKON = {
                 console.log('Websockets not supported');
             }        
 
+        },
+
+        // gets a value (one time use)
+        get: function(v) {
+
+            if (this.active) {
+                
+                if (MKON.debug) { console.log('Getting: ' + v); };
+
+                ws.send(JSON.stringify({
+                        "run": [ v ]
+                }));    
+            } 
         },
 
         // sets the data rate
