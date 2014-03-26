@@ -377,14 +377,14 @@ MKON = {
                         "run": [ c ]
                     }));
 
-                } else if (MKON.LAYOUT.locked) {
+                } else if (MKON.LAYOUT.locked && !this.active) {
 
                     // connection is idle and layout isnt locked
-                    this.overflow(c,'run');
+                    //this.overflow( c ,'run');
 
                 } else {
 
-                    // connection idle and layout unlocked - ignore
+                    // layout unlocked - ignore
 
                 }
             }
