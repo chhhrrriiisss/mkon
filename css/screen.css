@@ -1279,6 +1279,7 @@ header:focus .hitbox {
   /* Required to make elements draggable in old WebKit */
   -khtml-user-drag: element;
   -webkit-user-drag: element;
+  cursor: default;
   background-image: url('../modules/th/thumbnails.jpg');
   background-repeat: no-repeat;
 }
@@ -1290,7 +1291,7 @@ header:focus .hitbox {
 }
 #moduleList .addModule ul li.item:hover,
 #moduleList .addModule ul li.item:focus {
-  cursor: move;
+  cursor: default;
   opacity: 1;
   filter: alpha(opacity=100);
 }
