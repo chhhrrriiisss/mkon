@@ -1839,26 +1839,17 @@ header {
                             margin-top:-20px;
                             margin-left:-50%;
                             position:absolute;
-                            display:block;
-                            
+                            display:block;                            
                             text-align:center;
                             padding:3px;
 
-              /*              &.tw1 {
-
-                                span.trg:nth-child(-n+1) {
-                                    border-left: 12px solid @lightGreen;
-                                }
-                                
-                            }
-*/              
-                
                             .genTw (@index) when (@index > 0) {
                               
                                 &.tw@{index} {
                                    
                                     span.trg:nth-child(-n+@{index}) {                                    
                                         border-left: 12px solid @lightGreen;
+
                                     }
                                 }
 
@@ -1891,13 +1882,12 @@ header {
 
 
                     &.met {
-                        display:table;
-
-                       
+                        display:table;                      
 
                         h3 {
                             bottom:24px;
                         }
+
                         h3.data-time {
                             display:table-cell;
                             vertical-align:middle;
@@ -1914,9 +1904,7 @@ header {
                         }
                     }
 
-                    &.connection {
-                        
-
+                    &.connection {   
 
                         &.red {
 
@@ -1981,6 +1969,7 @@ header {
                         }
 
                         div.radio {
+
                             display:block;
                             width:125px;
                             height:120px;
@@ -1995,6 +1984,7 @@ header {
                         }
 
                         div.indicator {
+
                             display:block;
                             width:20px;
                             height:20px;
@@ -2020,6 +2010,7 @@ header {
                                 background:#000;
 
                                 span.highlight {
+
                                     display:block;
                                     width:70%;
                                     height:70%;
@@ -2037,6 +2028,7 @@ header {
                             bottom:24px;
                         }
                         h3.data-status {
+
                             display:table-cell;
                             vertical-align:middle;
                             text-align:center;
@@ -2046,11 +2038,10 @@ header {
                             top:75%;
                             margin-top:-15px;
                             bottom:0px;
-                            color:@lightGreen;
-                            .text-shadow(0px 0px 3px @lightGreen);
-                     
+                            color:@lightGreen;                                                
                             font-size:1em;
                             letter-spacing:0.1em;
+                            .text-shadow(0px 0px 3px @lightGreen); 
 
                         }
                     }
@@ -2063,24 +2054,20 @@ header {
                             position:relative;
                             top:0px;
                             left:0px;
-
                             height:60px;
                             .box-sizing(border-box);
 
                             .resource-bar {
                                 overflow:visible;
                                 .absoluteCenter();
-
                             }
 
                             h3 {
-
                                 position:absolute;
                                 margin:0;
                                 bottom:0px;
                                 font-size:.5em;
-                                text-transform:uppercase;       
-                                
+                                text-transform:uppercase;
                                 left:0px;
                             }
                         }
@@ -2099,15 +2086,12 @@ header {
                     display:block;
                     width:195px;
                     height:204px;
-
                     top:50%;
                     left:50%;
                     margin-left:-95px;
                     margin-top:-102px;
-
                     overflow:hidden;
                     .box-sizing();
-
 
                     .pointer {
 
@@ -2130,14 +2114,12 @@ header {
                     position:relative;
                     display:block;
                     top:0px;
-                    left:0px;  
-        
+                    left:0px;          
                     width:100%;
                     height:100%;
-                    overflow:hidden;
-                    .box-sizing();
+                    overflow:hidden;                   
                     background:none !important;
-
+                    .box-sizing();
 
                     .resource {
 
@@ -2155,20 +2137,18 @@ header {
 
                         &:after {
                             display:block;                                      
-                            height:100%;
-                                         
-                            .absoluteCenter();                            
+                            height:100%;            
                             content: attr(data-val);
                             text-align:right;
                             font-family:@display-font;              
-                            color:rgba(0,0,0,.5);
-                            
+                            color:rgba(0,0,0,.5);                            
                             font-size:1em;
                             padding:2px;
                             padding-top:0px;
                             padding-right:5px;     
                             .box-sizing(border-box);
                             z-index:9;
+                            .absoluteCenter(); 
                         }
 
                         .value {
@@ -2176,33 +2156,25 @@ header {
                             top:0px;
                             left:0px;
                             width:0%;
-                            height:100%;
-                            
+                            height:100%;                            
                             background-position:-547px -284px;
                             z-index:10;
 
                             &:after {
                                 display:block;                                      
-                                height:100%;
-                                                 
-                                .absoluteCenter();                            
+                                height:100%;            
                                 content: attr(data-val);
                                 text-align:right;
                                 font-family:@display-font;              
-                                color:rgba(0,0,0,.8);
-                               
+                                color:rgba(0,0,0,.8);                               
                                 font-size:1em;
                                 padding:1px;
                                 padding-top:0px;
                                 padding-right:3px;
-                                padding-left:3px;
-
-                  
-                                
-                                .box-sizing(border-box);
+                                padding-left:3px;                  
                                 z-index:11;
-
-                             
+                                .box-sizing(border-box);
+                                .absoluteCenter();                                                               
                             }
                         }
                         
@@ -2217,8 +2189,7 @@ header {
                         text-align:center;
                         width:100%;
                         margin-left:-50%;  
-                        text-transform:uppercase;                
-             
+                        text-transform:uppercase; 
                     }
 
 
@@ -2246,15 +2217,12 @@ header {
                         display:block;
                         background-position:-248px -312px;
                         background-repeat:repeat-x;
-
                         .transition(background-position .3s);
-
 
                         .marker {
                             display:block;
                             width:11px;
                             height:30px;
-
                             position:absolute;
                             left:50%;
                             top:50%;
@@ -2271,8 +2239,7 @@ header {
                         bottom:8px;
                         left:50%;
                         margin-left:-42px;
-                        display:none;
-             
+                        display:none;             
                     }
 
                     
@@ -2296,7 +2263,6 @@ header {
                     overflow:hidden;
                     .box-sizing();
 
-
                     .control {                 
                       
                         display:block;
@@ -2306,19 +2272,14 @@ header {
                         margin-top:-15px;
                         margin-left:-50%;
                         top:50%;
-                        left:50%;
-                        
-
-                        .box-sizing();
-
-                      
+                        left:50%;       
+                        .box-sizing();                     
 
                         .marker {
                             display:block;
                             width:14px;
                             height:30px;
-                            margin-top:-10px;
-                        
+                            margin-top:-10px;                        
                             position:relative;
                             left:50%;
                             margin-left:-7px;
@@ -2356,7 +2317,6 @@ header {
                             width:180px;
                             margin-left:-90px;
                             background-position:-302px 2px;
-                            
 
                             .marker {
                                 position:absolute;
@@ -2365,8 +2325,6 @@ header {
                                 .transition(left .1s);
                             }
                         }
-
-
 
                         h3 {
                             display:none; /* Until style fix */
@@ -2387,30 +2345,24 @@ header {
                     overflow:hidden;
                     .box-sizing();
 
-
-                    .scale {
-                        
+                    .scale {                        
                         display:block;
                         height:20px;
-                        width:228px;
-
-                        .box-sizing();
-
+                        width:228px;                      
                         position:absolute;
                         top:23px;
                         left:50%;
                         margin-left:-115px;
+                        .box-sizing();
 
                         .marker {
                             display:block;
                             width:10px;
-                            height:30px;
-                        
+                            height:30px;                        
                             position:relative;
                             left:0%;
                             margin-left:-5px;
                             background-position:-296px -148px;
-
                         }
 
                     }
@@ -2442,20 +2394,18 @@ header {
                 .density {
                     
                     background-position:40px 24px;
-                    
+
                 }
 
                  .throttle {                  
                     
                     background-position:38px -134px;
-
                     
                 }
 
                 .fuel {                  
                     
                     background-position:38px -207px;
-
                     
                 }
 
@@ -2476,7 +2426,6 @@ header {
                 span.gs-resize-handle {
                     display:inherit !important;
                     z-index:30;
-
                 }
 
                 &:before {
@@ -2516,7 +2465,6 @@ header {
                 span.gs-resize-handle {
                     display:inherit !important;
                     z-index:30;
-
                 }
            
                 &:before {
@@ -2539,9 +2487,7 @@ header {
 
                 &:hover, &:focus {
                     background:rgba(0,0,0,.1);
-
-                    cursor:move;
-                   
+                    cursor:move;                   
                 }
 
             }
