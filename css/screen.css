@@ -1192,35 +1192,42 @@ header:focus .hitbox {
 #moduleList .addModule #moduleContainer.show-button .data-type-scale,
 #moduleList .addModule #moduleContainer.show-button .data-type-dial,
 #moduleList .addModule #moduleContainer.show-button .data-type-screen,
-#moduleList .addModule #moduleContainer.show-button .data-type-none {
+#moduleList .addModule #moduleContainer.show-button .data-type-utility {
   display: none !important;
 }
 #moduleList .addModule #moduleContainer.show-resource .data-type-button,
 #moduleList .addModule #moduleContainer.show-resource .data-type-scale,
 #moduleList .addModule #moduleContainer.show-resource .data-type-dial,
 #moduleList .addModule #moduleContainer.show-resource .data-type-screen,
-#moduleList .addModule #moduleContainer.show-resource .data-type-none {
+#moduleList .addModule #moduleContainer.show-resource .data-type-utility {
   display: none !important;
 }
 #moduleList .addModule #moduleContainer.show-scale .data-type-button,
 #moduleList .addModule #moduleContainer.show-scale .data-type-resource,
 #moduleList .addModule #moduleContainer.show-scale .data-type-dial,
 #moduleList .addModule #moduleContainer.show-scale .data-type-screen,
-#moduleList .addModule #moduleContainer.show-scale .data-type-none {
+#moduleList .addModule #moduleContainer.show-scale .data-type-utility {
   display: none !important;
 }
 #moduleList .addModule #moduleContainer.show-dial .data-type-button,
 #moduleList .addModule #moduleContainer.show-dial .data-type-resource,
 #moduleList .addModule #moduleContainer.show-dial .data-type-scale,
 #moduleList .addModule #moduleContainer.show-dial .data-type-screen,
-#moduleList .addModule #moduleContainer.show-dial .data-type-none {
+#moduleList .addModule #moduleContainer.show-dial .data-type-utility {
   display: none !important;
 }
 #moduleList .addModule #moduleContainer.show-screen .data-type-button,
 #moduleList .addModule #moduleContainer.show-screen .data-type-resource,
 #moduleList .addModule #moduleContainer.show-screen .data-type-scale,
 #moduleList .addModule #moduleContainer.show-screen .data-type-dial,
-#moduleList .addModule #moduleContainer.show-screen .data-type-none {
+#moduleList .addModule #moduleContainer.show-screen .data-type-utility {
+  display: none !important;
+}
+#moduleList .addModule #moduleContainer.show-utility .data-type-button,
+#moduleList .addModule #moduleContainer.show-utility .data-type-resource,
+#moduleList .addModule #moduleContainer.show-utility .data-type-scale,
+#moduleList .addModule #moduleContainer.show-utility .data-type-screen,
+#moduleList .addModule #moduleContainer.show-utility .data-type-dial {
   display: none !important;
 }
 #moduleList .addModule ul {
@@ -1673,6 +1680,17 @@ header:focus .hitbox {
 }
 .gridster.locked ul li.blank {
   display: none !important;
+}
+.gridster.locked ul li.panel:before {
+  display: none !important;
+}
+.gridster.locked ul li.panel span.gs-resize-handle {
+  display: none !important;
+  z-index: 30;
+}
+.gridster.locked ul li.panel:hover,
+.gridster.locked ul li.panel:focus {
+  cursor: default;
 }
 .gridster.locked ul li .options {
   display: none !important;
@@ -2683,6 +2701,32 @@ header:focus .hitbox {
 .gridster ul li.panel span.gs-resize-handle {
   display: inherit !important;
   z-index: 30;
+}
+.gridster ul li.panel:before {
+  display: block;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 30px;
+  margin-left: -30px;
+  margin-top: -5px;
+  content: 'PANEL';
+  text-align: center;
+  font-family: 'Arial Black', 'Arial Bold', sans-serif;
+  font-size: .6em;
+  color: #222;
+}
+.gridster ul li.panel:hover,
+.gridster ul li.panel:focus {
+  cursor: move;
 }
 .gridster ul li.blank {
   border: 3px rgba(0, 0, 0, 0.1) solid;

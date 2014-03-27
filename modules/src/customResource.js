@@ -6,22 +6,32 @@ function init(url, col, row, meta, width, height) {
 
 	var r;
 
-    alertify.prompt("Enter the resource name to track", function (e,str) {
-        if (e) {
-          
-            if (str!=null && str != '') {
-            	r = str.toString();
-				req = ['r.resource[' + r + ']', 'r.resourceMax[' + r + ']'];
-            	add();
-            	// req = ['r.resource[' + r + ']', 'custom','r.resourceMax[' + r + ']','maxCustom'];
-        	} else {
-        		 return alert('You didnt enter a valid resource!');
-        	}
+	if (meta!=null && meta != '') {
 
-        } else {
-        	             
-        }
-    }, "LiquidFuel");
+	    r = meta.toString();
+		req = ['r.resource[' + r + ']', 'r.resourceMax[' + r + ']'];
+	    add();
+
+	} else {		
+
+	    alertify.prompt("Enter the resource name to track", function (e,str) {
+	        if (e) {
+	          
+	            if (str!=null && str != '') {
+	            	r = str.toString();
+					req = ['r.resource[' + r + ']', 'r.resourceMax[' + r + ']'];
+	            	add();
+	            	// req = ['r.resource[' + r + ']', 'custom','r.resourceMax[' + r + ']','maxCustom'];
+	        	} else {
+	        		 return alert('You didnt enter a valid resource!');
+	        	}
+
+	        } else {
+	        	             
+	        }
+	    }, "LiquidFuel");
+
+	}
 
     function add() {
 
@@ -52,7 +62,7 @@ function init(url, col, row, meta, width, height) {
 		);
 
 		// content for insertion to gridster
-		var content =   '<li id="' + id + '" data-row="1" data-col="1" data-link="' + url + '" data-sizex="3" data-sizey="1">\
+		var content =   '<li id="' + id + '" data-row="1" data-col="1" data-link="' + url + '" data-meta="' + r + '" data-sizex="3" data-sizey="1">\
 						<div class="options"><div class="remove"><i class="fa fa-times"></i></div></div>\
 						<div class="content"><div class="resource-bar"><h3>' + r + '</H3><div class="s resource" data-val="0"><div class="s value data-custom" data-val="0"></div></div></div></div></li>';
 

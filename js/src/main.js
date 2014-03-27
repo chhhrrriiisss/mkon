@@ -166,6 +166,10 @@ $(document).ready(function() {
             moduleContainer.addClass('show-scale');
             break;
 
+            case "utility":
+            moduleContainer.addClass('show-utility');
+            break;
+
             default:
             
         }

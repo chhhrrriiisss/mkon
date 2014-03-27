@@ -745,31 +745,37 @@ header {
 
             &.show-button {
 
-                .data-type-resource, .data-type-scale, .data-type-dial, .data-type-screen, .data-type-none {
+                .data-type-resource, .data-type-scale, .data-type-dial, .data-type-screen, .data-type-utility {
                     display:none !important;
                 }
             }
 
             &.show-resource {
-                .data-type-button, .data-type-scale, .data-type-dial, .data-type-screen, .data-type-none {
+                .data-type-button, .data-type-scale, .data-type-dial, .data-type-screen, .data-type-utility {
                     display:none !important;
                 }
             }
 
             &.show-scale {
-                .data-type-button, .data-type-resource, .data-type-dial, .data-type-screen, .data-type-none {
+                .data-type-button, .data-type-resource, .data-type-dial, .data-type-screen, .data-type-utility {
                     display:none !important;
                 }
             }
 
             &.show-dial {
-                .data-type-button, .data-type-resource, .data-type-scale, .data-type-screen, .data-type-none {
+                .data-type-button, .data-type-resource, .data-type-scale, .data-type-screen, .data-type-utility {
                     display:none !important;
                 }
             }
 
             &.show-screen {
-                .data-type-button, .data-type-resource, .data-type-scale, .data-type-dial, .data-type-none {
+                .data-type-button, .data-type-resource, .data-type-scale, .data-type-dial, .data-type-utility {
+                    display:none !important;
+                }
+            }
+
+            &.show-utility {
+                .data-type-button, .data-type-resource, .data-type-scale, .data-type-screen, .data-type-dial {
                     display:none !important;
                 }
             }
@@ -1300,6 +1306,21 @@ header {
 
                 &.blank {
                     display:none !important;
+                }
+
+                &.panel {
+                    &:before {
+                        display:none !important;
+                    }
+
+                    span.gs-resize-handle {
+                        display:none !important;
+                        z-index:30;
+                    }
+
+                    &:hover, &:focus {
+                        cursor:default;
+                    }
                 }
 
                 .options {
@@ -2400,10 +2421,35 @@ header {
             }
 
             &.panel {
-                 span.gs-resize-handle {
+
+                span.gs-resize-handle {
                     display:inherit !important;
                     z-index:30;
 
+                }
+
+                &:before {
+                    display:block;
+                    .opacity(50);
+                    .transition(all .3s);
+                    position:absolute;            
+                    top:50%;
+                    left:50%;
+                    width:60px;
+                    height:30px;
+                    margin-left:-30px;
+                    margin-top:-5px;
+                    content:'PANEL';
+                    text-align:center;
+                    font-family:@main-font;
+                    font-size:.6em;
+                    color:#222;
+                }
+
+                &:hover, &:focus {                  
+
+                    cursor:move;
+                   
                 }
             }
 
