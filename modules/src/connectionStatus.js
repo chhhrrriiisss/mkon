@@ -34,12 +34,15 @@ function init(url, col, row, meta, width, height) {
 				i.addClass('orange');
 				s.html('PAUSED');			
 				
+			} else if (p == 2) {
+
+				s.html('NO POWER');	
+
 			} else if (p == 3) { //
 
 				s.html('NO SIGNAL');		
 				
 			} else { // no power or no antenna	
-
 				
 				// no connection
 				i.addClass('red');
@@ -50,27 +53,6 @@ function init(url, col, row, meta, width, height) {
 
 		}
 		
-
-
-
-
-		// var oV = MKON.CONTENT.getVariable(req[1]) || 0;
-		// var alt = MKON.CONTENT.getVariable(req[2]) || 0;
-
-		// oV = MKON.FNC.toFixed( oV , 1);
-		// sV = MKON.FNC.toFixed( sV , 1);
-
-		
-
-		// if (alt > 35000) {
-		// 	t.find('.data-v').html(oV + 'm/s');
-		// 	t.find('.data-title').html('ORBIT');
-		// } else {
-		// 	t.find('.data-v').html(sV + 'm/s');
-		// 	t.find('.data-title').html('SURFACE');
-		
-		// }
-
 	} );
 
 	// content for insertion to gridster
@@ -82,11 +64,4 @@ function init(url, col, row, meta, width, height) {
 
 	MKON.CONTENT.addModule(mod, content);
 
-
-	// for (var i=0; i<req.length; i++) {
-	// 	addVariables( [ mod.req[i] ] );
-	// }
-
-	//updateAPIString();
 }
-

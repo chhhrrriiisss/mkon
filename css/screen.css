@@ -555,7 +555,7 @@ body {
 }
 body:after {
   display: none;
-  content: url('../img/noise.png') url('../img/grid.png') url('../img/logo.png') url('../modules/th/thumbnails.jpg');
+  content: url('../img/sprites.png') url('../img/noise.png') url('../img/grid.png') url('../img/logo.png') url('../modules/th/thumbnails.jpg');
 }
 /* Scrollbar CSS fixes */
 /* Let's get this party started */
@@ -1782,11 +1782,6 @@ header:focus .hitbox {
   position: absolute;
   opacity: 0;
   filter: alpha(opacity=0);
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  -ms-transition: all 0.3s;
-  -o-transition: all 0.3s;
-  transition: all 0.3s;
   z-index: 99;
   width: 100%;
   height: 100%;
@@ -1804,6 +1799,11 @@ header:focus .hitbox {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
   cursor: move;
+  -webkit-transition: opacity 0.3s;
+  -moz-transition: opacity 0.3s;
+  -ms-transition: opacity 0.3s;
+  -o-transition: opacity 0.3s;
+  transition: opacity 0.3s;
 }
 .gridster ul li .options .remove {
   position: absolute;
@@ -2202,6 +2202,65 @@ header:focus .hitbox {
 }
 .gridster ul li .content .screen .altitude .n.nine {
   background-position: 0px 0px;
+}
+.gridster ul li .content .screen.timewarp .holder {
+  width: 100%;
+  height: 30px;
+  top: 50%;
+  left: 50%;
+  margin-top: -20px;
+  margin-left: -50%;
+  position: absolute;
+  display: block;
+  text-align: center;
+  padding: 3px;
+  /*              &.tw1 {
+
+                                span.trg:nth-child(-n+1) {
+                                    border-left: 12px solid @lightGreen;
+                                }
+                                
+                            }
+*/
+}
+.gridster ul li .content .screen.timewarp .holder.tw8 span.trg:nth-child( -n + 8) {
+  border-left: 12px solid #91cc35;
+}
+.gridster ul li .content .screen.timewarp .holder.tw7 span.trg:nth-child( -n + 7) {
+  border-left: 12px solid #91cc35;
+}
+.gridster ul li .content .screen.timewarp .holder.tw6 span.trg:nth-child( -n + 6) {
+  border-left: 12px solid #91cc35;
+}
+.gridster ul li .content .screen.timewarp .holder.tw5 span.trg:nth-child( -n + 5) {
+  border-left: 12px solid #91cc35;
+}
+.gridster ul li .content .screen.timewarp .holder.tw4 span.trg:nth-child( -n + 4) {
+  border-left: 12px solid #91cc35;
+}
+.gridster ul li .content .screen.timewarp .holder.tw3 span.trg:nth-child( -n + 3) {
+  border-left: 12px solid #91cc35;
+}
+.gridster ul li .content .screen.timewarp .holder.tw2 span.trg:nth-child( -n + 2) {
+  border-left: 12px solid #91cc35;
+}
+.gridster ul li .content .screen.timewarp .holder.tw1 span.trg:nth-child( -n + 1) {
+  border-left: 12px solid #91cc35;
+}
+.gridster ul li .content .screen.timewarp .holder span.trg {
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-left: 12px solid #666;
+  display: inline-block;
+  padding-right: 15px;
+}
+.gridster ul li .content .screen.timewarp .holder span.trg:last-child {
+  padding-right: 0px;
+}
+.gridster ul li .content .screen.timewarp h3 {
+  bottom: 24px;
 }
 .gridster ul li .content .screen.met {
   display: table;
@@ -4331,6 +4390,9 @@ header:focus .hitbox {
   #moduleList .addModule ul li.item {
     width: 19.3% !important;
   }
+  #moduleList .addModule ul li.item {
+    height: 175px;
+  }
 }
 /* iPads (landscape) ----------- */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
@@ -4348,6 +4410,9 @@ header:focus .hitbox {
   }
   #moduleList .addModule ul li.item {
     width: 19.3% !important;
+  }
+  #moduleList .addModule ul li.item {
+    height: 175px;
   }
 }
 /* Tablets ----------- */

@@ -13,9 +13,7 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->        
 
         <link rel="Shortcut Icon" href="favicon.ico" type="image/x-icon" />
-        <meta http-equiv="cache-control" content="no-cache" />
-        <link rel="stylesheet" href="css/screen.css">      
-
+        <link rel="stylesheet" href="css/screen.css"> 
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
@@ -23,7 +21,6 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         
-        <!-- Start header hidden -->
         <header>
 
             <nav class="clearfix">
@@ -40,7 +37,8 @@
                 </ul>
                 
             </nav>
-      
+            
+            <!-- Yellow striped bar at bottom of header -->
             <div class="stripedBar"><span class="end"></span></div>
 
             <!-- Mainly for mobile devices -->
@@ -51,6 +49,7 @@
         <!-- Centre Logo -->
         <div id="logo" class="animated-slow"></div>
 
+        <!-- Drop Zone for Removing Modules -->
         <div id="removeZone" class="animated-fast"> <i class="fa fa-trash-o fa-2x trash"></i></div>
 
         <!-- Overlay for lock/unlock state animation -->
@@ -88,6 +87,21 @@
                  <div id="moduleContainer" class="moduleContainer">
                  
                       <ul>
+
+                        <li class="item data-type-screen" data-name="Time Warp" data-type="screen" data-link="modules/timeWarp.min.js" style="background-position:-666px -1332px;">
+                          <h4 class="title">
+                            Time Warp
+                            <span class="type fa fa-list">
+                            </span>
+                          </h4>
+                          <h5 class="desc">
+                            A screen indicating current time warp status.
+                          </h5>
+                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                            <i class="fa fa-plus">
+                            </i>
+                          </a>
+                        </li>
 
                           <li class="item data-type-screen" data-name="Connection Status" data-type="screen" data-link="modules/connectionStatus.min.js" style="background-position:0px 0px;">
                           <h4 class="title">
@@ -512,6 +526,7 @@
 
             <ul id="gridster">
 
+              <!-- Added Modules go here -->
 
             </ul>               
 
@@ -521,6 +536,5 @@
         <script src="js/plugins.min.js"></script>
         <script src="js/src/main.js"></script>
 
-        
     </body>
 </html>

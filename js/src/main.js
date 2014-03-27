@@ -316,7 +316,7 @@ MKON = {
                                     MKON.COMMS.unsubscribe('a.version');                               
                                 }
 
-                                MKON.versionCheck = true;
+                                MKON.versionCheck = true;                               
 
                             }                           
                         }
@@ -521,6 +521,7 @@ MKON = {
         prevLayout: false,
         viewportWidth: 0,
         viewportHeight: 0,
+        removeZoneLimit: 0,
 
         init: function() {
 
@@ -543,6 +544,7 @@ MKON = {
             var margins = (this.gridMargins*2) * cols;
             var offsetX = windowWidth - (margins + totalWidth);
             $('#gridsterWrapper').css('left', Math.abs(offsetX/2) + 'px');
+            MKON.LAYOUT.removeZoneLimit = parseInt(MKON.LAYOUT.viewportHeight - MKON.LAYOUT.removeZone.outerHeight());    
 
             this.initGridster();    
 
@@ -577,13 +579,13 @@ MKON = {
                                
                     if (this.prevLayout != null) {
 
-                        function waitUntil() {
-                            if (MKON.COMMS.active){
-                                MKON.LAYOUT.generate( MKON.LAYOUT.prevLayout );            
-                            } else {
-                                setTimeout(waitUntil, MKON.rate);
-                            }
-                        }
+                        // function waitUntil() {
+                        //     if (MKON.COMMS.active){
+                        //         MKON.LAYOUT.generate( MKON.LAYOUT.prevLayout );            
+                        //     } else {
+                        //         setTimeout(waitUntil, MKON.rate);
+                        //     }
+                        // }
 
                         //waitUntil();    
                         
@@ -618,26 +620,21 @@ MKON = {
 
                                  
                         },
-                        drag: function(event, ui) {
-                            
-                            var limit = parseInt(MKON.LAYOUT.viewportHeight - MKON.LAYOUT.removeZone.outerHeight());                          
-                            if (ui.pointer.top > limit) {
+                        drag: function(event, ui) {                            
+                                                  
+                            if (ui.pointer.top > MKON.LAYOUT.removeZoneLimit) {
                                 MKON.LAYOUT.removeZone.addClass('hover');
                    
                             } else {
-                                MKON.LAYOUT.removeZone.removeClass('hover');
-                        
+                                MKON.LAYOUT.removeZone.removeClass('hover');                        
                             }
 
                         },
                         stop: function(event, ui){ 
 
-
-
                             if ($('#removeZone').hasClass('hover')) {
 
-                                // remove the module as its over the remove zone                   
-
+                                // remove the module as its over the remove zone 
                                 var el = MKON.LAYOUT.currentWidget;
                                 el.hide();
                                 MKON.CONTENT.removeModule(el);
@@ -646,21 +643,14 @@ MKON = {
 
                                 // update the position on the grid
                                 var el = $(event.target).parent();
-
-                                var id = el.attr('id');
-                                var col = el.attr('data-col');
-                                var row = el.attr('data-row'); 
-
                                 //console.log(id + ' ' + col + ' ' + row);
                                
-                                MKON.CONTENT.updateModule( id, col, row );
+                                MKON.CONTENT.updateModule(el);
 
 
                                 
                             }
-
-
-                            setTimeout(function() { MKON.LAYOUT.save(); }, 100);
+                            
                             MKON.LAYOUT.removeZone.removeClass('hover');
                             MKON.LAYOUT.removeZoneAnimation('hide');
 
@@ -756,8 +746,9 @@ MKON = {
 
             this.clear();
             MKON.allowSave = false;
+           
             for (var item in data) {
-
+                
                 if (data.hasOwnProperty(item)) {  
                     
                     var p = data[item].p;   
@@ -769,9 +760,12 @@ MKON = {
                     var m = data[item].m;
                     MKON.CONTENT.retrieveModule(u, c, r, m, x, y);   
                 }
-            }
-            
-            this.unlock();
+
+            }           
+
+            MKON.allowSave = true;
+            MKON.LAYOUT.save();
+            MKON.LAYOUT.unlock();
 
         },
 
@@ -1144,13 +1138,17 @@ MKON = {
 
             var ind = $(target).index();
             MKON.LAYOUT.remove( $('#gridster li').eq(ind) );
+            MKON.LAYOUT.save();
 
         },
 
         // Updates grid coords for an activeModule
-        updateModule: function(id, newCol, newRow) {
+        updateModule: function(el) {
 
-            var id = id;
+            // update the dom module
+            var newCol = el.attr('data-col');
+            var newRow = el.attr('data-row');
+            var id = el.attr('id');       
 
             for(var i = 0; i<this.activeModules.length; i++) {
 
@@ -1160,6 +1158,8 @@ MKON = {
                     break;
                 }
             }
+
+            MKON.LAYOUT.save();
         },
 
         // Imports a module from the default module folder
