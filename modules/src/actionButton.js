@@ -39,8 +39,6 @@ function init(url, col, row, meta, width, height) {
 		// register a new module
 		var mod = new MKON.module('Action' + r, 'Button', id, ['',''], 
 
-
-
 		function() {   
 
 			// var t = $('#'+this.id);
@@ -68,11 +66,8 @@ function init(url, col, row, meta, width, height) {
 
 		MKON.CONTENT.addHook(id, r, function() { MKON.COMMS.command(com[0]); });
 
-			// register a new module
+		// register a new module
 		var mod = new MKON.module('Action' + r, 'Button', id, ['',''], function() {  } );
 
 	}
-
-	// 
-	// updateAPIString();
 }

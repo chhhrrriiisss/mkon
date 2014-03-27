@@ -2680,6 +2680,10 @@ header:focus .hitbox {
 .gridster ul li.alt {
   background: #576069;
 }
+.gridster ul li.panel span.gs-resize-handle {
+  display: inherit !important;
+  z-index: 30;
+}
 .gridster ul li.blank {
   border: 3px rgba(0, 0, 0, 0.1) solid;
   -webkit-border-radius: 0.3em;

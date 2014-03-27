@@ -4,7 +4,7 @@ function init(url, col, row, meta, width, height) {
 	var height = height || 1;
 
 	// content for insertion to gridster	
-	var content = '<li class="blank" data-col="1" data-link="' + url + '" data-sizex="1" data-sizey="1">\
+	var content = '<li class="blank" data-col="1" data-row="1" data-link="' + url + '" data-sizex="1" data-sizey="1">\
 				   <div class="options"><div class="remove"><i class="fa fa-times"></i></div></div>\
 				   </li>';
 

@@ -689,7 +689,7 @@ MKON = {
 
         save: function() {
             
-            
+
             if (MKON.localStorageSupport) {
 
                 this.serialize();  
@@ -1185,7 +1185,7 @@ MKON = {
                 error: function (request, status, error) {
                     console.log(error);
                 },
-                async:false,
+                async: true,
                 cache: true
             });  
 
