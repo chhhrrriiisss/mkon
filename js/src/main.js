@@ -688,9 +688,8 @@ MKON = {
         },
 
         save: function() {
-
-           
-
+            
+            
             if (MKON.localStorageSupport) {
 
                 this.serialize();  
@@ -1097,6 +1096,7 @@ MKON = {
             }
 
             MKON.LAYOUT.add(content);
+            MKON.LAYOUT.save();
 
         },
 
@@ -1175,7 +1175,7 @@ MKON = {
                         // console.log('url string ' + urlString);
                         // $('#' + last.id).attr('data-link', last.url);  
 
-                        MKON.LAYOUT.save();
+                     
                     }
                     catch (error) {
                         console.log('Error Initializing Module [' + error + ']');

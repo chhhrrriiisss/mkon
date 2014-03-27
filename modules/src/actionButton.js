@@ -5,9 +5,15 @@ function init(url, col, row, meta, width, height) {
 
 	var r;
 
-	if (meta != '') {
+	if (meta!=null && meta != '' && !isNaN(meta) && meta <= 10 && meta > 0) {  
 
-	    alertify.prompt("Enter a number for the Action Button", function (e,str) {
+	    r = meta.toString();
+		add();
+
+	} else {
+
+		
+		alertify.prompt("Enter a number for the Action Button", function (e,str) {
 	        if (e) {
 	          
 	            if (str!=null && str != '' && !isNaN(str) && str <= 10 && str > 0) {                
@@ -23,11 +29,6 @@ function init(url, col, row, meta, width, height) {
 	        	             
 	        }
 	    }, "1");
-
-	} else {
-
-		r = meta.toString();
-		add();
 	}    
 
 	function add() {
