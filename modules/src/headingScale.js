@@ -13,8 +13,8 @@ function init(url, col, row, meta, width, height) {
 
 		var hdn = MKON.CONTENT.getVariable(req);
 
-		var start = -180;
-		var end = -980;
+		var start = -178;
+		var end = -978;
 		var difference = Math.abs(start - end);
 		var scale = difference/360;
 		hdn = (hdn*scale);	

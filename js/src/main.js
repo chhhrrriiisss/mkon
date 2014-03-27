@@ -231,12 +231,12 @@ MKON = {
     cacheString: 'MKON',
     datalink:  "ws://" + window.location.host + "/datalink",  //    datalink:  "ws://" + window.location.host + "/datalink",  
     defaults: { 
-        "+": ['v.name', 'p.paused'],
-        "rate": this.rate,
-        "run": ['a.version']
+        "+": ['v.name', 'p.paused', 'a.version'],
+        "rate": this.rate
     },
     versionCheck: false,
     requiredVersion: '1.4.21.0',
+    allowSave: true,
 
     init: function() {      
 
@@ -294,22 +294,31 @@ MKON = {
 
                         MKON.CONTENT.filterData(evt.data);
 
-                        if (!MKON.versionCheck) { // if version hasnt been checked, but connection is active
-
-                            if (MKON.debug) {
-                                console.log('Telemachus version: ' + MKON.CONTENT.getVariable('a.version'));  
-                            }
-
+                        /* Version Check */
+                        if (!MKON.versionCheck && MKON.COMMS.active) { // if version hasnt been checked and connection is active
+                           
                             var v = MKON.CONTENT.getVariable('a.version');
-                            
-                            if (v == MKON.requiredVersion) {
-                                
-                                if (MKON.debug) { console.log('Version is ok.');  }                                 
-                            } else {
-                                alertify.error("Version mismatch");
-                            }
 
-                            MKON.versionCheck = true;
+                            if (typeof v !== 'undefined') {
+
+                                if (MKON.debug) {
+                                    console.log('Telemachus version: ' + MKON.CONTENT.getVariable('a.version'));  
+                                }
+                                
+                                if (v == MKON.requiredVersion) {
+                                    
+                                    if (MKON.debug) { console.log('Version is ok.');  }  
+                                    MKON.COMMS.unsubscribe('a.version');                             
+
+                                } else {
+
+                                    alertify.error("Version mismatch");
+                                    MKON.COMMS.unsubscribe('a.version');                               
+                                }
+
+                                MKON.versionCheck = true;
+
+                            }                           
                         }
 
                         MKON.COMMS.active = true;
@@ -576,9 +585,10 @@ MKON = {
                             }
                         }
 
-                        //waitUntil();                           
-
+                        //waitUntil();    
+                        
                         MKON.LAYOUT.generate( MKON.LAYOUT.prevLayout );    
+
 
                         if (MKON.debug) { console.log('Generating layout.'); };
                     }  
@@ -694,7 +704,7 @@ MKON = {
         save: function() {
             
 
-            if (MKON.localStorageSupport) {
+            if (MKON.localStorageSupport && MKON.allowSave) {
 
                 this.serialize();  
                 if (MKON.debug) {  console.log('Saving...'); };
@@ -745,11 +755,11 @@ MKON = {
         generate: function(data) {
 
             this.clear();
-           
+            MKON.allowSave = false;
             for (var item in data) {
 
                 if (data.hasOwnProperty(item)) {  
-
+                    
                     var p = data[item].p;   
                     var u = data[item].u;   
                     var c = p.c;
@@ -760,7 +770,7 @@ MKON = {
                     MKON.CONTENT.retrieveModule(u, c, r, m, x, y);   
                 }
             }
-
+            
             this.unlock();
 
         },
@@ -1084,7 +1094,7 @@ MKON = {
         },
 
         // Adds a retrieved module to the activeModules list
-        addModule: function(mod, content) {
+        addModule: function(mod, content, save) {
 
             if (mod != '') {
 
@@ -1100,7 +1110,7 @@ MKON = {
             }
 
             MKON.LAYOUT.add(content);
-            MKON.LAYOUT.save();
+            MKON.LAYOUT.save();      
 
         },
 

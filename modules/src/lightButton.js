@@ -26,7 +26,7 @@ function init(url, col, row, meta, width, height) {
 	// content for insertion to gridster
 	var content =   '<li id="' + id + '" data-com="' + com + '" data-row="1" data-col="1" data-link="' + url + '" data-sizex="1" data-sizey="1">\
 					<div class="options"><div class="remove"><i class="fa fa-times"></i></div></div>\
-					<div class="content blank"><a class="button lightText large square yellow" data-defaultClass="yellow" href="javascript:void(0);">LGHT</a></div></li>';
+					<div class="content blank"><a class="button lightText large square yellow" data-defaultClass="yellow" >LGHT</a></div></li>';
 
 	content = { html: content, x:1, y:1, col: col, row: row };
 	

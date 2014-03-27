@@ -539,6 +539,7 @@ textarea {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
   -webkit-touch-callout: none;
+  -webkit-user-select: none;
 }
 html,
 body {
@@ -2536,6 +2537,11 @@ header:focus .hitbox {
   display: block;
   background-position: -248px -312px;
   background-repeat: repeat-x;
+  -webkit-transition: background-position 0.3s;
+  -moz-transition: background-position 0.3s;
+  -ms-transition: background-position 0.3s;
+  -o-transition: background-position 0.3s;
+  transition: background-position 0.3s;
 }
 .gridster ul li .content .heading-bar .heading .marker {
   display: block;

@@ -103,7 +103,8 @@ textarea {
 *, *:before, *:after {
    -webkit-tap-highlight-color: rgba(255, 255, 255, 0); 
    .box-sizing(border-box);
-    -webkit-touch-callout: none;        
+    -webkit-touch-callout: none;  
+    -webkit-user-select:none;        
 }
 
 .d() {
@@ -134,6 +135,8 @@ body {
         display:none;
         content: url('../img/noise.png') url('../img/grid.png') url('../img/logo.png') url('../modules/th/thumbnails.jpg');
     }
+
+
 }
 
 /* Scrollbar CSS fixes */
@@ -2197,6 +2200,8 @@ header {
                         display:block;
                         background-position:-248px -312px;
                         background-repeat:repeat-x;
+
+                        .transition(background-position .3s);
 
 
                         .marker {

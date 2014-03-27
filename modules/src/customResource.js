@@ -49,6 +49,12 @@ function init(url, col, row, meta, width, height) {
 			custom = MKON.FNC.toFixed(custom, 2);
 			maxCustom = MKON.FNC.toFixed(maxCustom, 2);
 
+			if (custom == -1.00 || maxCustom == -1.00) {
+				custom = 0;
+				maxCustom = 0;
+				perc = 0;
+			}
+
 			var target = t.find('.data-custom');
 
 			target.css('width', perc + '%');
