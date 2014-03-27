@@ -1,4 +1,4 @@
-function init(startCol, startRow, url) {
+function init(url, col, row, meta, width, height) {
 
 	var id = MKON.FNC.randomString(5)	
 	var req = ['r.resource[LiquidFuel]','r.resourceMax[LiquidFuel]'];
@@ -34,7 +34,7 @@ function init(startCol, startRow, url) {
 					<div class="options"><div class="remove"><i class="fa fa-times"></i></div></div>\
 					<div class="content"><div class="resource-bar"><h3>LIQUID FUEL</H3><div class="s resource" data-val="0"><div class="s value data-fuel" data-val="0"></div></div></div></div></li>';
 
-	content = { html: content, x:3, y:1, col: startCol, row: startRow };
+	content = { html: content, x:3, y:1, col: col, row: row };
 
 	MKON.CONTENT.addModule(mod, content);
 

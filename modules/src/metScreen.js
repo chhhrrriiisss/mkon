@@ -1,4 +1,4 @@
-function init(startCol, startRow, url) {
+function init(url, col, row, meta, width, height) {
 
 	var id = MKON.FNC.randomString(5)	
 	var req = ['v.missionTime'];
@@ -22,7 +22,7 @@ function init(startCol, startRow, url) {
 					<div class="options"><div class="remove"><i class="fa fa-times"></i></div></div>\
 					<div class="content"><div class="met screen"><h3>MET</H3><h3 class="data-time">T+00:00:00</h3></div></li>';
 
-	content = { html: content, x: 3, y: 1, col: startCol, row: startRow };
+	content = { html: content, x: 3, y: 1, col: col, row: row };
 	// MKON.CONTENT.addModule(mod);
 
 	MKON.CONTENT.addModule(mod, content);

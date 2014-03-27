@@ -1,4 +1,4 @@
-function init(startCol, startRow, url) {
+function init(url, col, row, meta, width, height) {
 
 	var id = MKON.FNC.randomString(5)	
 	var req = ['p.paused', 'v.name'];
@@ -78,7 +78,7 @@ function init(startCol, startRow, url) {
 					<div class="options"><div class="remove"><i class="fa fa-times"></i></div></div>\
 					<div class="content"><div class="connection screen data-connection"><div class="radio"></div><div class="indicator green data-indicator"><span class="inner"><span class="highlight"></span></span></div><h3 class="data-status">NO SIGNAL</h3></div></li>';
 
-	content = { html: content, x: 2, y: 2, col: startCol, row: startRow };
+	content = { html: content, x: 2, y: 2, col: col, row: row };
 
 	MKON.CONTENT.addModule(mod, content);
 

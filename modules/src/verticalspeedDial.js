@@ -1,4 +1,4 @@
-function init(startCol, startRow, url) {
+function init(url, col, row, meta, width, height) {
 
 	var id = MKON.FNC.randomString(5)	
 	var req = ['v.verticalSpeed'];
@@ -57,7 +57,7 @@ function init(startCol, startRow, url) {
 					<div class="options"><div class="remove"><i class="fa fa-times"></i></div></div>\
 					<div class="content blank"><div class="verticalspeed s dial"><div class="pointer s data-vs"></div></div></div></li>';
 
-	content = { html: content, x: 2, y: 2, col: startCol, row: startRow };
+	content = { html: content, x: 2, y: 2, col: col, row: row };
 
 	MKON.CONTENT.addModule(mod, content);
 

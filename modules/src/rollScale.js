@@ -1,4 +1,4 @@
-function init(startCol, startRow, url) {
+function init(url, col, row, meta, width, height) {
 
 	var id = MKON.FNC.randomString(5)	
 	var req = ['n.roll'];
@@ -48,7 +48,7 @@ function init(startCol, startRow, url) {
 					<div class="options"><div class="remove"><i class="fa fa-times"></i></div></div>\
 					<div class="content"><div class="roll control-bar"><h3>ROLL</H3><div class="control s"><div class="marker s data-roll"></div></div></div></div></li>';
 
-	content = { html: content, x:2, y:1, col: startCol, row: startRow };
+	content = { html: content, x:2, y:1, col: col, row: row };
 
 	MKON.CONTENT.addModule(mod, content);
 

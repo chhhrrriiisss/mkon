@@ -1,4 +1,4 @@
-function init(startCol, startRow, url) {
+function init(url, col, row, meta, width, height) {
 
 	var id = MKON.FNC.randomString(5)	
 	var req = ['v.sasValue'];
@@ -28,7 +28,7 @@ function init(startCol, startRow, url) {
 					<div class="options"><div class="remove"><i class="fa fa-times"></i></div></div>\
 					<div class="content blank"><a class="button lightText large square white" data-defaultClass="white" href="javascript:void(0);">SAS</a></div></li>';
 
-	content = { html: content, col: startCol, row: startRow };
+	content = { html: content, col: col, row: row };
 
 	MKON.CONTENT.addModule(mod, content);
 

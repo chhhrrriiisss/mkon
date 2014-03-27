@@ -1,4 +1,4 @@
-function init(startCol, startRow, url) {
+function init(url, col, row, meta, width, height) {
 
 	var id = MKON.FNC.randomString(5)	
 	var req = ['v.atmosphericDensity'];
@@ -30,7 +30,7 @@ function init(startCol, startRow, url) {
 					<div class="options"><div class="remove"><i class="fa fa-times"></i></div></div>\
 					<div class="content"> <div class="density s scale-bar"><h3>ATMOSPHERE</H3><div class="scale"><div class="marker s"></div></div></div></div></li>';
 
-	content = { html: content, x:3, y:1, col: startCol, row: startRow };
+	content = { html: content, x:3, y:1, col: col, row: row };
 
 	MKON.CONTENT.addModule(mod, content);
 

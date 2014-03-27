@@ -1,4 +1,4 @@
-function init(startCol, startRow, url) {
+function init(url, col, row, meta, width, height) {
 
 	var id = MKON.FNC.randomString(5)	
 	var req = ['v.altitude'];
@@ -120,7 +120,7 @@ function init(startCol, startRow, url) {
 
 
 
-	content = { html: content, x:3, y:1, col: startCol, row: startRow };
+	content = { html: content, x:3, y:1, col: col, row: row };
 
 	MKON.CONTENT.addModule(mod, content);
 

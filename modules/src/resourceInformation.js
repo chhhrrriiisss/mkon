@@ -1,4 +1,4 @@
-function init(startCol, startRow, url) {
+function init(url, col, row, meta, width, height) {
 
 	var id = MKON.FNC.randomString(5)	
 	var req = 
@@ -77,7 +77,7 @@ function init(startCol, startRow, url) {
 					</div>\
 					</div></li>';
 
-	content = { html: content, x:3, y:4, col: startCol, row: startRow };
+	content = { html: content, x:3, y:4, col: col, row: row };
 
 	MKON.CONTENT.addModule(mod, content);
 

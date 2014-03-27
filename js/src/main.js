@@ -220,7 +220,7 @@ var MKON = new Object();
 MKON = { 
 
     // Comms config
-    debug: false,
+    debug: true,
     controls: true, // set to false to disable remote control
     rate: 100,
     localStorageSupport: false,
@@ -654,14 +654,17 @@ MKON = {
                         }
                 },
                 resize: {
-                    enabled: true
+                    enabled: true,
+                    stop: function () {                       
+                        MKON.LAYOUT.save();                         
+                    }
                 },
                 min_cols:3,         
                 serialize_params: function($w, wgd) {
                     return {
-                        c: wgd.col,
-                        r: wgd.row,
-                        u: $($w).attr('data-link')
+                        p: {"c": wgd.col, "r": wgd.row, "x": wgd.size_x, "y": wgd.size_y},      
+                        u: $($w).attr('data-link'),
+                        m: $($w).attr('data-meta')
                     }
                 }
 
@@ -742,11 +745,16 @@ MKON = {
            
             for (var item in data) {
 
-                if (data.hasOwnProperty(item)) {     
-                    var u = data[item].u;
-                    var c = data[item].c;
-                    var r = data[item].r;
-                    MKON.CONTENT.retrieveModule(u, c, r);   
+                if (data.hasOwnProperty(item)) {  
+
+                    var p = data[item].p;   
+                    var u = data[item].u;   
+                    var c = p.c;
+                    var r = p.r;
+                    var x = p.x;
+                    var y = p.y;
+                    var m = data[item].m;
+                    MKON.CONTENT.retrieveModule(u, c, r, m, x, y);   
                 }
             }
 
@@ -1141,20 +1149,23 @@ MKON = {
         },
 
         // Imports a module from the default module folder
-        retrieveModule: function(url, col, row) {
+        retrieveModule: function(url, col, row, meta, width, height) {
 
-            var urlString = url;
-            var startCol = col || MKON.LAYOUT.defaultCol;
-            var startRow = row || MKON.LAYOUT.defaultRow;    
+            var u = url;
+            var c = col || MKON.LAYOUT.defaultCol;
+            var r = row || MKON.LAYOUT.defaultRow; 
+            var m = meta || '';
+            var w = width;
+            var h = height;             
 
             $.ajax({
                 type: "GET",
-                url: urlString,
+                url: u,
                 dataType: "script",
                 success: function(data) { 
 
                     try {
-                        init(startCol,startRow, urlString);
+                        init(u, c, r, m, w, h);
 
                         //MKON.runScript(data);
 

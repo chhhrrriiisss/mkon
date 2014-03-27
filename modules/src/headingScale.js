@@ -1,4 +1,4 @@
-function init(startCol, startRow, url) {
+function init(url, col, row, meta, width, height) {
 
 	var id = MKON.FNC.randomString(5)	
 	var req = ['n.heading'];
@@ -37,7 +37,7 @@ function init(startCol, startRow, url) {
 					<div class="options"><div class="remove"><i class="fa fa-times"></i></div></div>\
 					<div class="content">   <div class="deg s heading-bar"><h3>HEADING</H3><div class="heading s data-hdn"><div class="marker s"></div></div></div></div></li>';
 
-	content = { html: content, x:4, y:1, col: startCol, row: startRow };
+	content = { html: content, x:4, y:1, col: col, row: row };
 
 	MKON.CONTENT.addModule(mod, content);
 
