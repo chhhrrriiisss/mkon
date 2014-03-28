@@ -19,7 +19,8 @@ function init(config) {
 		var t = $('#'+this.id);	
 
 		var roll = MKON.CONTENT.getVariable(req);
-		var last = t.find('.data-roll').getAttribute('data-last');
+		var r = t.find('.data-roll');
+		var last = r[0].getAttribute('data-last');
 		var direction = 0;
 		var dif = Math.round( Math.abs(roll-last) );
 
@@ -45,7 +46,7 @@ function init(config) {
 			newPos = base;
 		}
 
-		t.find('.data-roll').css('left', newPos + '%').getAttribute('data-last', roll);		
+		t.find('.data-roll').css('left', newPos + '%').attr('data-last', roll);		
 
 	
 	} );

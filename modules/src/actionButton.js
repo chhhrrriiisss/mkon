@@ -48,18 +48,6 @@ function init(config) {
 
 		function() {   
 
-			// var t = $('#'+this.id);
-
-			// var d = MKON.CONTENT.getVariable(req[1]);	
-		
-			// if (d == 'True') {
-			// 	t.find('.button').removeClass('gray');
-			
-			// } else {
-			// 	t.find('.button').addClass('gray');
-		
-			// }
-		
 		} );
 
 		// content for insertion to gridster

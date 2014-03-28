@@ -44,10 +44,10 @@ function init(config) {
 
 			var c = getClass(output[i]);	
 			var slot = t.find('.slot' + i);
-			var last = slot.getAttribute('data-last');
+			var last = slot[0].getAttribute('data-last');
 			slot.removeClass(last);
 			slot.addClass(c);
-			slot.getAttribute('data-last', c);
+			slot[0].getAttribute('data-last', c);
 		}
 
 		if (unit == 'k') {

@@ -27,8 +27,8 @@ function init(config) {
 		var target = t.find('.data-chr');
 
 		target.css('width', perc + '%');
-		target.getAttribute('data-val', chr);
-		target.parent().getAttribute('data-val', maxChr);
+		target.attr('data-val', chr);
+		target.parent().attr('data-val', maxChr);
 
 		// t.find('.marker').css('left', perc + '%')	
 	

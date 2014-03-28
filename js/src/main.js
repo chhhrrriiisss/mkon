@@ -497,7 +497,7 @@ MKON = {
 
             var entry = [ type, data ];
 
-            this.overflowList.push(entry);
+            this.overflowList[this.overflowList.length] = entry;
 
             if (this.overflowList.length > 0 && !this.overflowActive) {
 
@@ -784,8 +784,8 @@ MKON = {
 
             this.currentLayout = this.gridster.serialize();
 
-            for (var item in this.currentLayout) {
-                if (this.currentLayout.hasOwnProperty(item)) {     
+            for (var item in this.currentLayout) {              
+                if (typeof this.currentLayout[item] !== 'undefined') {
                     var u = this.currentLayout[item].u;
                     var c = this.currentLayout[item].c;
                     var r = this.currentLayout[item].r;
@@ -801,8 +801,8 @@ MKON = {
             var requests = [];
 
             for (var item in data) {
-                
-                if (data.hasOwnProperty(item)) {  
+
+                if (typeof data[item] !== 'undefined') {  
                     
                     var p = data[item].p;   
                     var u = data[item].u;   
@@ -815,7 +815,8 @@ MKON = {
                     var config = {'u': u, 'c': c, 'r':r, 'm':m, 'w':w, 'h':h};
 
                     var promise = MKON.CONTENT.getModule(u, config);
-                    requests.push(promise);
+
+                    requests[requests.length] = promise;
                 }
 
             }  
@@ -1036,8 +1037,7 @@ MKON = {
             if (MKON.COMMS.active && this.activeModules.length > 0) {
             
                 for(var item in this.activeModules) {
-
-                    if (this.activeModules.hasOwnProperty(item)) {            
+                    if (typeof this.activeModules[item] !== 'undefined') {                               
                         this.activeModules[item].handleData();
                     };
                 }
@@ -1096,8 +1096,8 @@ MKON = {
             } else {
                 if (MKON.debug) { console.log(v + ' not yet tracked'); };
                 // it's not being tracked, so add a new entry to the array & subscribe
-                // var arr = [v, 1];      
-                this.activeVariables.push( [v[0], 1] );     
+
+                this.activeVariables[this.activeVariables.length] = [v[0], 1];
                 MKON.COMMS.subscribe( v ); 
 
                 if (!isMobile) { // Desktop only due to performance
@@ -1156,7 +1156,7 @@ MKON = {
 
             if (mod != '') {
 
-                this.activeModules.push(mod);            
+                this.activeModules[this.activeModules.length] = mod;         
 
                 for (var i=0; i<mod.req.length; i++) {
 
@@ -1180,8 +1180,7 @@ MKON = {
 
             // Remove from activeModules
             for(var item in this.activeModules) {
-
-                 if (this.activeModules.hasOwnProperty(item)) {   
+                 if (typeof this.activeModules[item] !== 'undefined') {                 
 
                     if (this.activeModules[item].id == targetID) {
 
