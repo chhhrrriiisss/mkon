@@ -15,18 +15,6 @@ function init(config) {
 	var mod = new MKON.module('Abort Button', 'Button', id, ['',''], 
 
 	function() {   
-
-		// var t = $('#'+this.id);
-
-		// var d = MKON.CONTENT.getVariable(req[1]);	
-	
-		// if (d == 'True') {
-		// 	t.find('.button').removeClass('gray');
-		
-		// } else {
-		// 	t.find('.button').addClass('gray');
-	
-		// }
 	
 	} );
 
@@ -40,6 +28,5 @@ function init(config) {
 	MKON.CONTENT.addModule(mod, content);
 
 	MKON.CONTENT.addHook(id, 'backspace', function() { MKON.COMMS.command(com[0]); });
-	// 
-	// updateAPIString();
+
 }

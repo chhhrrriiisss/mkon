@@ -65,8 +65,8 @@ function init(config) {
 			var target = t.find('.data-custom');
 
 			target.css('width', perc + '%');
-			target.attr('data-val', custom);
-			target.parent().attr('data-val', maxCustom);
+			target.getAttribute('data-val', custom);
+			target.parent().getAttribute('data-val', maxCustom);
 
 			// t.find('.marker').css('left', perc + '%')	
 		

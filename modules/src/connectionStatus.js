@@ -20,7 +20,7 @@ function init(config) {
 		var s = t.find('.data-status');
 
 		var p =  MKON.CONTENT.getVariable(req[0]) || 0;
-		var l = s.attr('data-last'); 
+		var l = s.getAttribute('data-last'); 
 
 		// if the cached status differs from the retrieved one
 		if (p != l) {
@@ -56,7 +56,7 @@ function init(config) {
 				s.html('ERROR');	
 			}
 
-			s.attr('data-last', p);
+			s.getAttribute('data-last', p);
 
 		}
 		

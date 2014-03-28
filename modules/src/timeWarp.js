@@ -18,7 +18,7 @@ function init(config) {
 
 		var t = $('#'+this.id);	
 		var w = t.find('.data-speed');
-		var l = w.attr('data-last');
+		var l = w.getAttribute('data-last');
 		var n = MKON.CONTENT.getVariable(req[0]) || 0;
 
 	
@@ -26,7 +26,7 @@ function init(config) {
 		// var s = t.find('.data-status');
 
 		// var p =  MKON.CONTENT.getVariable(req[0]) || 0;
-		// var l = s.attr('data-last'); 
+		// var l = s.getAttribute('data-last'); 
 
 	} );
 

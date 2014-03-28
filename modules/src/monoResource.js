@@ -27,8 +27,8 @@ function init(config) {
 		var target = t.find('.data-mono');
 
 		target.css('width', perc + '%');
-		target.attr('data-val', mono);
-		target.parent().attr('data-val', maxMono);
+		target.getAttribute('data-val', mono);
+		target.parent().getAttribute('data-val', maxMono);
 
 		// t.find('.marker').css('left', perc + '%')	
 	

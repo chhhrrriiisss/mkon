@@ -39,8 +39,8 @@ function init(config) {
 			var target = t.find('div.data:eq(' + count + ')');	
 			count++;	
 			target.css('width', perc + '%');
-			target.attr('data-val', cur);
-			target.parent().attr('data-val', max);
+			target.getAttribute('data-val', cur);
+			target.parent().getAttribute('data-val', max);
 		}
 
 

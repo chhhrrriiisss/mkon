@@ -27,8 +27,8 @@ function init(config) {
 		var target = t.find('.data-fuel');
 
 		target.css('width', perc + '%');
-		target.attr('data-val', fuel);
-		target.parent().attr('data-val', maxFuel);
+		target.getAttribute('data-val', fuel);
+		target.parent().getAttribute('data-val', maxFuel);
 
 		// t.find('.marker').css('left', perc + '%')	
 	

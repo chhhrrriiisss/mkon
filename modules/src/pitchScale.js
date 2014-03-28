@@ -20,7 +20,7 @@ function init(config) {
 
 		var ptc = MKON.CONTENT.getVariable(req);
 
-		var last = t.find('.data-ptc').attr('data-last');
+		var last = t.find('.data-ptc').getAttribute('data-last');
 		var direction = 0;
 		var dif = Math.round( Math.abs(ptc-last) );
 
@@ -46,7 +46,7 @@ function init(config) {
 			newPos = base;
 		}
 
-		t.find('.data-ptc').css('left', newPos + '%').attr('data-last', ptc);	
+		t.find('.data-ptc').css('left', newPos + '%').getAttribute('data-last', ptc);	
 	
 	} );
 

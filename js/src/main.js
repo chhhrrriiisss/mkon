@@ -56,7 +56,7 @@ $(document).ready(function() {
             if (e) {
                 MKON.LAYOUT.closeOverlay();   
 
-                // check if a valid input
+                // Check if a valid input
                 if (str != '' && typeof str !== 'undefined') {                     
                     MKON.LAYOUT.generate(JSON.parse(str));  
                 }        
@@ -186,11 +186,11 @@ $(document).ready(function() {
         return false;
     }); 
 
-
+    // Buttons that have commands that require it to be held down
     $('#gridster').on('touchstart mousedown', '.command-hold', function(e){
     
         var el = $(this);
-        var com = el.attr('data-com') || false;
+        var com = el[0].getAttribute('data-com') || false;
 
         if (!com) {} else {
             MKON.COMMS.repeatCommand(true, com);
@@ -203,12 +203,12 @@ $(document).ready(function() {
 
     });
 
-
+    // Buttons that have commands attached
     $('#gridster').on('fastClick', '.command', function(e) {
 
         var el = $(this);
         var button = $(this).find('a.button') || false;
-        var com = el.attr('data-com') || false;
+        var com = el[0].getAttribute('data-com') || false;
 
         if (!com) {} else {
             MKON.COMMS.command(com);
@@ -216,28 +216,14 @@ $(document).ready(function() {
 
         if (!button) {} else {
 
+            // Ignore for non toggle buttons 
             if (!(button.hasClass('no-toggle')) || !(button.hasClass('action') || !(button.hasClass('abort'))) )  {
                 button.toggleClass('gray');  
             }   
         }        
 
     })
-    // // Triggers control functions on module buttons
-    // $('#gridster').on('fastClick', '.button', function (e) {   
 
-    //         var button = $(e.target);
-
-    //         e.preventDefault(); // if you want to cancel the event flow
-
-    //         if (!(button.hasClass('no-toggle')) || !(button.hasClass('action') || !(button.hasClass('abort'))) )  {
-
-    //             button.toggleClass('gray');  
-    //         }   
-
-    //         if (button.hasClass('no-toggle'))   
-
-    //         return false;
-    // });
 
 });
 
@@ -257,9 +243,9 @@ var MKON = new Object();
 MKON = { 
 
     // Comms config
-    debug: false,
+    debug: true,
     controls: true, // set to false to disable remote control
-    rate: 50,
+    rate: 75,
     localStorageSupport: false,
     cacheString: 'MKON',
     datalink:  "ws://" + window.location.host + "/datalink",  //    datalink:  "ws://" + window.location.host + "/datalink",  
@@ -452,7 +438,7 @@ MKON = {
 
             this.repeater = state
             this.repeaterCommand = command || '';
-;
+
             if (this.repeater) {
 
                 if (MKON.debug) { console.log('Starting command repeater'); }
@@ -733,8 +719,8 @@ MKON = {
                 serialize_params: function($w, wgd) {
                     return {
                         p: {"c": wgd.col, "r": wgd.row, "x": wgd.size_x, "y": wgd.size_y},      
-                        u: $($w).attr('data-link'),
-                        m: $($w).attr('data-meta')
+                        u: $($w)[0].getAttribute('data-link'),
+                        m: $($w)[0].getAttribute('data-meta')
                     }
                 }
 
@@ -1189,7 +1175,7 @@ MKON = {
         // Removes the specified module from the activeModules list
         removeModule: function(target) {
 
-            var targetID = target.attr('id');
+            var targetID = target[0].getAttribute('id');
             var r = [];
 
             // Remove from activeModules
@@ -1224,9 +1210,9 @@ MKON = {
         updateModule: function(el) {
 
             // update the dom module
-            var newCol = el.attr('data-col');
-            var newRow = el.attr('data-row');
-            var id = el.attr('id');       
+            var newCol = el[0].getAttribute('data-col');
+            var newRow = el[0].getAttribute('data-row');
+            var id = el[0].getAttribute('id');       
 
             for(var i = 0; i<this.activeModules.length; i++) {
 
