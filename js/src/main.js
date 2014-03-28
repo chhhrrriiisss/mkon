@@ -1043,14 +1043,14 @@ MKON = {
             }
 
             if (pos != -1) {
-                if (MKON.debug) { console.log('already tracked'); };
+                if (MKON.debug) { console.log('Variable ' + v + ' already tracked'); };
                 // if it is already being tracked, increase the track count
                 var count = parseFloat( this.activeVariables[pos][1] );
                 count++;
                 this.activeVariables[pos][1] = count;
 
             } else {
-                if (MKON.debug) { console.log('not yet tracked'); };
+                if (MKON.debug) { console.log(v + ' not yet tracked'); };
                 // it's not being tracked, so add a new entry to the array & subscribe
                 // var arr = [v, 1];      
                 this.activeVariables.push( [v[0], 1] );     
@@ -1091,13 +1091,13 @@ MKON = {
 
                     if (count == 1) {
 
-                        if (MKON.debug) { console.log('its the last one'); };
+                        if (MKON.debug) { console.log(v + ' last tracked variable'); };
                         this.activeVariables.splice(i,1);
                         MKON.COMMS.unsubscribe(v);
 
                     } else {
                         count--;    
-                        if (MKON.debug) { console.log(count + 'more to go!');  };                                   
+                        if (MKON.debug) { console.log(count + ' more to go! [' + v + ']');  };                                   
                         this.activeVariables[i][1] = count;
                     }
 

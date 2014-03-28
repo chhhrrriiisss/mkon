@@ -1,4 +1,11 @@
-function init(url, col, row, meta, width, height) {
+function init(config) {  
+
+	var url = config.u;
+	var col = config.c || MKON.LAYOUT.defaultCol;
+	var row = config.r || MKON.LAYOUT.defaultRow;
+	var meta = config.m || '';
+	var width = config.w;
+	var height = config.h;
 
 	var id = MKON.FNC.randomString(5)	
 	var req = ['v.long', 'v.lat', 'n.pitch','n.roll','n.heading','v.surfaceVelocity','f.throttle'];
