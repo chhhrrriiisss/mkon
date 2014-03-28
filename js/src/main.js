@@ -188,39 +188,50 @@ $(document).ready(function() {
 
     // Buttons that have commands that require it to be held down
     $('#gridster').on('touchstart mousedown', '.command-hold', function(e){
-    
-        var el = $(this);
-        var com = el[0].getAttribute('data-com') || false;
 
-        if (!com) {} else {
-            MKON.COMMS.repeatCommand(true, com);
-        } 
+        if (!MKON.LAYOUT.locked) {
+
+            var el = $(this);
+            var com = el[0].getAttribute('data-com') || false;
+
+            if (!com) {} else {
+                MKON.COMMS.repeatCommand(true, com);
+            } 
+        }
+        
     });
 
     $('#gridster').on('touchend mouseup', '.command-hold', function(e){
 
-        MKON.COMMS.repeatCommand(false);       
+        if (!MKON.LAYOUT.locked) {
+
+            MKON.COMMS.repeatCommand(false);  
+
+        }  
 
     });
 
     // Buttons that have commands attached
     $('#gridster').on('fastClick', '.command', function(e) {
 
-        var el = $(this);
-        var button = $(this).find('a.button') || false;
-        var com = el[0].getAttribute('data-com') || false;
+        if (!MKON.LAYOUT.locked) {
 
-        if (!com) {} else {
-            MKON.COMMS.command(com);
-        } 
+            var el = $(this);
+            var button = $(this).find('a.button') || false;
+            var com = el[0].getAttribute('data-com') || false;
 
-        if (!button) {} else {
+            if (!com) {} else {
+                MKON.COMMS.command(com);
+            } 
 
-            // Ignore for non toggle buttons 
-            if (!(button.hasClass('no-toggle')) || !(button.hasClass('action') || !(button.hasClass('abort'))) )  {
-                button.toggleClass('gray');  
-            }   
-        }        
+            if (!button) {} else {
+
+                // Ignore for non toggle buttons 
+                if (!(button.hasClass('no-toggle')) || !(button.hasClass('action') || !(button.hasClass('abort'))) )  {
+                    button.toggleClass('gray');  
+                }   
+            } 
+        }       
 
     })
 
