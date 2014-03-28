@@ -132,6 +132,7 @@ $(document).ready(function() {
         var button = $(e.target).parent();
         var moduleLink = button.data('link');
         var config = {'u':moduleLink};
+        MKON.allowSave = true;
         MKON.CONTENT.getModule(moduleLink, config);
         return false;
 
@@ -368,7 +369,7 @@ MKON = {
 
             if (this.active) {
                 
-                if (MKON.debug) { console.log('Changing rate to:' + v); };
+                if (MKON.debug) { console.log('Changing rate to: ' + v); };
 
                 ws.send(JSON.stringify({
                         "rate": v
@@ -386,7 +387,7 @@ MKON = {
 
             if (this.active) {                
 
-                if (MKON.debug) {  console.log('subscribing:' + v); };
+                if (MKON.debug) {  console.log('Subscribing: ' + v); };
 
                 ws.send(JSON.stringify({
                         "+": v
@@ -402,7 +403,7 @@ MKON = {
 
             if (this.active) {
 
-                if (MKON.debug) {  console.log('unsubscribing:' + v); };
+                if (MKON.debug) {  console.log('Unsubscribing: ' + v); };
 
                 ws.send(JSON.stringify({
                         "-": v
@@ -776,17 +777,9 @@ MKON = {
                 if (MKON.debug) {
                     console.log('Cache modules successfully retrieved.')
                 }
-            }
+            }    
 
-            function error() {
-
-                if (MKON.debug) {
-                    console.log('Error retrieving batch modules.')
-                }
-            }
-
-            $.when.all(requests).done(success, error);          
-
+            $.when.all(requests).done(success);
         },
 
         checkLogo: function() {
@@ -1182,6 +1175,7 @@ MKON = {
             MKON.LAYOUT.save();
         },
 
+        // retrieves module, returns deferred object
         getModule: function(url, config) {
 
             return $.ajax({
@@ -1191,35 +1185,22 @@ MKON = {
                 success: function(module) { 
 
                     try {
-                        init(config);
-                        // initModule(module, config);                   
+                        init(config);   
+                        return 'test';                              
                     }
-                    catch (error) {
+                    catch (error) {                        
                         console.log('Error Initializing Module [' + error + ']');
                     }              
 
                 },
                 error: function (request, status, error) {
-                    console.log(error);
+                    return console.log(error);
                 },
                 async: true,
                 cache: true
-            });  
+            });
 
-        },
-
-        // Imports a module from the default module folder
-        retrieveModule: function(url, col, row, meta, width, height) {
-    
-            var col = col || MKON.LAYOUT.defaultCol;
-            var row = row || MKON.LAYOUT.defaultRow; 
-            var meta = meta || '';
-
-            //var config = {'u': url, 'c': col, 'r':row, 'm':meta, 'w':width, 'h':height};
-          
-
-
-        }
+        }  
 
     },
 
