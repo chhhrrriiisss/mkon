@@ -135,6 +135,19 @@ body {
         content: url('../img/sprites.png') url('../img/noise.png') url('../img/grid.png') url('../img/logo.png') url('../modules/th/thumbnails.jpg');
     }
 
+    &.isMobile {
+
+        #moduleList .addModule ul li.item { 
+
+            .opacity(100) !important;
+
+            &:hover, &:active, &:focus {
+                .opacity(100);
+            }
+        }
+
+    }
+
 
 }
 

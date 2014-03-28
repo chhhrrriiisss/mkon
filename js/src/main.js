@@ -11,6 +11,7 @@ var isMobile = false;
 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
     isMobile = true;
     //document.write('<script src="http://jsconsole.com/remote.js?A347700A-FD65-4F75-88B1-9E5E2AD4E7EB"></script>');    
+    $('body').addClass('isMobile');
 }
 
 $(document).ready(function() {
@@ -127,9 +128,8 @@ $(document).ready(function() {
 
     // Add buttons for modules in gui
     $('#moduleContainer .addButton').fastClick(function(e) {
-
-        e.preventDefault(); // if you want to cancel the event flow
-        var button = $(e.target).parent();
+      
+        var button = $(this).parent();
         var moduleLink = button.data('link');
         var config = {'u':moduleLink};
         MKON.allowSave = true;
@@ -227,8 +227,7 @@ $(document).ready(function() {
 
 });
 
-
-// Localstorage utility function
+// Localstorage utility functions
 Storage.prototype.setObj = function(key, obj) {
     var o = obj || 'Null';
     return this.setItem(key, JSON.stringify(o))
@@ -242,20 +241,21 @@ var MKON = new Object();
 
 MKON = { 
 
-    // Comms config
-    debug: true,
+    // Config
+    debug: true, // only if you like seeing console spam
     controls: true, // set to false to disable remote control
-    rate: 75,
-    localStorageSupport: false,
-    cacheString: 'MKON',
-    datalink:  "ws://" + window.location.host + "/datalink",  //    datalink:  "ws://" + window.location.host + "/datalink",  
-    defaults: { 
+    rate: 75, // set the starting recieve rate for data   
+    cacheString: 'MKON', // change to a new string to start a new cache
+    datalink:  "ws://" + window.location.host + "/datalink",  // default web socket address (using ip used to access ui)  
+    defaults: { // any default key/values you want to send when the ui is started
         "+": ['v.name', 'p.paused', 'a.version'],
         "rate": this.rate
     },
-    versionCheck: false,
+    // Dont touch these...
+    localStorageSupport: false,
+    versionCheck: false, 
     requiredVersion: '1.4.21.0',
-    allowSave: true,
+    allowSave: true, 
 
     init: function() {      
 
@@ -263,6 +263,7 @@ MKON = {
         this.LAYOUT.init();
     },
 
+    // Structure for a standard module
     module: function(name, type, id, req, handle, command) {    
             this.name = name;
             this.type = type;
@@ -270,11 +271,11 @@ MKON = {
             this.req = req || [''];
             this.handleData = handle;    
             this.url = '';
-            this.col = "100";
+            this.col = "100"; // defaults to a high value to force it to 'stack' and gap fill
             this.row = "100";
     },
 
-     // Server Interactions (websockets w/fallback)
+     // Websocket Server Interactions 
     COMMS: {
 
         ws: '',
@@ -290,7 +291,7 @@ MKON = {
 
         init: function(datalink, defaults) {        
 
-            //ws = $.gracefulWebSocket(this.datalink);
+            // Check if we can use web sockets
             if ("WebSocket" in window) {
                 
                 try {
@@ -315,7 +316,7 @@ MKON = {
 
                         MKON.CONTENT.filterData(evt.data);
 
-                        /* Version Check */
+                        // Version Check 
                         if (!MKON.versionCheck && MKON.COMMS.active) { // if version hasnt been checked and connection is active
                            
                             var v = MKON.CONTENT.getVariable('a.version');
@@ -364,8 +365,7 @@ MKON = {
 
 
             } else {
-
-                console.log('Websockets not supported');
+                if (MKON.debug) { console.log('Websockets not supported'); }
             }        
 
         },
@@ -434,6 +434,7 @@ MKON = {
             }
         },
 
+        // Repeats a command while a button is under a mousedown event
         repeatCommand: function(state, command) {
 
             this.repeater = state
@@ -447,12 +448,12 @@ MKON = {
 
                     var com = com;
 
-                    if (MKON.debug) { console.log('Sending repeater command'); }
+                    if (MKON.debug) { console.log('Sending command'); }
 
                     if (MKON.COMMS.repeater) {
 
                         MKON.COMMS.command(MKON.COMMS.repeaterCommand);
-                        setTimeout(repeater, 100);
+                        setTimeout(repeater, 75);
 
                     } else {
 
@@ -491,7 +492,7 @@ MKON = {
             }
         },
 
-        // For stacking commands if the websocket server drops out
+        // For stacking api calls if the websocket server drops out periodically
         overflow: function(data, type) {
             
 
@@ -546,8 +547,6 @@ MKON = {
             this.overflowList = [];
         }
 
-
-
     },
 
     // Save, setup templates and ui interactions (key binding etc)
@@ -597,9 +596,10 @@ MKON = {
             var margins = (this.gridMargins*2) * cols;
             var offsetX = windowWidth - (margins + totalWidth);
             $('#gridsterWrapper').css('left', Math.abs(offsetX/2) + 'px');
-            MKON.LAYOUT.removeZoneLimit = parseInt(MKON.LAYOUT.viewportHeight - MKON.LAYOUT.removeZone.outerHeight());    
-
+            MKON.LAYOUT.removeZoneLimit = parseInt(MKON.LAYOUT.viewportHeight - MKON.LAYOUT.removeZone.outerHeight());   
             this.initGridster();    
+
+            // this is quite an ugly function...
 
         },
 
@@ -607,11 +607,10 @@ MKON = {
         
             var urlLayout = window.location.hash.substring(1);                 
 
-            // Check if url layout available
+            // Check if url layout available (a # with json layout attached to url)
             if (urlLayout) {
                 this.prevLayout = JSON.parse(urlLayout);
-                this.generate(this.prevLayout);
-                //console.log('layout:' + prevLayout);
+                this.generate(this.prevLayout);                
             } else {
                 this.prevLayout = false;
             }
@@ -631,16 +630,6 @@ MKON = {
                     }
                                
                     if (this.prevLayout != null) {
-
-                        // function waitUntil() {
-                        //     if (MKON.COMMS.active){
-                        //         MKON.LAYOUT.generate( MKON.LAYOUT.prevLayout );            
-                        //     } else {
-                        //         setTimeout(waitUntil, MKON.rate);
-                        //     }
-                        // }
-
-                        //waitUntil();    
                         
                         MKON.LAYOUT.generate( MKON.LAYOUT.prevLayout );  
 
@@ -691,22 +680,15 @@ MKON = {
                                 el.hide();
                                 MKON.CONTENT.removeModule(el);
 
+
                             } else {
-
                                 // update the position on the grid
-                                var el = $(event.target).parent();
-                                //console.log(id + ' ' + col + ' ' + row);
-                               
-                                MKON.CONTENT.updateModule(el);
-
-
-                                
+                                var el = $(event.target).parent();  
+                                MKON.CONTENT.updateModule(el);                                
                             }
                             
                             MKON.LAYOUT.removeZone.removeClass('hover');
-                            MKON.LAYOUT.removeZoneAnimation('hide');
-
-                           
+                            MKON.LAYOUT.removeZoneAnimation('hide');                        
                         }
                 },
                 resize: {
@@ -731,15 +713,12 @@ MKON = {
         remove: function(target) {
 
             this.gridster.remove_widget(target);
-
        
         },
 
         add: function(content) {
            
-            this.gridster.add_widget(content.html, content.x, content.y, content.col, content.row); 
-
-        
+            this.gridster.add_widget(content.html, content.x, content.y, content.col, content.row);         
 
         },
 
@@ -780,6 +759,7 @@ MKON = {
             MKON.CONTENT.activeVariables = [];
         },
 
+        // Converts the current layout into serial form for saving/exporting
         serialize: function() {
 
             this.currentLayout = this.gridster.serialize();
@@ -788,12 +768,12 @@ MKON = {
                 if (typeof this.currentLayout[item] !== 'undefined') {
                     var u = this.currentLayout[item].u;
                     var c = this.currentLayout[item].c;
-                    var r = this.currentLayout[item].r;
-                    //console.log(u + ' ' +c + ' ' + r);
+                    var r = this.currentLayout[item].r;                    
                 }
             }
         },
 
+        // Generates a new layout using JSON input
         generate: function(data) {
 
             this.clear();            
@@ -1012,7 +992,7 @@ MKON = {
     // Active variables and modules that make up the current layout
     CONTENT: {
 
-        freezeData: false,
+        freezeData: false, 
         activeModules: [],
         activeVariables: [],
         rawData: [],
@@ -1067,8 +1047,12 @@ MKON = {
         },
 
         getVariable: function(v) {
-            //console.log(rawData);
-            return this.rawData[v];
+
+            if (typeof this.rawData[v] !== 'undefined') {
+                return this.rawData[v];
+            } else {
+                return 0;
+            }
         },
 
         // Adds a specified variable request
