@@ -130,8 +130,9 @@ $(document).ready(function() {
 
         e.preventDefault(); // if you want to cancel the event flow
         var button = $(e.target).parent();
-        var moduleName = button.data('link');
-        MKON.CONTENT.retrieveModule(moduleName);
+        var moduleLink = button.data('link');
+        var config = {'u':moduleLink};
+        MKON.CONTENT.getModule(moduleLink, config);
         return false;
 
     });
@@ -589,8 +590,7 @@ MKON = {
 
                         //waitUntil();    
                         
-                        MKON.LAYOUT.generate( MKON.LAYOUT.prevLayout );    
-
+                        MKON.LAYOUT.generate( MKON.LAYOUT.prevLayout );  
 
                         if (MKON.debug) { console.log('Generating layout.'); };
                     }  
@@ -744,9 +744,10 @@ MKON = {
 
         generate: function(data) {
 
-            this.clear();
+            this.clear();            
             MKON.allowSave = false;
-           
+            var requests = [];
+
             for (var item in data) {
                 
                 if (data.hasOwnProperty(item)) {  
@@ -755,17 +756,36 @@ MKON = {
                     var u = data[item].u;   
                     var c = p.c;
                     var r = p.r;
-                    var x = p.x;
-                    var y = p.y;
+                    var w = p.x;
+                    var h = p.y;
                     var m = data[item].m;
-                    MKON.CONTENT.retrieveModule(u, c, r, m, x, y);   
+
+                    var config = {'u': u, 'c': c, 'r':r, 'm':m, 'w':w, 'h':h};
+
+                    var promise = MKON.CONTENT.getModule(u, config);
+                    requests.push(promise);
                 }
 
-            }           
+            }  
 
-            MKON.allowSave = true;
-            MKON.LAYOUT.save();
-            MKON.LAYOUT.unlock();
+            function success() {
+                MKON.allowSave = true;
+                MKON.LAYOUT.save();
+                MKON.LAYOUT.unlock();
+
+                if (MKON.debug) {
+                    console.log('Cache modules successfully retrieved.')
+                }
+            }
+
+            function error() {
+
+                if (MKON.debug) {
+                    console.log('Error retrieving batch modules.')
+                }
+            }
+
+            $.when.all(requests).done(success, error);          
 
         },
 
@@ -1162,34 +1182,17 @@ MKON = {
             MKON.LAYOUT.save();
         },
 
-        // Imports a module from the default module folder
-        retrieveModule: function(url, col, row, meta, width, height) {
+        getModule: function(url, config) {
 
-            var u = url;
-            var c = col || MKON.LAYOUT.defaultCol;
-            var r = row || MKON.LAYOUT.defaultRow; 
-            var m = meta || '';
-            var w = width;
-            var h = height;             
-
-            $.ajax({
+            return $.ajax({
                 type: "GET",
-                url: u,
+                url: url,
                 dataType: "script",
-                success: function(data) { 
+                success: function(module) { 
 
                     try {
-                        init(u, c, r, m, w, h);
-
-                        //MKON.runScript(data);
-
-                        // var last = this.activeModules[this.activeModules.length-1];
-                        // this.activeModules[this.activeModules.length-1].url = urlString; 
-
-                        // console.log('url string ' + urlString);
-                        // $('#' + last.id).attr('data-link', last.url);  
-
-                     
+                        init(config);
+                        // initModule(module, config);                   
                     }
                     catch (error) {
                         console.log('Error Initializing Module [' + error + ']');
@@ -1202,6 +1205,19 @@ MKON = {
                 async: true,
                 cache: true
             });  
+
+        },
+
+        // Imports a module from the default module folder
+        retrieveModule: function(url, col, row, meta, width, height) {
+    
+            var col = col || MKON.LAYOUT.defaultCol;
+            var row = row || MKON.LAYOUT.defaultRow; 
+            var meta = meta || '';
+
+            //var config = {'u': url, 'c': col, 'r':row, 'm':meta, 'w':width, 'h':height};
+          
+
 
         }
 
