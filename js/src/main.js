@@ -179,34 +179,65 @@ $(document).ready(function() {
 
     // Remove buttons on active modules
     $('#gridster').on('fastClick', '.remove', function (e) {       
-            var parent = $(e.target).closest('li');
-            MKON.CONTENT.removeModule(parent);
-            MKON.LAYOUT.save();
+        var parent = $(e.target).closest('li');
+        MKON.CONTENT.removeModule(parent);
+        MKON.LAYOUT.save();
 
-            return false;
+        return false;
     }); 
 
-    // Triggers control functions on module buttons
-    $('#gridster').on('fastClick', '.button', function (e) {   
 
-            var button = $(e.target);
+    $('#gridster').on('touchstart mousedown', '.command-hold', function(e){
+    
+        var el = $(this);
+        var com = el.attr('data-com') || false;
 
-            e.preventDefault(); // if you want to cancel the event flow
+        if (!com) {} else {
+            MKON.COMMS.repeatCommand(true, com);
+        } 
+    });
+
+    $('#gridster').on('touchend mouseup', '.command-hold', function(e){
+
+        MKON.COMMS.repeatCommand(false);       
+
+    });
+
+
+    $('#gridster').on('fastClick', '.command', function(e) {
+
+        var el = $(this);
+        var button = $(this).find('a.button') || false;
+        var com = el.attr('data-com') || false;
+
+        if (!com) {} else {
+            MKON.COMMS.command(com);
+        } 
+
+        if (!button) {} else {
 
             if (!(button.hasClass('no-toggle')) || !(button.hasClass('action') || !(button.hasClass('abort'))) )  {
+                button.toggleClass('gray');  
+            }   
+        }        
 
-                button.toggleClass('gray');   
+    })
+    // // Triggers control functions on module buttons
+    // $('#gridster').on('fastClick', '.button', function (e) {   
 
-                var com = button.closest('li').attr('data-com') || false;
+    //         var button = $(e.target);
 
-                if (!com) {} else {
-                    MKON.COMMS.command(com);
-                }
-            
-            }      
+    //         e.preventDefault(); // if you want to cancel the event flow
 
-            return false;
-    });
+    //         if (!(button.hasClass('no-toggle')) || !(button.hasClass('action') || !(button.hasClass('abort'))) )  {
+
+    //             button.toggleClass('gray');  
+    //         }   
+
+    //         if (button.hasClass('no-toggle'))   
+
+    //         return false;
+    // });
 
 });
 
@@ -226,9 +257,9 @@ var MKON = new Object();
 MKON = { 
 
     // Comms config
-    debug: true,
+    debug: false,
     controls: true, // set to false to disable remote control
-    rate: 100,
+    rate: 50,
     localStorageSupport: false,
     cacheString: 'MKON',
     datalink:  "ws://" + window.location.host + "/datalink",  //    datalink:  "ws://" + window.location.host + "/datalink",  
@@ -267,7 +298,9 @@ MKON = {
         overflowList: [],   
         overflowActive: false, 
         overflowAttempts: 0,                  
-        maxOverflowAttempts: 100,        
+        maxOverflowAttempts: 100,     
+        repeater: false,  
+        repeaterCommand: '', 
 
         init: function(datalink, defaults) {        
 
@@ -413,6 +446,38 @@ MKON = {
 
                 this.overflow(v,'-');
             }
+        },
+
+        repeatCommand: function(state, command) {
+
+            this.repeater = state
+            this.repeaterCommand = command || '';
+;
+            if (this.repeater) {
+
+                if (MKON.debug) { console.log('Starting command repeater'); }
+
+                function repeater() {
+
+                    var com = com;
+
+                    if (MKON.debug) { console.log('Sending repeater command'); }
+
+                    if (MKON.COMMS.repeater) {
+
+                        MKON.COMMS.command(MKON.COMMS.repeaterCommand);
+                        setTimeout(repeater, 100);
+
+                    } else {
+
+                        if (MKON.debug) { console.log('Ending repeater'); }
+                    }                        
+                }
+
+                repeater(command);
+
+            } else {}
+
         },
 
         command: function (c) { 

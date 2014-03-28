@@ -33,7 +33,11 @@ function init(config) {
 
 	MKON.CONTENT.addModule(mod, content);
 
-	;
+	MKON.CONTENT.addHook(id, 'shift', function() { MKON.COMMS.command("f.throttleUp"); });
+	MKON.CONTENT.addHook(id, 'ctrl', function() { MKON.COMMS.command("f.throttleDown"); });
+	MKON.CONTENT.addHook(id, 'x', function() { MKON.COMMS.command("f.throttleZero"); });
+	MKON.CONTENT.addHook(id, 'z', function() { MKON.COMMS.command("f.throttleFull"); });
+	
 	//updateAPIString();
 }
 

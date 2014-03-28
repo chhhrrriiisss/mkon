@@ -63,7 +63,7 @@ function init(config) {
 		} );
 
 		// content for insertion to gridster
-		var content =   '<li id="' + id + '" data-com="' + com + '" data-row="1" data-col="1" data-meta="' + r + '" data-link="' + url + '" data-sizex="1" data-sizey="1">\
+		var content =   '<li id="' + id + '" data-com="' + com + '" class="command" data-row="1" data-col="1" data-meta="' + r + '" data-link="' + url + '" data-sizex="1" data-sizey="1">\
 						<div class="options"><div class="remove"><i class="fa fa-times"></i></div></div>\
 						<div class="content blank"><a class="button lightText large square orange gray action" >A' + r + '</a></div></li>';
 

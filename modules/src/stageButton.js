@@ -19,7 +19,7 @@ function init(config) {
 	} );
 
 	// content for insertion to gridster
-	var content =   '<li id="' + id + '" data-row="1" data-col="1" data-link="' + url + '" data-sizex="1" data-sizey="1">\
+	var content =   '<li id="' + id + '" data-com="' + com + '" class="command" data-row="1" data-col="1" data-link="' + url + '" data-sizex="1" data-sizey="1">\
 					<div class="options"><div class="remove"><i class="fa fa-times"></i></div></div>\
 					<div class="content blank"><div class="stageButton"><div class="inner"><i class="fa fa-level-up fa-4x"></i></div></div></div></li>';
 
