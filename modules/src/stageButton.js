@@ -9,10 +9,10 @@ function init(config) {
 
 	var id = MKON.FNC.randomString(5)	
 	var req = [''];
-
+	var com = ['f.stage'];
 
 	// register a new module
-	var mod = new MKON.module('STAGE', 'Button', id, req,
+	var mod = new MKON.module('Stage', 'Button', id, req,
 
 	function() {   
 
@@ -35,7 +35,7 @@ function init(config) {
 					<div class="options"><div class="remove"><i class="fa fa-times"></i></div></div>\
 					<div class="content blank"><a class="button lightText large square stage" data-defaultClass="stage">S</a></div></li>';
 
-	content = { html: content, x: 1, y: 1, col: col, row: row };
+	content = { html: content, x: 2, y: 2, col: col, row: row };
 
 	MKON.CONTENT.addModule(mod, content);
 
