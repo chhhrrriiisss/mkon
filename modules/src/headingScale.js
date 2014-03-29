@@ -26,10 +26,10 @@ function init(config) {
 		var scale = difference/360;
 		hdn = (hdn*scale);	
 		hdn = start - hdn;
-		hdn = MKON.FNC.toFixed( hdn, 2);
+		hdn = MKON.FNC.toFixed( hdn, 0);
 	
 		var target = t.find('.data-hdn');
-		var oY = t.find('.data-hdn').css('background-position-y');
+		var oY = target.css('background-position-y');
 
 		//console.log('output: ' + hdn);
 

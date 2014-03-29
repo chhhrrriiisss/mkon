@@ -18,12 +18,8 @@ function init(config) {
 		var t = $('#'+this.id);	
 		
 		var utc =  MKON.CONTENT.getVariable(req) || 0;
-		
-		console.log(utc);
 
-		utc = MKON.FNC.formatters.time( parseFloat(utc) );		
-
-		console.log(utc);
+		utc = MKON.FNC.formatters.time( parseFloat(utc) );	
 
 		t.find('.data-time').html(utc);
 	} );

@@ -80,7 +80,8 @@ p {
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
   box-sizing: border-box;
-  padding: 20px;
+  width: 112px !important;
+  height: 112px !important;
 }
 .gridster .player-revert {
   z-index: 10!important;
@@ -2432,19 +2433,25 @@ header:focus .hitbox {
 .gridsterWrapper ul li .content .screen.met,
 .gridster ul li .content .screen.met,
 .gridsterWrapper ul li .content .screen.utc,
-.gridster ul li .content .screen.utc {
+.gridster ul li .content .screen.utc,
+.gridsterWrapper ul li .content .screen.heading,
+.gridster ul li .content .screen.heading {
   display: table;
 }
 .gridsterWrapper ul li .content .screen.met h3,
 .gridster ul li .content .screen.met h3,
 .gridsterWrapper ul li .content .screen.utc h3,
-.gridster ul li .content .screen.utc h3 {
+.gridster ul li .content .screen.utc h3,
+.gridsterWrapper ul li .content .screen.heading h3,
+.gridster ul li .content .screen.heading h3 {
   bottom: 24px;
 }
 .gridsterWrapper ul li .content .screen.met h3.data-time,
 .gridster ul li .content .screen.met h3.data-time,
 .gridsterWrapper ul li .content .screen.utc h3.data-time,
-.gridster ul li .content .screen.utc h3.data-time {
+.gridster ul li .content .screen.utc h3.data-time,
+.gridsterWrapper ul li .content .screen.heading h3.data-time,
+.gridster ul li .content .screen.heading h3.data-time {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
@@ -2466,6 +2473,23 @@ header:focus .hitbox {
   -webkit-text-shadow: 0px 0px 3px #4c91c0;
   -moz-text-shadow: 0px 0px 3px #4c91c0;
   text-shadow: 0px 0px 3px #4c91c0;
+}
+.gridsterWrapper ul li .content .screen.heading h3.data-heading,
+.gridster ul li .content .screen.heading h3.data-heading {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  left: 0px;
+  top: 33px;
+  bottom: 0px;
+  color: #fff;
+  letter-spacing: 0.01em;
+  -webkit-text-shadow: 0px 0px 3px #ffffff;
+  -moz-text-shadow: 0px 0px 3px #ffffff;
+  text-shadow: 0px 0px 3px #ffffff;
+  font-size: 1.3em;
 }
 .gridsterWrapper ul li .content .screen.connection.red div.radio,
 .gridster ul li .content .screen.connection.red div.radio {
@@ -2796,6 +2820,11 @@ header:focus .hitbox {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
   background: none !important;
+  -webkit-transition: background-position 0.3s;
+  -moz-transition: background-position 0.3s;
+  -ms-transition: background-position 0.3s;
+  -o-transition: background-position 0.3s;
+  transition: background-position 0.3s;
 }
 .gridsterWrapper ul li .content .heading-bar .heading,
 .gridster ul li .content .heading-bar .heading {
@@ -2809,11 +2838,6 @@ header:focus .hitbox {
   display: block;
   background-position: -248px -312px;
   background-repeat: repeat-x;
-  -webkit-transition: background-position 0.3s;
-  -moz-transition: background-position 0.3s;
-  -ms-transition: background-position 0.3s;
-  -o-transition: background-position 0.3s;
-  transition: background-position 0.3s;
 }
 .gridsterWrapper ul li .content .heading-bar .heading .marker,
 .gridster ul li .content .heading-bar .heading .marker {

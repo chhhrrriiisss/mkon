@@ -26,8 +26,8 @@ function init(config) {
 		var target = t.find('.data-oxd');
 
 		target.css('width', perc + '%');
-		target.getAttribute('data-val', oxd);
-		target.parent().getAttribute('data-val', maxOxd);
+		target.attr('data-val', oxd);
+		target.parent().attr('data-val', maxOxd);
 
 		// t.find('.marker').css('left', perc + '%')	
 	
