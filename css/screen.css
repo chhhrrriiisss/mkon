@@ -383,6 +383,12 @@ p {
 .alertify-buttons .button.green {
   color: #333;
 }
+.alertify-buttons .button.green {
+  background: #91cc35;
+}
+.alertify-buttons .button.red {
+  background: #df422b;
+}
 .alertify-buttons .button:after {
   display: none;
 }
@@ -1619,7 +1625,7 @@ header:focus .hitbox {
   border-radius: 1.25em;
 }
 .button.blue {
-  background-color: #538fb8;
+  background-color: #4c91c0;
   /* Set the button color here */
   color: #23475f;
 }
@@ -2424,15 +2430,21 @@ header:focus .hitbox {
   bottom: 24px;
 }
 .gridsterWrapper ul li .content .screen.met,
-.gridster ul li .content .screen.met {
+.gridster ul li .content .screen.met,
+.gridsterWrapper ul li .content .screen.utc,
+.gridster ul li .content .screen.utc {
   display: table;
 }
 .gridsterWrapper ul li .content .screen.met h3,
-.gridster ul li .content .screen.met h3 {
+.gridster ul li .content .screen.met h3,
+.gridsterWrapper ul li .content .screen.utc h3,
+.gridster ul li .content .screen.utc h3 {
   bottom: 24px;
 }
 .gridsterWrapper ul li .content .screen.met h3.data-time,
-.gridster ul li .content .screen.met h3.data-time {
+.gridster ul li .content .screen.met h3.data-time,
+.gridsterWrapper ul li .content .screen.utc h3.data-time,
+.gridster ul li .content .screen.utc h3.data-time {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
@@ -2446,6 +2458,14 @@ header:focus .hitbox {
   -moz-text-shadow: 0px 0px 3px #91cc35;
   text-shadow: 0px 0px 3px #91cc35;
   font-size: 1.3em;
+}
+.gridsterWrapper ul li .content .screen.utc h3.data-time,
+.gridster ul li .content .screen.utc h3.data-time {
+  color: #4c91c0;
+  font-size: 1.3em;
+  -webkit-text-shadow: 0px 0px 3px #4c91c0;
+  -moz-text-shadow: 0px 0px 3px #4c91c0;
+  text-shadow: 0px 0px 3px #4c91c0;
 }
 .gridsterWrapper ul li .content .screen.connection.red div.radio,
 .gridster ul li .content .screen.connection.red div.radio {

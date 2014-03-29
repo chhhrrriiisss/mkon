@@ -1224,7 +1224,7 @@ header {
     /* Custom */
 
     &.blue {
-        background-color: #538fb8; /* Set the button color here */    
+        background-color: @lightBlue; /* Set the button color here */    
         color:#23475f;  
 
          &:before {
@@ -1980,7 +1980,7 @@ header {
                     }
 
 
-                    &.met {
+                    &.met, &.utc {
                         display:table;                      
 
                         h3 {
@@ -2000,6 +2000,14 @@ header {
                             .text-shadow(0px 0px 3px @lightGreen);
                             font-size:1.3em;
 
+                        }
+                    }
+
+                    &.utc {
+                        h3.data-time {
+                            color:@lightBlue;
+                            font-size:1.3em;
+                            .text-shadow(0px 0px 3px @lightBlue);
                         }
                     }
 

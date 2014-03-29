@@ -647,7 +647,7 @@ MKON = {
             // If localstorage available
             if(typeof(Storage)!=="undefined" && !this.prevLayout) {   
 
-                if (MKON.debug) {  console.log('LocalStorage supported'); };
+                if (MKON.debug) {  console.log('LocalStorage supported.'); };
                 MKON.localStorageSupport = true; 
 
                 try { 
@@ -1353,7 +1353,7 @@ MKON = {
             time: function (v) {
 
                 f = [86400, 3600, 60, 60];
-                u = ["d", "h", "m", "s"];
+                u = ["D", "H", "M", "S"];
                 vprime = [0, 0, 0, 0]
 
                 v = Math.floor(v);
