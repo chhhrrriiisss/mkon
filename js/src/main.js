@@ -572,6 +572,8 @@ MKON = {
         startCol: 100, // 100
         startRow: 100, // 100
         currentWidget: '',
+        gridsterDOM: $( document.getElementById('gridster') ),
+        gridsterWrapper: $( document.getElementById('gridsterWrapper') ),
         removeZone: $( document.getElementById('removeZone') ),
         lockUnlockWrapper: $( document.getElementById('lockUnlockWrapper') ),
         lockUnlockBtnIcon: $( document.getElementById('lockUnlockBtnIcon') ), 
@@ -588,9 +590,12 @@ MKON = {
 
         init: function() {
 
-            // Resize the gridster ul according to window size        
-            this.resize();            
-            this.gridster = $("#gridster").gridster().data('gridster'); 
+            // Resize the gridster ul according to window size   
+
+
+            this.resize();        
+            this.initGridster();    
+            this.gridster = $("#gridster").gridster().data('gridster');           
             this.setup();
             this.unlock();          
 
@@ -598,17 +603,30 @@ MKON = {
 
         resize: function() {
 
-            // Offset fix for gridster's crappy margin config
+            // Recalculate page width/height and store
             var windowWidth = $(window).width();
+            var windowHeight = $(window).height();
             MKON.LAYOUT.viewportWidth = windowWidth;
-            MKON.LAYOUT.viewportHeight = $(window).height();
-            var cols = (Math.floor(windowWidth/this.gridWidth) ) -1;
+            MKON.LAYOUT.viewportHeight = windowHeight;
+
+            // Use new width to ascertain a limit on cols
+            var cols = (Math.floor(windowWidth/this.gridWidth) ) - 1;
+
+            // The total width with new columns/widths;
             var totalWidth = cols * this.gridWidth;
+
+            // Total gridster width needed with margins
             var margins = (this.gridMargins*2) * cols;
+
+            // The offset needed each side
             var offsetX = windowWidth - (margins + totalWidth);
-            $('#gridsterWrapper').css('left', Math.abs(offsetX/2) + 'px');
-            MKON.LAYOUT.removeZoneLimit = parseInt(MKON.LAYOUT.viewportHeight - MKON.LAYOUT.removeZone.outerHeight());   
-            this.initGridster();    
+
+            // Set the wrapper to the offset and the width to the combined total width
+            MKON.LAYOUT.gridsterWrapper.css({'left': Math.abs(offsetX/2) + 'px', 'width': (margins + totalWidth) + 'px' });
+            MKON.LAYOUT.gridsterDOM.css({'max-height': windowHeight, 'max-width': windowWidth})       
+
+            // Recalculate area of page needed to trigger hover effect on remove zone
+            MKON.LAYOUT.removeZoneLimit = parseInt(MKON.LAYOUT.viewportHeight - MKON.LAYOUT.removeZone.outerHeight());               
 
             // this is quite an ugly function...
 
@@ -658,7 +676,7 @@ MKON = {
         initGridster: function() {
 
             // Gridster Config
-            $(".gridster ul").gridster({
+            $("#gridster").gridster({
 
                 widget_selector: "li",
                 widget_margins: [this.gridMargins, this.gridMargins],
@@ -676,6 +694,7 @@ MKON = {
                                                   
                             if (ui.pointer.top > MKON.LAYOUT.removeZoneLimit) {
                                 MKON.LAYOUT.removeZone.addClass('hover');
+                                $(window).scrollTop();
                    
                             } else {
                                 MKON.LAYOUT.removeZone.removeClass('hover');                        

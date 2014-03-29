@@ -544,14 +544,15 @@ textarea {
 html,
 body {
   background: #848b97 url('../img/noise.png');
-  /* fix resize margin function pushing page out */
-  overflow-x: hidden;
-  overflow-y: hidden;
 }
 body {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
   min-width: 650px;
   display: none;
-  overflow-y: hidden;
 }
 body:after {
   display: none;
@@ -1750,7 +1751,9 @@ header:focus .hitbox {
   padding-top: .45em;
 }
 /* GRIDSTER */
+.gridsterWrapper,
 .gridster {
+  /* AKA gridster wrapper */
   position: absolute;
   display: block;
   left: 0px;
@@ -1762,30 +1765,40 @@ header:focus .hitbox {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
+.gridsterWrapper.locked ul li :active,
 .gridster.locked ul li :active {
   cursor: not-allowed !important;
 }
+.gridsterWrapper.locked ul li .button:active,
 .gridster.locked ul li .button:active {
   cursor: pointer !important;
 }
+.gridsterWrapper.locked ul li.blank,
 .gridster.locked ul li.blank {
   display: none !important;
 }
+.gridsterWrapper.locked ul li.panel:before,
 .gridster.locked ul li.panel:before {
   display: none !important;
 }
+.gridsterWrapper.locked ul li.panel span.gs-resize-handle,
 .gridster.locked ul li.panel span.gs-resize-handle {
   display: none !important;
   z-index: 30;
 }
+.gridsterWrapper.locked ul li.panel:hover,
 .gridster.locked ul li.panel:hover,
+.gridsterWrapper.locked ul li.panel:focus,
 .gridster.locked ul li.panel:focus {
   cursor: default;
 }
+.gridsterWrapper.locked ul li .options,
 .gridster.locked ul li .options {
   display: none !important;
 }
+.gridsterWrapper ul,
 .gridster ul {
+  border: 1px #fff solid;
   margin: 0;
   padding: 0;
   margin-top: 80px;
@@ -1796,6 +1809,7 @@ header:focus .hitbox {
   top: 0px;
   left: 0px;
 }
+.gridsterWrapper ul li,
 .gridster ul li {
   position: relative;
   border-radius: .3em;
@@ -1849,23 +1863,29 @@ header:focus .hitbox {
   transform: translateZ(0);
   /* Other transform properties here */
 }
+.gridsterWrapper ul li.dragging,
 .gridster ul li.dragging {
   z-index: 19;
 }
+.gridsterWrapper ul li span.gs-resize-handle,
 .gridster ul li span.gs-resize-handle {
   display: none;
 }
+.gridsterWrapper ul li:hover,
 .gridster ul li:hover {
   cursor: pointer;
   /* .opacity(60);*/
 }
+.gridsterWrapper ul li:hover .options,
 .gridster ul li:hover .options {
   opacity: 1;
   filter: alpha(opacity=100);
 }
+.gridsterWrapper ul li:active,
 .gridster ul li:active {
   z-index: 19;
 }
+.gridsterWrapper ul li .options,
 .gridster ul li .options {
   display: block;
   position: absolute;
@@ -1894,6 +1914,7 @@ header:focus .hitbox {
   -o-transition: opacity 0.3s;
   transition: opacity 0.3s;
 }
+.gridsterWrapper ul li .options .remove,
 .gridster ul li .options .remove {
   position: absolute;
   display: block;
@@ -1905,15 +1926,19 @@ header:focus .hitbox {
   cursor: pointer;
   z-index: 99999;
 }
+.gridsterWrapper ul li .options .remove:hover,
 .gridster ul li .options .remove:hover,
+.gridsterWrapper ul li .options .remove:focus,
 .gridster ul li .options .remove:focus {
   color: #333;
   opacity: 1;
   filter: alpha(opacity=100);
 }
+.gridsterWrapper ul li .options .remove:active,
 .gridster ul li .options .remove:active {
   color: #f2e600;
 }
+.gridsterWrapper ul li .content,
 .gridster ul li .content {
   width: 100%;
   height: 100%;
@@ -1930,12 +1955,14 @@ header:focus .hitbox {
   /* Module Types */
   /* Info types */
 }
+.gridsterWrapper ul li .content.blank,
 .gridster ul li .content.blank {
   background: none;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
 }
+.gridsterWrapper ul li .content h2,
 .gridster ul li .content h2 {
   font-family: 'Arial Black', 'Arial Bold', sans-serif;
   font-weight: bold;
@@ -1950,6 +1977,7 @@ header:focus .hitbox {
   text-shadow: -1px -1px 3px #000000;
   padding-bottom: 10px;
 }
+.gridsterWrapper ul li .content h3,
 .gridster ul li .content h3 {
   font-family: 'Arial Black', 'Arial Bold', sans-serif;
   font-weight: bold;
@@ -1969,6 +1997,7 @@ header:focus .hitbox {
   width: 100%;
   margin-left: -50%;
 }
+.gridsterWrapper ul li .content p,
 .gridster ul li .content p {
   font-family: 'Gnuolane';
   color: rgba(255, 255, 255, 0.6);
@@ -1979,10 +2008,12 @@ header:focus .hitbox {
   padding-top: 0px;
   font-size: 1.4em;
 }
+.gridsterWrapper ul li .content img,
 .gridster ul li .content img {
   width: 100%;
   height: auto;
 }
+.gridsterWrapper ul li .content .button,
 .gridster ul li .content .button {
   position: absolute;
   top: 50%;
@@ -1992,6 +2023,7 @@ header:focus .hitbox {
   margin-top: -32%;
   margin-left: -32%;
 }
+.gridsterWrapper ul li .content .control,
 .gridster ul li .content .control {
   position: absolute;
   top: 0px;
@@ -2002,6 +2034,7 @@ header:focus .hitbox {
   -moz-border-radius: 3px;
   border-radius: 3px;
 }
+.gridsterWrapper ul li .content .control.throttle,
 .gridster ul li .content .control.throttle {
   display: block;
   position: absolute;
@@ -2011,6 +2044,7 @@ header:focus .hitbox {
   height: 100%;
   perspective: 2000px;
 }
+.gridsterWrapper ul li .content .control.throttle .handle,
 .gridster ul li .content .control.throttle .handle {
   display: block;
   width: 225px;
@@ -2037,12 +2071,15 @@ header:focus .hitbox {
   transform: translateZ(0);
   /* Other transform properties here */
 }
+.gridsterWrapper ul li .content .control.throttle .handle:hover,
 .gridster ul li .content .control.throttle .handle:hover {
   cursor: pointer !important;
 }
+.gridsterWrapper ul li .content .control.throttle .handle:active,
 .gridster ul li .content .control.throttle .handle:active {
   cursor: move !important;
 }
+.gridsterWrapper ul li .content .control.throttle .stem,
 .gridster ul li .content .control.throttle .stem {
   display: block;
   width: 8%;
@@ -2081,12 +2118,15 @@ header:focus .hitbox {
   -o-transform-origin: 0px 0px;
   transform-origin: 0px 0px;
 }
+.gridsterWrapper ul li .content .control.throttle .stem.one,
 .gridster ul li .content .control.throttle .stem.one {
   left: 30%;
 }
+.gridsterWrapper ul li .content .control.throttle .stem.two,
 .gridster ul li .content .control.throttle .stem.two {
   left: 70%;
 }
+.gridsterWrapper ul li .content .control.throttle .bar,
 .gridster ul li .content .control.throttle .bar {
   display: block;
   width: 10%;
@@ -2101,12 +2141,15 @@ header:focus .hitbox {
   -moz-box-shadow: inset 0px 0px 15px rgba(0, 0, 0, 0.5);
   box-shadow: inset 0px 0px 15px rgba(0, 0, 0, 0.5);
 }
+.gridsterWrapper ul li .content .control.throttle .bar.one,
 .gridster ul li .content .control.throttle .bar.one {
   left: 30%;
 }
+.gridsterWrapper ul li .content .control.throttle .bar.two,
 .gridster ul li .content .control.throttle .bar.two {
   left: 70%;
 }
+.gridsterWrapper ul li .content .screen,
 .gridster ul li .content .screen {
   padding: 5%;
   width: 100%;
@@ -2116,6 +2159,7 @@ header:focus .hitbox {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
+.gridsterWrapper ul li .content .screen .item,
 .gridster ul li .content .screen .item {
   width: 100%;
   height: auto;
@@ -2128,7 +2172,9 @@ header:focus .hitbox {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
+.gridsterWrapper ul li .content .screen .item h4,
 .gridster ul li .content .screen .item h4,
+.gridsterWrapper ul li .content .screen .item span.data,
 .gridster ul li .content .screen .item span.data {
   text-transform: uppercase;
   font-family: 'BebasNeue', 'Arial', sans-serif;
@@ -2137,6 +2183,7 @@ header:focus .hitbox {
   margin: 0 !important;
   padding: 0 !important;
 }
+.gridsterWrapper ul li .content .screen .item h4,
 .gridster ul li .content .screen .item h4 {
   display: inline;
   margin: 0;
@@ -2144,11 +2191,13 @@ header:focus .hitbox {
   float: left;
   font-size: 1.25em;
 }
+.gridsterWrapper ul li .content .screen .item span.data,
 .gridster ul li .content .screen .item span.data {
   color: rgba(255, 255, 255, 0.4);
   float: right;
   font-size: 1.25em;
 }
+.gridsterWrapper ul li .content .screen h3,
 .gridster ul li .content .screen h3 {
   position: absolute;
   margin: 0;
@@ -2158,12 +2207,14 @@ header:focus .hitbox {
   width: 100%;
   margin-left: -50%;
 }
+.gridsterWrapper ul li .content .screen.navball canvas,
 .gridster ul li .content .screen.navball canvas {
   margin: 0;
   padding: 0;
   top: 0px;
   left: 0px;
 }
+.gridsterWrapper ul li .content .screen.navball .navballPointer,
 .gridster ul li .content .screen.navball .navballPointer {
   background: url('../img/navballPointer.png') no-repeat;
   position: absolute;
@@ -2176,6 +2227,7 @@ header:focus .hitbox {
   display: block;
   z-index: 10;
 }
+.gridsterWrapper ul li .content .screen.navball .navballOutside,
 .gridster ul li .content .screen.navball .navballOutside {
   background: url('../img/navballOutside.png') no-repeat;
   display: block;
@@ -2188,6 +2240,7 @@ header:focus .hitbox {
   top: 176px;
   left: 176px;
 }
+.gridsterWrapper ul li .content .screen .altitude,
 .gridster ul li .content .screen .altitude {
   display: block;
   height: 84px;
@@ -2213,6 +2266,7 @@ header:focus .hitbox {
   bottom: 0;
   right: 0;
 }
+.gridsterWrapper ul li .content .screen .altitude:after,
 .gridster ul li .content .screen .altitude:after {
   position: absolute;
   top: 0px;
@@ -2239,6 +2293,7 @@ header:focus .hitbox {
   /* IE6-9 */
   content: '';
 }
+.gridsterWrapper ul li .content .screen .altitude .n,
 .gridster ul li .content .screen .altitude .n {
   width: 45px;
   height: 75px;
@@ -2253,45 +2308,59 @@ header:focus .hitbox {
   -o-transition: background-position 0.2s;
   transition: background-position 0.2s;
 }
+.gridsterWrapper ul li .content .screen .altitude .n.distance,
 .gridster ul li .content .screen .altitude .n.distance {
   background-position: -45px 0px;
 }
+.gridsterWrapper ul li .content .screen .altitude .n.m,
 .gridster ul li .content .screen .altitude .n.m {
   background-position: -45px 0px;
 }
+.gridsterWrapper ul li .content .screen .altitude .n.k,
 .gridster ul li .content .screen .altitude .n.k {
   background-position: -45px -71px;
 }
+.gridsterWrapper ul li .content .screen .altitude .n.zero,
 .gridster ul li .content .screen .altitude .n.zero {
   background-position: 0px -642px;
 }
+.gridsterWrapper ul li .content .screen .altitude .n.one,
 .gridster ul li .content .screen .altitude .n.one {
   background-position: 0px -570px;
 }
+.gridsterWrapper ul li .content .screen .altitude .n.two,
 .gridster ul li .content .screen .altitude .n.two {
   background-position: 0px -499px;
 }
+.gridsterWrapper ul li .content .screen .altitude .n.three,
 .gridster ul li .content .screen .altitude .n.three {
   background-position: 0px -427px;
 }
+.gridsterWrapper ul li .content .screen .altitude .n.four,
 .gridster ul li .content .screen .altitude .n.four {
   background-position: 0px -356px;
 }
+.gridsterWrapper ul li .content .screen .altitude .n.five,
 .gridster ul li .content .screen .altitude .n.five {
   background-position: 0px -284px;
 }
+.gridsterWrapper ul li .content .screen .altitude .n.six,
 .gridster ul li .content .screen .altitude .n.six {
   background-position: 0px -214px;
 }
+.gridsterWrapper ul li .content .screen .altitude .n.seven,
 .gridster ul li .content .screen .altitude .n.seven {
   background-position: 0px -140px;
 }
+.gridsterWrapper ul li .content .screen .altitude .n.eight,
 .gridster ul li .content .screen .altitude .n.eight {
   background-position: 0px -71px;
 }
+.gridsterWrapper ul li .content .screen .altitude .n.nine,
 .gridster ul li .content .screen .altitude .n.nine {
   background-position: 0px 0px;
 }
+.gridsterWrapper ul li .content .screen.timewarp .holder,
 .gridster ul li .content .screen.timewarp .holder {
   width: 100%;
   height: 30px;
@@ -2304,30 +2373,39 @@ header:focus .hitbox {
   text-align: center;
   padding: 3px;
 }
+.gridsterWrapper ul li .content .screen.timewarp .holder.tw8 span.trg:nth-child( -n + 8),
 .gridster ul li .content .screen.timewarp .holder.tw8 span.trg:nth-child( -n + 8) {
   border-left: 12px solid #91cc35;
 }
+.gridsterWrapper ul li .content .screen.timewarp .holder.tw7 span.trg:nth-child( -n + 7),
 .gridster ul li .content .screen.timewarp .holder.tw7 span.trg:nth-child( -n + 7) {
   border-left: 12px solid #91cc35;
 }
+.gridsterWrapper ul li .content .screen.timewarp .holder.tw6 span.trg:nth-child( -n + 6),
 .gridster ul li .content .screen.timewarp .holder.tw6 span.trg:nth-child( -n + 6) {
   border-left: 12px solid #91cc35;
 }
+.gridsterWrapper ul li .content .screen.timewarp .holder.tw5 span.trg:nth-child( -n + 5),
 .gridster ul li .content .screen.timewarp .holder.tw5 span.trg:nth-child( -n + 5) {
   border-left: 12px solid #91cc35;
 }
+.gridsterWrapper ul li .content .screen.timewarp .holder.tw4 span.trg:nth-child( -n + 4),
 .gridster ul li .content .screen.timewarp .holder.tw4 span.trg:nth-child( -n + 4) {
   border-left: 12px solid #91cc35;
 }
+.gridsterWrapper ul li .content .screen.timewarp .holder.tw3 span.trg:nth-child( -n + 3),
 .gridster ul li .content .screen.timewarp .holder.tw3 span.trg:nth-child( -n + 3) {
   border-left: 12px solid #91cc35;
 }
+.gridsterWrapper ul li .content .screen.timewarp .holder.tw2 span.trg:nth-child( -n + 2),
 .gridster ul li .content .screen.timewarp .holder.tw2 span.trg:nth-child( -n + 2) {
   border-left: 12px solid #91cc35;
 }
+.gridsterWrapper ul li .content .screen.timewarp .holder.tw1 span.trg:nth-child( -n + 1),
 .gridster ul li .content .screen.timewarp .holder.tw1 span.trg:nth-child( -n + 1) {
   border-left: 12px solid #91cc35;
 }
+.gridsterWrapper ul li .content .screen.timewarp .holder span.trg,
 .gridster ul li .content .screen.timewarp .holder span.trg {
   width: 0;
   height: 0;
@@ -2337,18 +2415,23 @@ header:focus .hitbox {
   display: inline-block;
   padding-right: 15px;
 }
+.gridsterWrapper ul li .content .screen.timewarp .holder span.trg:last-child,
 .gridster ul li .content .screen.timewarp .holder span.trg:last-child {
   padding-right: 0px;
 }
+.gridsterWrapper ul li .content .screen.timewarp h3,
 .gridster ul li .content .screen.timewarp h3 {
   bottom: 24px;
 }
+.gridsterWrapper ul li .content .screen.met,
 .gridster ul li .content .screen.met {
   display: table;
 }
+.gridsterWrapper ul li .content .screen.met h3,
 .gridster ul li .content .screen.met h3 {
   bottom: 24px;
 }
+.gridsterWrapper ul li .content .screen.met h3.data-time,
 .gridster ul li .content .screen.met h3.data-time {
   display: table-cell;
   vertical-align: middle;
@@ -2364,30 +2447,36 @@ header:focus .hitbox {
   text-shadow: 0px 0px 3px #91cc35;
   font-size: 1.3em;
 }
+.gridsterWrapper ul li .content .screen.connection.red div.radio,
 .gridster ul li .content .screen.connection.red div.radio {
   background-position: -238px -395px;
 }
+.gridsterWrapper ul li .content .screen.connection.red h3.data-status,
 .gridster ul li .content .screen.connection.red h3.data-status {
   color: #df422b;
   -webkit-text-shadow: 0px 0px 3px #df422b;
   -moz-text-shadow: 0px 0px 3px #df422b;
   text-shadow: 0px 0px 3px #df422b;
 }
+.gridsterWrapper ul li .content .screen.connection.red div.indicator span.inner,
 .gridster ul li .content .screen.connection.red div.indicator span.inner {
   background: #df422b;
   -webkit-box-shadow: 0px 0px 15px rgba(223, 66, 43, 0.8);
   -moz-box-shadow: 0px 0px 15px rgba(223, 66, 43, 0.8);
   box-shadow: 0px 0px 15px rgba(223, 66, 43, 0.8);
 }
+.gridsterWrapper ul li .content .screen.connection.green div.radio,
 .gridster ul li .content .screen.connection.green div.radio {
   background-position: -117px -395px;
 }
+.gridsterWrapper ul li .content .screen.connection.green div.indicator span.inner,
 .gridster ul li .content .screen.connection.green div.indicator span.inner {
   background: #91cc35;
   -webkit-box-shadow: 0px 0px 15px rgba(145, 204, 53, 0.5);
   -moz-box-shadow: 0px 0px 15px rgba(145, 204, 53, 0.5);
   box-shadow: 0px 0px 15px rgba(145, 204, 53, 0.5);
 }
+.gridsterWrapper ul li .content .screen.connection.orange div.radio,
 .gridster ul li .content .screen.connection.orange div.radio {
   background-position: -364px -395px;
   -webkit-animation: fadeLoop 2s infinite;
@@ -2399,12 +2488,14 @@ header:focus .hitbox {
   animation: fadeLoop 2s infinite;
   /* IE 10+ */
 }
+.gridsterWrapper ul li .content .screen.connection.orange h3.data-status,
 .gridster ul li .content .screen.connection.orange h3.data-status {
   color: #f67d1d;
   -webkit-text-shadow: 0px 0px 3px #f67d1d;
   -moz-text-shadow: 0px 0px 3px #f67d1d;
   text-shadow: 0px 0px 3px #f67d1d;
 }
+.gridsterWrapper ul li .content .screen.connection.orange div.indicator,
 .gridster ul li .content .screen.connection.orange div.indicator {
   -webkit-animation: fadeLoop 2s infinite;
   /* Safari 4+ */
@@ -2415,12 +2506,14 @@ header:focus .hitbox {
   animation: fadeLoop 2s infinite;
   /* IE 10+ */
 }
+.gridsterWrapper ul li .content .screen.connection.orange div.indicator span.inner,
 .gridster ul li .content .screen.connection.orange div.indicator span.inner {
   background: #f67d1d;
   -webkit-box-shadow: 0px 0px 15px rgba(246, 125, 29, 0.8);
   -moz-box-shadow: 0px 0px 15px rgba(246, 125, 29, 0.8);
   box-shadow: 0px 0px 15px rgba(246, 125, 29, 0.8);
 }
+.gridsterWrapper ul li .content .screen.connection div.radio,
 .gridster ul li .content .screen.connection div.radio {
   display: block;
   width: 125px;
@@ -2435,11 +2528,13 @@ header:focus .hitbox {
   background-image: url('../img/sprites.png');
 }
 @media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-resolution: 1.5dppx) {
+  .gridsterWrapper ul li .content .screen.connection div.radio,
   .gridster ul li .content .screen.connection div.radio {
     background-image: url("../img/sprites@2x.png");
     background-size: auto auto;
   }
 }
+.gridsterWrapper ul li .content .screen.connection div.indicator,
 .gridster ul li .content .screen.connection div.indicator {
   display: block;
   width: 20px;
@@ -2457,6 +2552,7 @@ header:focus .hitbox {
   -moz-box-shadow: 0px 0px 5px #000000;
   box-shadow: 0px 0px 5px #000000;
 }
+.gridsterWrapper ul li .content .screen.connection div.indicator span.inner,
 .gridster ul li .content .screen.connection div.indicator span.inner {
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
@@ -2474,6 +2570,7 @@ header:focus .hitbox {
   border-radius: 0.8em;
   background: #000;
 }
+.gridsterWrapper ul li .content .screen.connection div.indicator span.inner span.highlight,
 .gridster ul li .content .screen.connection div.indicator span.inner span.highlight {
   display: block;
   width: 70%;
@@ -2486,9 +2583,11 @@ header:focus .hitbox {
   border-radius: 0.7em;
   background: rgba(255, 255, 255, 0.25);
 }
+.gridsterWrapper ul li .content .screen.connection h3,
 .gridster ul li .content .screen.connection h3 {
   bottom: 24px;
 }
+.gridsterWrapper ul li .content .screen.connection h3.data-status,
 .gridster ul li .content .screen.connection h3.data-status {
   display: table-cell;
   vertical-align: middle;
@@ -2506,6 +2605,7 @@ header:focus .hitbox {
   -moz-text-shadow: 0px 0px 3px #91cc35;
   text-shadow: 0px 0px 3px #91cc35;
 }
+.gridsterWrapper ul li .content .screen.resource .item,
 .gridster ul li .content .screen.resource .item {
   width: 100%;
   display: block;
@@ -2518,6 +2618,7 @@ header:focus .hitbox {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
+.gridsterWrapper ul li .content .screen.resource .item .resource-bar,
 .gridster ul li .content .screen.resource .item .resource-bar {
   overflow: visible;
   position: absolute;
@@ -2527,6 +2628,7 @@ header:focus .hitbox {
   bottom: 0;
   right: 0;
 }
+.gridsterWrapper ul li .content .screen.resource .item h3,
 .gridster ul li .content .screen.resource .item h3 {
   position: absolute;
   margin: 0;
@@ -2535,6 +2637,7 @@ header:focus .hitbox {
   text-transform: uppercase;
   left: 0px;
 }
+.gridsterWrapper ul li .content .dial,
 .gridster ul li .content .dial {
   position: absolute;
   display: block;
@@ -2550,6 +2653,7 @@ header:focus .hitbox {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
+.gridsterWrapper ul li .content .dial .pointer,
 .gridster ul li .content .dial .pointer {
   position: absolute;
   top: 50%;
@@ -2561,6 +2665,7 @@ header:focus .hitbox {
   background-position: -345px -146px;
   display: block;
 }
+.gridsterWrapper ul li .content .resource-bar,
 .gridster ul li .content .resource-bar {
   position: relative;
   display: block;
@@ -2575,6 +2680,7 @@ header:focus .hitbox {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
+.gridsterWrapper ul li .content .resource-bar .resource,
 .gridster ul li .content .resource-bar .resource {
   width: 248px;
   height: 22px;
@@ -2588,6 +2694,7 @@ header:focus .hitbox {
   background-repeat: repeat-x;
   overflow: hidden;
 }
+.gridsterWrapper ul li .content .resource-bar .resource:after,
 .gridster ul li .content .resource-bar .resource:after {
   display: block;
   height: 100%;
@@ -2611,6 +2718,7 @@ header:focus .hitbox {
   bottom: 0;
   right: 0;
 }
+.gridsterWrapper ul li .content .resource-bar .resource .value,
 .gridster ul li .content .resource-bar .resource .value {
   position: absolute;
   top: 0px;
@@ -2620,6 +2728,7 @@ header:focus .hitbox {
   background-position: -547px -284px;
   z-index: 10;
 }
+.gridsterWrapper ul li .content .resource-bar .resource .value:after,
 .gridster ul li .content .resource-bar .resource .value:after {
   display: block;
   height: 100%;
@@ -2644,6 +2753,7 @@ header:focus .hitbox {
   bottom: 0;
   right: 0;
 }
+.gridsterWrapper ul li .content .resource-bar h3,
 .gridster ul li .content .resource-bar h3 {
   padding-top: 0px;
   position: absolute;
@@ -2654,6 +2764,7 @@ header:focus .hitbox {
   margin-left: -50%;
   text-transform: uppercase;
 }
+.gridsterWrapper ul li .content .heading-bar,
 .gridster ul li .content .heading-bar {
   position: relative;
   display: block;
@@ -2666,6 +2777,7 @@ header:focus .hitbox {
   box-sizing: border-box;
   background: none !important;
 }
+.gridsterWrapper ul li .content .heading-bar .heading,
 .gridster ul li .content .heading-bar .heading {
   width: 100%;
   height: 60px;
@@ -2683,6 +2795,7 @@ header:focus .hitbox {
   -o-transition: background-position 0.3s;
   transition: background-position 0.3s;
 }
+.gridsterWrapper ul li .content .heading-bar .heading .marker,
 .gridster ul li .content .heading-bar .heading .marker {
   display: block;
   width: 11px;
@@ -2694,6 +2807,7 @@ header:focus .hitbox {
   margin-left: -5px;
   background-position: -296px -148px;
 }
+.gridsterWrapper ul li .content .heading-bar h3,
 .gridster ul li .content .heading-bar h3 {
   padding-top: 0px;
   position: absolute;
@@ -2702,9 +2816,13 @@ header:focus .hitbox {
   margin-left: -42px;
   display: none;
 }
+.gridsterWrapper ul li .content .scale-bar .control .marker,
 .gridster ul li .content .scale-bar .control .marker,
+.gridsterWrapper ul li .content .control-bar .control .marker,
 .gridster ul li .content .control-bar .control .marker,
+.gridsterWrapper ul li .content .scale-bar .scale .marker,
 .gridster ul li .content .scale-bar .scale .marker,
+.gridsterWrapper ul li .content .control-bar .scale .marker,
 .gridster ul li .content .control-bar .scale .marker {
   -webkit-transition: left 0.3s;
   -moz-transition: left 0.3s;
@@ -2712,6 +2830,7 @@ header:focus .hitbox {
   -o-transition: left 0.3s;
   transition: left 0.3s;
 }
+.gridsterWrapper ul li .content .control-bar,
 .gridster ul li .content .control-bar {
   position: relative;
   display: block;
@@ -2723,6 +2842,7 @@ header:focus .hitbox {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
+.gridsterWrapper ul li .content .control-bar .control,
 .gridster ul li .content .control-bar .control {
   display: block;
   position: absolute;
@@ -2737,6 +2857,7 @@ header:focus .hitbox {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
+.gridsterWrapper ul li .content .control-bar .control .marker,
 .gridster ul li .content .control-bar .control .marker {
   display: block;
   width: 14px;
@@ -2747,16 +2868,19 @@ header:focus .hitbox {
   margin-left: -7px;
   background-position: -300px -28px;
 }
+.gridsterWrapper ul li .content .control-bar.roll .control,
 .gridster ul li .content .control-bar.roll .control {
   width: 180px;
   margin-left: -90px;
   background-position: -302px 2px;
 }
+.gridsterWrapper ul li .content .control-bar.yaw .control,
 .gridster ul li .content .control-bar.yaw .control {
   width: 180px;
   margin-left: -90px;
   background-position: -302px 2px;
 }
+.gridsterWrapper ul li .content .control-bar.pitch .control,
 .gridster ul li .content .control-bar.pitch .control {
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
@@ -2767,6 +2891,7 @@ header:focus .hitbox {
   margin-left: -90px;
   background-position: -302px 2px;
 }
+.gridsterWrapper ul li .content .control-bar.pitch .control .marker,
 .gridster ul li .content .control-bar.pitch .control .marker {
   position: absolute;
   left: 0%;
@@ -2776,10 +2901,12 @@ header:focus .hitbox {
   -o-transition: left 0.1s;
   transition: left 0.1s;
 }
+.gridsterWrapper ul li .content .control-bar.pitch h3,
 .gridster ul li .content .control-bar.pitch h3 {
   display: none;
   /* Until style fix */
 }
+.gridsterWrapper ul li .content .scale-bar,
 .gridster ul li .content .scale-bar {
   position: relative;
   display: block;
@@ -2791,6 +2918,7 @@ header:focus .hitbox {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
+.gridsterWrapper ul li .content .scale-bar .scale,
 .gridster ul li .content .scale-bar .scale {
   display: block;
   height: 20px;
@@ -2804,6 +2932,7 @@ header:focus .hitbox {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
+.gridsterWrapper ul li .content .scale-bar .scale .marker,
 .gridster ul li .content .scale-bar .scale .marker {
   display: block;
   width: 10px;
@@ -2813,9 +2942,11 @@ header:focus .hitbox {
   margin-left: -5px;
   background-position: -296px -148px;
 }
+.gridsterWrapper ul li .content .verticalspeed,
 .gridster ul li .content .verticalspeed {
   background-position: -575px -68px;
 }
+.gridsterWrapper ul li .content .verticalspeed .pointer,
 .gridster ul li .content .verticalspeed .pointer {
   -webkit-transform: rotate(22.5deg);
   -moz-transform: rotate(22.5deg);
@@ -2823,31 +2954,40 @@ header:focus .hitbox {
   -o-transform: rotate(22.5deg);
   transform: rotate(22.5deg);
 }
+.gridsterWrapper ul li .content .rcs,
 .gridster ul li .content .rcs {
   background-position: -371px -70px;
 }
+.gridsterWrapper ul li .content .sas,
 .gridster ul li .content .sas {
   background-position: -439px -70px;
 }
+.gridsterWrapper ul li .content .density,
 .gridster ul li .content .density {
   background-position: 40px 24px;
 }
+.gridsterWrapper ul li .content .throttle,
 .gridster ul li .content .throttle {
   background-position: 38px -134px;
 }
+.gridsterWrapper ul li .content .fuel,
 .gridster ul li .content .fuel {
   background-position: 38px -207px;
 }
+.gridsterWrapper ul li .content .gforce,
 .gridster ul li .content .gforce {
   background-position: 38px -55px;
 }
+.gridsterWrapper ul li.alt,
 .gridster ul li.alt {
   background: #576069;
 }
+.gridsterWrapper ul li.panel span.gs-resize-handle,
 .gridster ul li.panel span.gs-resize-handle {
   display: inherit !important;
   z-index: 30;
 }
+.gridsterWrapper ul li.panel:before,
 .gridster ul li.panel:before {
   display: block;
   opacity: 0.5;
@@ -2870,10 +3010,13 @@ header:focus .hitbox {
   font-size: .6em;
   color: #222;
 }
+.gridsterWrapper ul li.panel:hover,
 .gridster ul li.panel:hover,
+.gridsterWrapper ul li.panel:focus,
 .gridster ul li.panel:focus {
   cursor: move;
 }
+.gridsterWrapper ul li.blank,
 .gridster ul li.blank {
   border: 3px rgba(0, 0, 0, 0.1) solid;
   -webkit-border-radius: 0.3em;
@@ -2889,10 +3032,12 @@ header:focus .hitbox {
   -o-transition: none;
   transition: none;
 }
+.gridsterWrapper ul li.blank span.gs-resize-handle,
 .gridster ul li.blank span.gs-resize-handle {
   display: inherit !important;
   z-index: 30;
 }
+.gridsterWrapper ul li.blank:before,
 .gridster ul li.blank:before {
   display: block;
   opacity: 0.5;
@@ -2915,7 +3060,9 @@ header:focus .hitbox {
   font-size: .6em;
   color: #222;
 }
+.gridsterWrapper ul li.blank:hover,
 .gridster ul li.blank:hover,
+.gridsterWrapper ul li.blank:focus,
 .gridster ul li.blank:focus {
   background: rgba(0, 0, 0, 0.1);
   cursor: move;

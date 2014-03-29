@@ -5859,7 +5859,6 @@ if (jQuery.when.all === undefined) {
         return this;
     };
 
-
     /**
     * Recalculates the offsets for the faux grid. You need to use it when
     * the browser is resized.
