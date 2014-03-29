@@ -599,6 +599,7 @@ MKON = {
             this.setup();
             this.unlock();          
 
+
         },
 
         resize: function() {
@@ -622,13 +623,10 @@ MKON = {
             var offsetX = windowWidth - (margins + totalWidth);
 
             // Set the wrapper to the offset and the width to the combined total width
-            MKON.LAYOUT.gridsterWrapper.css({'left': Math.abs(offsetX/2) + 'px', 'width': (margins + totalWidth) + 'px' });
-            MKON.LAYOUT.gridsterDOM.css({'max-height': windowHeight, 'max-width': windowWidth})       
+            MKON.LAYOUT.gridsterWrapper.css({'left': Math.abs(offsetX/2) + 'px', 'width': (margins + totalWidth) + 'px' });  
 
             // Recalculate area of page needed to trigger hover effect on remove zone
             MKON.LAYOUT.removeZoneLimit = parseInt(MKON.LAYOUT.viewportHeight - MKON.LAYOUT.removeZone.outerHeight());               
-
-            // this is quite an ugly function...
 
         },
 
@@ -639,17 +637,18 @@ MKON = {
             // Check if url layout available (a # with json layout attached to url)
             if (urlLayout) {
                 this.prevLayout = JSON.parse(urlLayout);
-                this.generate(this.prevLayout);                
+                this.generate(this.prevLayout);    
+                if (MKON.debug) {  console.log('Found url layout.'); };            
             } else {
                 this.prevLayout = false;
+                if (MKON.debug) {  console.log('Couldnt find url layout.'); };   
             }
 
             // If localstorage available
-            if(typeof(Storage)!=="undefined") {   
+            if(typeof(Storage)!=="undefined" && !this.prevLayout) {   
 
                 if (MKON.debug) {  console.log('LocalStorage supported'); };
                 MKON.localStorageSupport = true; 
-
 
                 try { 
 
@@ -666,9 +665,11 @@ MKON = {
                     }  
 
                 } catch (error) {
-                    console.log('Error getting cache. [' + error + ']');
+                    if (MKON.debug) { console.log('Error getting cache. [' + error + ']'); }
                 }
 
+            }  else if (this.prevLayout) {
+                if (MKON.debug) { console.log('Using url layout method.'); }
             }
 
         },
@@ -755,19 +756,28 @@ MKON = {
         save: function() {
             
 
-            if (MKON.localStorageSupport && MKON.allowSave) {
-
-                this.serialize();  
-                if (MKON.debug) {  console.log('Saving...'); };
+            if (MKON.allowSave) {
 
                 try {
-                    localStorage.setObj(MKON.cacheString, this.currentLayout);
-                    if (MKON.debug) { console.log('Layout save successful.'); }
-                }
-                catch (error) {
+                    this.serialize();  
+                    if (MKON.debug) {  console.log('Saving...'); };
+                } catch (error) {
+                    if (MKON.debug) {  console.log('Error serializing layout.'); };
+                }            
 
-                    if (MKON.debug) { console.log('Error saving. [' + error + ']'); };
-                }
+                if (MKON.localStorageSupport) { // Use localstorage to save
+                    try {
+                        localStorage.setObj(MKON.cacheString, this.currentLayout);
+                        if (MKON.debug) { console.log('Layout save successful.'); }
+                    }
+                    catch (error) {
+                        if (MKON.debug) { console.log('Error saving. [' + error + ']'); };
+                    }
+
+                } else { // Use location hash to save
+
+                    parent.location.hash =  JSON.stringify(this.currentLayout)
+                }              
                 
             }
 

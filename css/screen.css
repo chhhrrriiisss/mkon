@@ -1482,6 +1482,7 @@ header:focus .hitbox {
   -ms-transform: scale(0.95);
   -o-transform: scale(0.95);
   transform: scale(0.95);
+  cursor: pointer;
 }
 .stageButton:active:after,
 .stageButton:focus:after,
@@ -1798,7 +1799,6 @@ header:focus .hitbox {
 }
 .gridsterWrapper ul,
 .gridster ul {
-  border: 1px #fff solid;
   margin: 0;
   padding: 0;
   margin-top: 80px;
