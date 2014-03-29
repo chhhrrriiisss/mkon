@@ -189,7 +189,7 @@ $(document).ready(function() {
     // Buttons that have commands that require it to be held down
     $('#gridster').on('touchstart mousedown', '.command-hold', function(e){
 
-        if (!MKON.LAYOUT.locked) {
+        if (MKON.LAYOUT.locked) {
 
             var el = $(this);
             var com = el[0].getAttribute('data-com') || false;
@@ -203,7 +203,7 @@ $(document).ready(function() {
 
     $('#gridster').on('touchend mouseup', '.command-hold', function(e){
 
-        if (!MKON.LAYOUT.locked) {
+        if (vMKON.LAYOUT.locked) {
 
             MKON.COMMS.repeatCommand(false);  
 
@@ -214,7 +214,7 @@ $(document).ready(function() {
     // Buttons that have commands attached
     $('#gridster').on('fastClick', '.command', function(e) {
 
-        if (!MKON.LAYOUT.locked) {
+        if (MKON.LAYOUT.locked) {
 
             var el = $(this);
             var button = $(this).find('a.button') || false;
@@ -341,12 +341,12 @@ MKON = {
                                 if (v == MKON.requiredVersion) {
                                     
                                     if (MKON.debug) { console.log('Version is ok.');  }  
-                                    MKON.COMMS.unsubscribe('a.version');                             
+                                    MKON.COMMS.unsubscribe(['a.version']);                             
 
                                 } else {
 
                                     alertify.error("Version mismatch");
-                                    MKON.COMMS.unsubscribe('a.version');                               
+                                    MKON.COMMS.unsubscribe(['a.version']);                               
                                 }
 
                                 MKON.versionCheck = true;                               
