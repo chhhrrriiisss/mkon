@@ -1314,8 +1314,7 @@ header:focus .hitbox {
   background: url('../modules/th/thumbnails.jpg');
   background-position: 0px 0px;
   background-repeat: no-repeat;
-  background-width: 888px;
-  background-height: 1776px;
+  background-size: 888px 1776px;
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
   -ms-backface-visibility: hidden;

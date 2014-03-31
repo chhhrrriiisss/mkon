@@ -47,7 +47,7 @@ function init(config) {
 			var last = slot[0].getAttribute('data-last');
 			slot.removeClass(last);
 			slot.addClass(c);
-			slot[0].getAttribute('data-last', c);
+			slot.attr('data-last', c);
 		}
 
 		if (unit == 'k') {
