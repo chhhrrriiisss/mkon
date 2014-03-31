@@ -1067,7 +1067,7 @@ MKON = {
         // Loops through active modules and triggers handleData events for each
         handleData: function() {
 
-            if (MKON.COMMS.active && this.activeModules.length > 0) {
+            if (MKON.COMMS.active && MKON.LAYOUT.locked && this.activeModules.length > 0) {
             
                 for(var item in this.activeModules) {
                     if (typeof this.activeModules[item] !== 'undefined') {                               
