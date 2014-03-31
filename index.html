@@ -14,555 +14,618 @@
 
         <link rel="Shortcut Icon" href="favicon.ico" type="image/x-icon" />
         <link rel="stylesheet" href="css/screen.css"> 
-        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+
+        <script src="js/preloader.min.js"></script>
+        <script type="text/javascript">
+
+        var manifest;
+
+        if (window.devicePixelRatio > 1) { // its retina          
+            manifest = [
+              'img/sprites@2x.png', 
+              'img/logo@2x.png', 
+              'modules/th/thumbnails@2x.jpg',
+              'img/noise.png',
+              'img/grid.png'
+            ];
+        } else {
+            manifest = [
+              'img/sprites.png', 
+              'img/logo.png', 
+              'modules/th/thumbnails.jpg',
+              'img/noise.png',
+              'img/grid.png'
+            ];
+        }
+
+        new preLoader(manifest, {
+
+          onProgress: function(src, element, index){
+            // output some stats
+            var donePercent = Math.floor((100 / this.queue.length) * this.completed.length);
+            console.log(donePercent + '% completed');
+            var statusText = document.getElementById('statusText');
+            var text = donePercent + '%';
+            statusText.innerHTML = text;
+          },
+          onComplete: function(loaded, errors){
+            console.log('Preloaded: ', loaded);
+            errors && errros.length && console.log('Failed to load: ', errors);
+            var wrapper = document.getElementById('wrapper'); 
+            wrapper.className = wrapper.className + ' loaded';
+
+            var status = document.getElementById('status');
+            status.className = 'hide';
+          }
+        });
+
+        </script>
+
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        
-        <header>
 
-            <nav class="clearfix">
+        <!-- Force Preload Fonts -->
+        <span style="font-family:'BebasNeue'; color:transparent;">BebasNeue</span>
+        <span style="font-family:'FontAwesome'; color:transparent;">FontAwesome</span>
 
-                <ul id="menu" class="clearfix">
-                    
-                    <li id="openList" class="link openList"><a class="lightText"><i class="fa fa-plus-square"></i> &nbsp; ADD MODULES</a></li>
-                    <li id="lockUnlock" data-state="unlocked" class="link lockUnlock"><a class="lightText"><i id="lockUnlockBtnIcon" class="fa fa-unlock fa-lg"></i></a></li>
-                    <li id="exportModules" class="link exportOverlay"><a class="lightText"><i class="fa fa-long-arrow-down"></i><i class="fa fa-long-arrow-up"></i> &nbsp; IMPORT / EXPORT</a></li>
-                    <li id="clearModules" class="link clearOverlay"><a class="lightText"><i class="fa fa-times-circle"></i>&nbsp; CLEAR</a></li>
-                    <li id="settingsButton" class="link" style="display:none !important;"><a class="lightText"><i class="fa fa-cogs"></i>&nbsp; SETTINGS</a></li>
-                    <li id="mobileMenu" class="link mobile"><a class="lightText"><i class="fa fa-bars openMobile"></i><i class="fa fa-angle-double-up fa-lg closeMobile"></i></a></li>
+        <!-- Status box for preloader -->
+        <div id="status">
+          <h2 id="statusText">
+          LOADING...
+          </h2>
+        </div>
 
-                </ul>
-                
-            </nav>
-            
-            <!-- Yellow striped bar at bottom of header -->
-            <div class="stripedBar"><span class="end"></span></div>
+        <div id="wrapper">
 
-            <!-- Mainly for mobile devices -->
-            <div class="hitbox"></div>
+          <header>
 
-        </header>
-        
-        <!-- Centre Logo -->
-        <div id="logo" class="animated-slow"></div>
+              <nav class="clearfix">
 
-        <!-- Drop Zone for Removing Modules -->
-        <div id="removeZone" class="animated-fast"> <i class="fa fa-trash-o fa-2x trash"></i></div>
+                  <ul id="menu" class="clearfix">
+                      
+                      <li id="openList" class="link openList"><a class="lightText"><i class="fa fa-plus-square"></i> &nbsp; ADD MODULES</a></li>
+                      <li id="lockUnlock" data-state="unlocked" class="link lockUnlock"><a class="lightText"><i id="lockUnlockBtnIcon" class="fa fa-unlock fa-lg"></i></a></li>
+                      <li id="exportModules" class="link exportOverlay"><a class="lightText"><i class="fa fa-long-arrow-down"></i><i class="fa fa-long-arrow-up"></i> &nbsp; IMPORT / EXPORT</a></li>
+                      <li id="clearModules" class="link clearOverlay"><a class="lightText"><i class="fa fa-times-circle"></i>&nbsp; CLEAR</a></li>
+                      <li id="settingsButton" class="link" style="display:none !important;"><a class="lightText"><i class="fa fa-cogs"></i>&nbsp; SETTINGS</a></li>
+                      <li id="mobileMenu" class="link mobile"><a class="lightText"><i class="fa fa-bars openMobile"></i><i class="fa fa-angle-double-up fa-lg closeMobile"></i></a></li>
 
-        <!-- Overlay for lock/unlock state animation -->
-        <div id="lockUnlockWrapper" class="lockUnlockWrapper animated-cubic"><i class="fa fa-unlock fa-5x"></i><i class="fa fa-lock fa-5x"></i></div>
+                  </ul>
+                  
+              </nav>
+              
+              <!-- Yellow striped bar at bottom of header -->
+              <div class="stripedBar"><span class="end"></span></div>
 
-        <!-- Vignette Overlay -->
-        <div id="overlayWrapper" class="overlayWrapper" style="display:none;"></div>
+              <!-- Mainly for mobile devices -->
+              <div class="hitbox"></div>
 
-        <!-- AddModule Dialog -->
-        <div id="moduleList" style="display:none;">
+          </header>
+          
+          <!-- Centre Logo -->
+          <div id="logo" class="animated-slow"></div>
 
-          <a id="closeButton" class="closeButton button lightText large square red no-toggle" data-defaultClass="red"><i class="fa fa-times"></i></a>
+          <!-- Drop Zone for Removing Modules -->
+          <div id="removeZone" class="animated-fast"> <i class="fa fa-trash-o fa-2x trash"></i></div>
 
-          <div id="addModule" class="addModule">            
+          <!-- Overlay for lock/unlock state animation -->
+          <div id="lockUnlockWrapper" class="lockUnlockWrapper animated-cubic"><i class="fa fa-unlock fa-5x"></i><i class="fa fa-lock fa-5x"></i></div>
 
-                 <div class="moduleHeader">
+          <!-- Vignette Overlay -->
+          <div id="overlayWrapper" class="overlayWrapper" style="display:none;">
 
-                   <div class="filterWrapper">
-                       <h3><i class="fa fa-caret-square-o-down"></i>&nbsp; FILTER &nbsp; </H3> 
-                       <div class="moduleFilter">
-                            <select id="filterButton" class="filterButton" name="filterButton">
-                            <option value="all">All</option>
-                            <option value="buttons">Buttons</option>
-                            <option value="screens">Screens</option>
-                            <option value="scales">Scales</option>
-                            <option value="resources">Resource</option>
-                            <option value="dials">Dials</option>
-                            <option value="utility">Utility</option>
-                            </select>
-                       </div>
-                    </div>
-                 </div>
+          
 
-                 <!-- Importable Modules List -->
-                 <div id="moduleContainer" class="moduleContainer">
-                 
-                      <ul>                        
+          </div>
+
+          <!-- AddModule Dialog -->
+          <div id="moduleList" style="display:none;">          
+            <a id="closeButton" class="closeButton button lightText large square red no-toggle" data-defaultClass="red"><i class="fa fa-times"></i></a>
+            <div id="addModule" class="addModule">            
+
+                   <div class="moduleHeader">
+
+                     <div class="filterWrapper">
+                         <h3><i class="fa fa-caret-square-o-down"></i>&nbsp; FILTER &nbsp; </H3> 
+                         <div class="moduleFilter">
+                              <select id="filterButton" class="filterButton" name="filterButton">
+                              <option value="all">All</option>
+                              <option value="buttons">Buttons</option>
+                              <option value="screens">Screens</option>
+                              <option value="scales">Scales</option>
+                              <option value="resources">Resource</option>
+                              <option value="dials">Dials</option>
+                              <option value="utility">Utility</option>
+                              </select>
+                         </div>
+                      </div>
+                   </div>
+
+                   <!-- Importable Modules List -->
+                   <div id="moduleContainer" class="moduleContainer">
+                   
+                        <ul>                        
+
+                          
+
+                            <li class="item data-type-screen" data-name="Connection Status" data-type="screen" data-link="modules/connectionStatus.min.js" style="background-position:0px -1554px;">
+                            <h4 class="title">
+                              Connection Status
+                              <span class="type fa fa-list">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              A screen showing current connection status and settings.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
+                   
+                          <li class="item data-type-utility" data-name="Spacer" data-type="none" data-link="modules/spacer.min.js" style="background-position:-222px 0px;">
+                            <h4 class="title">
+                              Spacer
+                              <span class="type fa fa-square">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              A blank module to add space around other modules on the grid.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
+
+                            <li class="item data-type-utility" data-name="Panel" data-type="none" data-link="modules/panel.min.js" style="background-position:-444px -1332px;">
+                            <h4 class="title">
+                              Panel
+                              <span class="type fa fa-square">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              A blank panel with screws to add space around other modules.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
+
+                          <li class="item data-type-button" data-name="Stage Button" data-type="screen" data-link="modules/stageButton.min.js" style="background-position:-222px -1554px;">
+                            <h4 class="title">
+                              Stage
+                              <span class="type fa fa-list">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              A big red button that launches the next stage.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
+
+                          <li class="item data-type-button" data-name="Abort" data-type="button" data-link="modules/abortButton.min.js" style="background-position:-444px 0px;">
+                            <h4 class="title">
+                              Abort
+                              <span class="type fa fa-caret-square-o-right">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              A pressable button that aborts the current mission.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
+
+                          <li class="item data-type-button" data-name="SAS" data-type="button" data-link="modules/sasButton.min.js" style="background-position:-666px 0px;">
+                            <h4 class="title">
+                              SAS
+                              <span class="type fa fa-caret-square-o-right">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              Toggleable button for SAS.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
+
+
+                          <li class="item data-type-button" data-name="RCS" data-type="button" data-link="modules/rcsButton.min.js"  style="background-position:0px -222px;">
+                            <h4 class="title">
+                              RCS
+                              <span class="type fa fa-caret-square-o-right">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              Toggleable button for RCS.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
+
+                          <li class="item data-type-button" data-name="Lights" data-type="button" data-link="modules/lightButton.min.js" style="background-position:-222px -222px;">
+                            <h4 class="title">
+                              Lights
+                              <span class="type fa fa-caret-square-o-right">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              Toggle button for ship lights.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
+
+                          <li class="item data-type-button" data-name="Landing Gear" data-type="button" data-link="modules/gearButton.min.js" style="background-position:-444px -222px;">
+                            <h4 class="title">
+                              Landing Gear
+                              <span class="type fa fa-caret-square-o-right">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              Toggle button for landing gear.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
+
+                          <li class="item data-type-button" data-name="Brakes" data-type="button" data-link="modules/brakesButton.min.js" style="background-position:-666px -222px;">
+                            <h4 class="title">
+                            Brakes
+                              <span class="type fa fa-caret-square-o-right">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              Pressable button for brakes.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
+
+                          <li class="item data-type-button" data-name="Action" data-type="button" data-link="modules/actionButton.min.js" style="background-position:0px -444px;">
+                            <h4 class="title">
+                              Action
+                              <span class="type fa fa-caret-square-o-right">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              Pressable action button.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
+
+                          <li class="item data-type-scale" data-name="Atmospheric Density" data-type="scale" data-link="modules/atmosphericDensity.min.js" style="background-position:-222px -444px;">
+                            <h4 class="title">
+                              Atmospheric Density
+                              <span class="type fa fa-arrows-h">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              Scale bar indicating air density outside ship.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
+
+                          <li class="item data-type-scale" data-name="Throttle" data-type="scale" data-link="modules/throttleScale.min.js" style="background-position:-444px -444px;">
+                            <h4 class="title">
+                              Throttle
+                              <span class="type fa fa-arrows-h">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              Scale bar showing current throttle percentage.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
+
+                          <li class="item data-type-screen" data-name="Time Warp" data-type="screen" data-link="modules/timeWarp.min.js" style="background-position:-666px -1332px;">
+                            <h4 class="title">
+                              Time Warp
+                              <span class="type fa fa-list">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              A screen indicating current time warp status.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
+
+                          <li class="item data-type-scale" data-name="Pitch" data-type="scale" data-link="modules/pitchScale.min.js" style="background-position:-666px -444px;">
+                            <h4 class="title">
+                              Pitch
+                              <span class="type fa fa-arrows-h">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              Bar indicating current pitch angle.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
+
+                          <li class="item data-type-scale" data-name="Roll" data-type="scale" data-link="modules/rollScale.min.js" style="background-position:0px -666px;">
+                            <h4 class="title">
+                              Roll
+                              <span class="type fa fa-arrows-h">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              Bar indicating current roll angle.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
+
+                          <li class="item data-type-scale" data-name="Heading Scale" data-type="scale" data-link="modules/headingScale.min.js" style="background-position:-222px -666px;">
+                            <h4 class="title">
+                              Heading Scale
+                              <span class="type fa fa-arrows-h">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              Scrolling bar indicating current ship heading in degrees.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
+
+                          <li class="item data-type-screen" data-name="Orbital Info" data-type="screen" data-link="modules/orbitalInformation.min.js" style="background-position:-444px -666px;">
+                            <h4 class="title">
+                              Orbital Info
+                              <span class="type fa fa-list">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              Apoapsis, periapsis, TTA/TTP, inclination, eccentricity and orbital Velocity.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
+
+                          <li class="item data-type-screen" data-name="Surface Info" data-type="screen" data-link="modules/surfaceInformation.min.js" style="background-position:-666px -666px;">
+                            <h4 class="title">
+                              Surface Info
+                              <span class="type fa fa-list">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              Latitude, longitude, pitch, roll, heading, surface velocity and throttle.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
+
+                          <li class="item data-type-screen" data-name="Resource Info" data-type="screen" data-link="modules/resourceInformation.min.js" style="background-position:0px -888px;">
+                            <h4 class="title">
+                              Resource Info
+                              <span class="type fa fa-list">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              Liquid fuel, oxidizer, electric charge &amp; monopropellant.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
+
+                          <li class="item data-type-screen" data-name="Altitude Display" data-type="screen" data-link="modules/altitudeScreen.min.js" style="background-position:-222px -888px;">
+                            <h4 class="title">
+                              Altitude Display
+                              <span class="type fa fa-list">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              Rotating display showing current radar altitude.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
+
+                          <li class="item data-type-screen" data-name="UTC Time" data-type="screen" data-link="modules/utcScreen.min.js" style="background-position:-444px -1554px;">
+                            <h4 class="title">
+                              UTC Time
+                              <span class="type fa fa-list">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              A screen showing the universal time clock.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
 
                         
+                          <li class="item data-type-screen" data-name="Mission Time" data-type="screen" data-link="modules/metScreen.min.js" style="background-position:-444px -888px;">
+                            <h4 class="title">
+                              Mission Time
+                              <span class="type fa fa-list">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              A digital clock indicating the current mission time.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
 
-                          <li class="item data-type-screen" data-name="Connection Status" data-type="screen" data-link="modules/connectionStatus.min.js" style="background-position:0px -1554px;">
-                          <h4 class="title">
-                            Connection Status
-                            <span class="type fa fa-list">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            A screen showing current connection status and settings.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
+                           <li class="item data-type-screen" data-name="Velocity Screen" data-type="screen" data-link="modules/velocityDisplay.min.js" style="background-position:-666px -888px;">
+                            <h4 class="title">
+                              Velocity Display
+                              <span class="type fa fa-list">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              A screen showing current orbital/surface velocity.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
+
                  
-                        <li class="item data-type-utility" data-name="Spacer" data-type="none" data-link="modules/spacer.min.js" style="background-position:-222px 0px;">
-                          <h4 class="title">
-                            Spacer
-                            <span class="type fa fa-square">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            A blank module to add space around other modules on the grid.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
-
-                          <li class="item data-type-utility" data-name="Panel" data-type="none" data-link="modules/panel.min.js" style="background-position:-444px -1332px;">
-                          <h4 class="title">
-                            Panel
-                            <span class="type fa fa-square">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            A blank panel with screws to add space around other modules.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
-
-                        <li class="item data-type-button" data-name="Stage Button" data-type="screen" data-link="modules/stageButton.min.js" style="background-position:-222px -1554px;">
-                          <h4 class="title">
-                            Stage
-                            <span class="type fa fa-list">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            A big red button that launches the next stage.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
-
-                        <li class="item data-type-button" data-name="Abort" data-type="button" data-link="modules/abortButton.min.js" style="background-position:-444px 0px;">
-                          <h4 class="title">
-                            Abort
-                            <span class="type fa fa-caret-square-o-right">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            A pressable button that aborts the current mission.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
-
-                        <li class="item data-type-button" data-name="SAS" data-type="button" data-link="modules/sasButton.min.js" style="background-position:-666px 0px;">
-                          <h4 class="title">
-                            SAS
-                            <span class="type fa fa-caret-square-o-right">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            Toggleable button for SAS.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
 
 
-                        <li class="item data-type-button" data-name="RCS" data-type="button" data-link="modules/rcsButton.min.js"  style="background-position:0px -222px;">
-                          <h4 class="title">
-                            RCS
-                            <span class="type fa fa-caret-square-o-right">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            Toggleable button for RCS.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
+                          <li class="item data-type-resource" data-name="Liquid Fuel" data-type="resource" data-link="modules/fuelResource.min.js" style="background-position:0px -1110px;">
+                            <h4 class="title">
+                              Liquid Fuel
+                              <span class="type fa fa-tasks">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              A scale bar showing overall liquid fuel.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
 
-                        <li class="item data-type-button" data-name="Lights" data-type="button" data-link="modules/lightButton.min.js" style="background-position:-222px -222px;">
-                          <h4 class="title">
-                            Lights
-                            <span class="type fa fa-caret-square-o-right">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            Toggle button for ship lights.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
+                          <li class="item data-type-resource" data-name="Oxidizer" data-type="resource" data-link="modules/oxidizerResource.min.js" style="background-position:-222px -1110px;">
+                            <h4 class="title">
+                              Oxidizer
+                              <span class="type fa fa-tasks">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              A scale bar showing overall oxidizer.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
 
-                        <li class="item data-type-button" data-name="Landing Gear" data-type="button" data-link="modules/gearButton.min.js" style="background-position:-444px -222px;">
-                          <h4 class="title">
-                            Landing Gear
-                            <span class="type fa fa-caret-square-o-right">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            Toggle button for landing gear.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
+                          <li class="item data-type-resource" data-name="Electric Charge" data-type="resource" data-link="modules/electricChargeResource.min.js" style="background-position:-444px -1110px;">
+                            <h4 class="title">
+                              Electric Charge
+                              <span class="type fa fa-tasks">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              A scale bar showing overall electric charge.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
 
-                        <li class="item data-type-button" data-name="Brakes" data-type="button" data-link="modules/brakesButton.min.js" style="background-position:-666px -222px;">
-                          <h4 class="title">
-                          Brakes
-                            <span class="type fa fa-caret-square-o-right">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            Pressable button for brakes.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
+                          <li class="item data-type-resource" data-name="Monopropellant" data-type="resource" data-link="modules/monoResource.min.js" style="background-position:-666px -1110px;">
+                            <h4 class="title">
+                              Monopropellant
+                              <span class="type fa fa-tasks">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              A scale bar showing overall monopropellant.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
 
-                        <li class="item data-type-button" data-name="Action" data-type="button" data-link="modules/actionButton.min.js" style="background-position:0px -444px;">
-                          <h4 class="title">
-                            Action
-                            <span class="type fa fa-caret-square-o-right">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            Pressable action button.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
+                          <li class="item data-type-resource" data-name="Custom" data-type="resource" data-link="modules/customResource.min.js" style="background-position:0px -1332px;">
+                            <h4 class="title">
+                              Custom
+                              <span class="type fa fa-tasks">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              A scale bar that can show any resource in game.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
 
-                        <li class="item data-type-scale" data-name="Atmospheric Density" data-type="scale" data-link="modules/atmosphericDensity.min.js" style="background-position:-222px -444px;">
-                          <h4 class="title">
-                            Atmospheric Density
-                            <span class="type fa fa-arrows-h">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            Scale bar indicating air density outside ship.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
+                          <li class="item data-type-dial" data-name="Vertical Speed" data-type="dial" data-link="modules/verticalspeedDial.min.js" style="background-position:-222px -1332px;">
+                            <h4 class="title">
+                              Vertical Speed
+                              <span class="type fa fa-clock-o">
+                              </span>
+                            </h4>
+                            <h5 class="desc">
+                              A small dial showing the current vertical velocity.
+                            </h5>
+                            <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
+                              <i class="fa fa-plus">
+                              </i>
+                            </a>
+                          </li>
 
-                        <li class="item data-type-scale" data-name="Throttle" data-type="scale" data-link="modules/throttleScale.min.js" style="background-position:-444px -444px;">
-                          <h4 class="title">
-                            Throttle
-                            <span class="type fa fa-arrows-h">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            Scale bar showing current throttle percentage.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
+                        </ul>
 
-                        <li class="item data-type-screen" data-name="Time Warp" data-type="screen" data-link="modules/timeWarp.min.js" style="background-position:-666px -1332px;">
-                          <h4 class="title">
-                            Time Warp
-                            <span class="type fa fa-list">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            A screen indicating current time warp status.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
+                   </div>
 
-                        <li class="item data-type-scale" data-name="Pitch" data-type="scale" data-link="modules/pitchScale.min.js" style="background-position:-666px -444px;">
-                          <h4 class="title">
-                            Pitch
-                            <span class="type fa fa-arrows-h">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            Bar indicating current pitch angle.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
+            </div>        
 
-                        <li class="item data-type-scale" data-name="Roll" data-type="scale" data-link="modules/rollScale.min.js" style="background-position:0px -666px;">
-                          <h4 class="title">
-                            Roll
-                            <span class="type fa fa-arrows-h">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            Bar indicating current roll angle.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
+          </div>     
 
-                        <li class="item data-type-scale" data-name="Heading Scale" data-type="scale" data-link="modules/headingScale.min.js" style="background-position:-222px -666px;">
-                          <h4 class="title">
-                            Heading Scale
-                            <span class="type fa fa-arrows-h">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            Scrolling bar indicating current ship heading in degrees.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
+          <!-- Main Container for Gridster -->
+          <div id="gridsterWrapper" class="gridsterWrapper gridster">
 
-                        <li class="item data-type-screen" data-name="Orbital Info" data-type="screen" data-link="modules/orbitalInformation.min.js" style="background-position:-444px -666px;">
-                          <h4 class="title">
-                            Orbital Info
-                            <span class="type fa fa-list">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            Apoapsis, periapsis, TTA/TTP, inclination, eccentricity and orbital Velocity.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
+              <ul id="gridster">
 
-                        <li class="item data-type-screen" data-name="Surface Info" data-type="screen" data-link="modules/surfaceInformation.min.js" style="background-position:-666px -666px;">
-                          <h4 class="title">
-                            Surface Info
-                            <span class="type fa fa-list">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            Latitude, longitude, pitch, roll, heading, surface velocity and throttle.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
+                <!-- Added Modules go here -->
 
-                        <li class="item data-type-screen" data-name="Resource Info" data-type="screen" data-link="modules/resourceInformation.min.js" style="background-position:0px -888px;">
-                          <h4 class="title">
-                            Resource Info
-                            <span class="type fa fa-list">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            Liquid fuel, oxidizer, electric charge &amp; monopropellant.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
+              </ul>               
 
-                        <li class="item data-type-screen" data-name="Altitude Display" data-type="screen" data-link="modules/altitudeScreen.min.js" style="background-position:-222px -888px;">
-                          <h4 class="title">
-                            Altitude Display
-                            <span class="type fa fa-list">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            Rotating display showing current radar altitude.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
+          </div>      
 
-                        <li class="item data-type-screen" data-name="UTC Time" data-type="screen" data-link="modules/utcScreen.min.js" style="background-position:-444px -1554px;">
-                          <h4 class="title">
-                            UTC Time
-                            <span class="type fa fa-list">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            A screen showing the universal time clock.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
-
-                      
-                        <li class="item data-type-screen" data-name="Mission Time" data-type="screen" data-link="modules/metScreen.min.js" style="background-position:-444px -888px;">
-                          <h4 class="title">
-                            Mission Time
-                            <span class="type fa fa-list">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            A digital clock indicating the current mission time.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
-
-                         <li class="item data-type-screen" data-name="Velocity Screen" data-type="screen" data-link="modules/velocityDisplay.min.js" style="background-position:-666px -888px;">
-                          <h4 class="title">
-                            Velocity Display
-                            <span class="type fa fa-list">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            A screen showing current orbital/surface velocity.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
-
-               
-
-
-                        <li class="item data-type-resource" data-name="Liquid Fuel" data-type="resource" data-link="modules/fuelResource.min.js" style="background-position:0px -1110px;">
-                          <h4 class="title">
-                            Liquid Fuel
-                            <span class="type fa fa-tasks">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            A scale bar showing overall liquid fuel.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
-
-                        <li class="item data-type-resource" data-name="Oxidizer" data-type="resource" data-link="modules/oxidizerResource.min.js" style="background-position:-222px -1110px;">
-                          <h4 class="title">
-                            Oxidizer
-                            <span class="type fa fa-tasks">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            A scale bar showing overall oxidizer.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
-
-                        <li class="item data-type-resource" data-name="Electric Charge" data-type="resource" data-link="modules/electricChargeResource.min.js" style="background-position:-444px -1110px;">
-                          <h4 class="title">
-                            Electric Charge
-                            <span class="type fa fa-tasks">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            A scale bar showing overall electric charge.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
-
-                        <li class="item data-type-resource" data-name="Monopropellant" data-type="resource" data-link="modules/monoResource.min.js" style="background-position:-666px -1110px;">
-                          <h4 class="title">
-                            Monopropellant
-                            <span class="type fa fa-tasks">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            A scale bar showing overall monopropellant.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
-
-                        <li class="item data-type-resource" data-name="Custom" data-type="resource" data-link="modules/customResource.min.js" style="background-position:0px -1332px;">
-                          <h4 class="title">
-                            Custom
-                            <span class="type fa fa-tasks">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            A scale bar that can show any resource in game.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
-
-                        <li class="item data-type-dial" data-name="Vertical Speed" data-type="dial" data-link="modules/verticalspeedDial.min.js" style="background-position:-222px -1332px;">
-                          <h4 class="title">
-                            Vertical Speed
-                            <span class="type fa fa-clock-o">
-                            </span>
-                          </h4>
-                          <h5 class="desc">
-                            A small dial showing the current vertical velocity.
-                          </h5>
-                          <a class="addButton button lightText large square green no-toggle" data-defaultclass="green">
-                            <i class="fa fa-plus">
-                            </i>
-                          </a>
-                        </li>
-
-                      </ul>
-
-                 </div>
-
-          </div>        
-
-        </div>     
-
-        <!-- Main Container for Gridster -->
-        <div id="gridsterWrapper" class="gridsterWrapper gridster">
-
-            <ul id="gridster">
-
-              <!-- Added Modules go here -->
-
-            </ul>               
-
-        </div>      
+        </div>
 
         <script src="js/vendor/jquery-2.1.0.min.js"></script>
         <script src="js/plugins.min.js"></script>

@@ -10,13 +10,12 @@ var isMobile = false;
 
 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
     isMobile = true;
-    //document.write('<script src="http://jsconsole.com/remote.js?A347700A-FD65-4F75-88B1-9E5E2AD4E7EB"></script>');    
-    $('body').addClass('isMobile');
+    document.body.className = document.body.className + ' isMobile';
 }
 
 $(document).ready(function() {
 
-    $('body').fadeIn('slow'); 
+    // $('body').fadeIn('slow'); 
 
     MKON.init();
 
@@ -253,7 +252,7 @@ var MKON = new Object();
 MKON = { 
 
     // Config
-    debug: true, // only if you like seeing console spam
+    debug: false, // only if you like seeing console spam
     controls: true, // set to false to disable remote control
     rate: 75, // set the starting recieve rate for data   
     cacheString: 'MKON', // change to a new string to start a new cache
