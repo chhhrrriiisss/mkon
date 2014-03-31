@@ -95,7 +95,7 @@ if (jQuery.when.all === undefined) {
             isopen    = false,
             keys      = { ENTER: 13, ESC: 27, SPACE: 32 },
             queue     = [],
-            $, btnCancel, btnOK, btnReset, btnResetBack, btnFocus, elCallee, elCover, elDialog, elLog, form, input, getTransitionEvent;
+            $, btnCancel, btnOK, btnBookmark, btnReset, btnResetBack, btnFocus, elCallee, elCover, elDialog, elLog, form, input, getTransitionEvent;
 
         /**
          * Markup pieces
@@ -106,7 +106,8 @@ if (jQuery.when.all === undefined) {
                 holder : "<nav class=\"alertify-buttons\">{{buttons}}</nav>",
                 submit : "<button type=\"submit\" class=\"button green\" id=\"alertify-ok\">{{ok}}</button>",
                 ok     : "<button class=\"button green\" id=\"alertify-ok\">{{ok}}</button>",
-                cancel : "<button class=\"button red\" id=\"alertify-cancel\">{{cancel}}</button>"
+                cancel : "<button class=\"button red\" id=\"alertify-cancel\">{{cancel}}</button>",
+                bookmark : "<button class=\"button yellow\" id=\"alertify-bookmark\">BOOKMARK</button>"
             },
             input   : "<div class=\"alertify-text-wrapper\"><input type=\"text\" class=\"alertify-text\" id=\"alertify-text\"></div>",
             message : "<p class=\"alertify-message\">{{message}}</p>",
@@ -202,13 +203,15 @@ if (jQuery.when.all === undefined) {
             addListeners : function (fn) {
                 var hasOK     = (typeof btnOK !== "undefined"),
                     hasCancel = (typeof btnCancel !== "undefined"),
+                    hasBookmark = (typeof btnBookmark !== "undefined"),
                     hasInput  = (typeof input !== "undefined"),
                     val       = "",
                     self      = this,
-                    ok, cancel, common, key, reset;
+                    ok, cancel, bookmark, common, key, reset;
 
                 // ok event handler
                 ok = function (event) {
+
                     if (typeof event.preventDefault !== "undefined") event.preventDefault();
                     common(event);
                     if (typeof input !== "undefined") val = input.value;
@@ -221,6 +224,17 @@ if (jQuery.when.all === undefined) {
                     return false;
                 };
 
+                // bookmark event handler
+                bookmark = function (event) {
+                          
+                    var url = window.location;
+                    var current = JSON.stringify( MKON.LAYOUT.currentLayout );
+                    var bookmarkUrl = 'http://' + url + '#' + current;
+                    console.log(bookmarkUrl);
+                    MKON.FNC.bookmark('MKON Layout', bookmarkUrl);
+                    return false;
+                };
+
                 // cancel event handler
                 cancel = function (event) {
                     if (typeof event.preventDefault !== "undefined") event.preventDefault();
@@ -229,13 +243,14 @@ if (jQuery.when.all === undefined) {
                     return false;
                 };
 
-                // common event handler (keyup, ok and cancel)
+                            // common event handler (keyup, ok and cancel)
                 common = function (event) {
                     self.hide();
                     self.unbind(document.body, "keyup", key);
                     self.unbind(btnReset, "focus", reset);
                     if (hasOK) self.unbind(btnOK, "click", ok);
                     if (hasCancel) self.unbind(btnCancel, "click", cancel);
+                    if (hasBookmark) self.unbind(btnBookmark, "click", bookmark);
                 };
 
                 // keyup handler
@@ -262,6 +277,7 @@ if (jQuery.when.all === undefined) {
                 if (hasOK) this.bind(btnOK, "click", ok);
                 // handle Cancel click
                 if (hasCancel) this.bind(btnCancel, "click", cancel);
+                if (hasBookmark) this.bind(btnBookmark, "click", bookmark);
                 // listen for keys, Cancel => ESC
                 this.bind(document.body, "keyup", key);
                 if (!this.transition.supported) {
@@ -356,7 +372,7 @@ if (jQuery.when.all === undefined) {
                     break;
                 case "prompt":
                     html = html.replace("{{buttons}}", this.appendButtons(dialogs.buttons.cancel, dialogs.buttons.submit));
-                    html = html.replace("{{ok}}", this.labels.ok).replace("{{cancel}}", this.labels.cancel);
+                    html = html.replace("{{ok}}", this.labels.ok).replace("{{cancel}}", this.labels.cancel);             
                     break;
                 case "alert":
                     html = html.replace("{{buttons}}", dialogs.buttons.ok);
@@ -657,6 +673,7 @@ if (jQuery.when.all === undefined) {
                 btnResetBack  = $("alertify-resetFocusBack");
                 btnOK     = $("alertify-ok")     || undefined;
                 btnCancel = $("alertify-cancel") || undefined;
+                btnBookmark = $("alertify-bookmark") || undefined;
                 btnFocus  = (_alertify.buttonFocus === "cancel") ? btnCancel : ((_alertify.buttonFocus === "none") ? $("alertify-noneFocus") : btnOK),
                 input     = $("alertify-text")   || undefined;
                 form      = $("alertify-form")   || undefined;

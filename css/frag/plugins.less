@@ -170,11 +170,7 @@
     opacity: 1;
 }
     .alertify-hidden {
-        -webkit-transform: translate(0,-150px);
-           -moz-transform: translate(0,-150px);
-            -ms-transform: translate(0,-150px);
-             -o-transform: translate(0,-150px);
-                transform: translate(0,-150px);
+        .transform(translate(0px, 150px));
         opacity: 0;
         display: none;
     }
@@ -183,11 +179,13 @@
         display: block;
         visibility: hidden;
     }
+
 .alertify-logs {
     position: fixed;
     z-index: 15;
     bottom: 10px;
-    right: 10px;
+    left:50%;
+    margin-left:-150px;
     width: 300px;
 
 }
@@ -196,21 +194,16 @@
 }
     .alertify-log {
         display: block;
-        margin-top: 10px;
-        position: relative;
-        right: -300px;
+        .transform(translate(0px,50px));        
         opacity: 0;
     }
     .alertify-log-show {
-        right: 0;
+        .transform(translate(0px, 0px));
         opacity: 1;
     }
     .alertify-log-hide {
-        -webkit-transform: translate(300px, 0);
-           -moz-transform: translate(300px, 0);
-            -ms-transform: translate(300px, 0);
-             -o-transform: translate(300px, 0);
-                transform: translate(300px, 0);
+
+        .transform(translate(0px, 50px));
         opacity: 0;
     }
     .alertify-dialog {
@@ -232,9 +225,7 @@
         .alertify-text {
             margin-bottom: 15px;
             width: 100%;
-            -webkit-box-sizing: border-box;
-               -moz-box-sizing: border-box;
-                    box-sizing: border-box;
+            .box-sizing(border-box);
             font-size: 100%;
         }
         .alertify-buttons {
@@ -257,10 +248,11 @@
 @media only screen and (max-width: 680px) {
     .alertify,
     .alertify-logs {
-        width: 90%;
-        -webkit-box-sizing: border-box;
-           -moz-box-sizing: border-box;
-                box-sizing: border-box;
+        width: 100%;
+        .box-sizing(border-box);
+        margin:0;
+        bottom:0px;
+        left:0px;
     }
     .alertify {
         left: 5%;
@@ -284,11 +276,9 @@
     -webkit-background-clip: padding;     /* Safari 4? Chrome 6? */
        -moz-background-clip: padding;     /* Firefox 3.6 */
             background-clip: padding-box; /* Firefox 4, Safari 5, Opera 10, IE 9 */
-
-    .displayStyle();  
-
     background: rgba(170,170,170,.85);
 
+    .displayStyle();
 
 }
 
@@ -326,13 +316,11 @@
 
         .alertify-buttons {
             padding: 14px 15px 15px;
-            
+
             border-top:0px;
 
             box-shadow: inset 0 1px 0 rgba(255,255,255,.2);
             text-align: right;
-
-
 
             .button {
  
@@ -374,53 +362,40 @@
         }
        
 
-.alertify-logs {
-        bottom:0px;
-    right:0px;
-    margin:5px;
-    padding:0;
-    width:19%;
+/* Custom CSS */
 
+.alertify-logs {
+    bottom:10px;
+    right:0px;
+    padding:0;
+    z-index:1 !important;
 }
+
 .alertify-log {
 
-
-    text-align:center;
-    
-    padding: 8px 14px;
-
-    .displayStyle();  
- font-size:1.2em;
- font-weight:100;
- .text-shadow(none);
- border-width:1px;
- .border-radius(3px);
-    i {
-/*        position:absolute;
-        left:5%;
-        top:50%;
-        margin-top:-9px;*/
-        padding-right:5px;
-    }
-
-    b {
-        .opacity(50);
-    }
-
-
-
+    margin-top:0px;
+    text-align:center;    
+    padding:5px;
+    font-weight:100;
+    .text-shadow(none);
+    border-width:1px;
+    font-family:@display-font; 
+    font-size:1.6em;
+    color:#666a72;
+    margin:0;
+    line-height:1em;
+    z-index:1 !important;
 
 }
-    .alertify-log-error {
-        color: #B94A48;
-        background: #F2DEDE;
-        border: 1px solid #EED3D7;
-    }
-    .alertify-log-success {
-        color: #468847;
-        background: #DFF0D8;
-        border: 1px solid #D6E9C6;
-    }
-
+.alertify-log-error {
+    color: #B94A48;
+    background: #F2DEDE;
+    border: 1px solid #EED3D7;
+}
+.alertify-log-success {
+    color: #468847;
+    background: #DFF0D8;
+    border: 1px solid #D6E9C6;
+}
 
 /* End Custom Alert Box CSS */

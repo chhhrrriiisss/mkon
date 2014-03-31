@@ -15,7 +15,7 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
 
 $(document).ready(function() {
 
-    // $('body').fadeIn('slow'); 
+
 
     MKON.init();
 
@@ -56,9 +56,10 @@ $(document).ready(function() {
             if (e) {
                 MKON.LAYOUT.closeOverlay();   
 
+                console.log(str);
                 // Check if a valid input
-                if (str != '' && typeof str !== 'undefined') {                     
-                    MKON.LAYOUT.generate(JSON.parse(str));  
+                if (str != '' && typeof str !== 'undefined' && str != '[]') {                     
+                    MKON.LAYOUT.generate(JSON.parse(str), true);  
                 }        
 
 
@@ -74,6 +75,8 @@ $(document).ready(function() {
 
         return false;
     });
+
+
 
     // Clear button
     $('#clearModules').fastClick(function() {
@@ -131,7 +134,8 @@ $(document).ready(function() {
         var button = $(this).parent();
         var moduleLink = button.data('link');
         var config = {'u':moduleLink};
-        MKON.allowSave = true;
+        MKON.allowSave = true;        
+
         MKON.CONTENT.getModule(moduleLink, config);
         return false;
 
@@ -343,8 +347,9 @@ MKON = {
                                     MKON.COMMS.unsubscribe(['a.version']);                             
 
                                 } else {
+                             
+                                    alertify.log("<i class='fa fa-exclamation-triangle'></i> &nbsp; VERSION MISMATCH", "", 1200);
 
-                                    alertify.error("Version mismatch");
                                     MKON.COMMS.unsubscribe(['a.version']);                               
                                 }
 
@@ -636,7 +641,7 @@ MKON = {
             // Check if url layout available (a # with json layout attached to url)
             if (urlLayout) {
                 this.prevLayout = JSON.parse(urlLayout);
-                this.generate(this.prevLayout);    
+                this.generate(this.prevLayout, false);    
                 if (MKON.debug) {  console.log('Found url layout.'); };            
             } else {
                 this.prevLayout = false;
@@ -658,7 +663,7 @@ MKON = {
                                
                     if (this.prevLayout != null) {
                         
-                        MKON.LAYOUT.generate( MKON.LAYOUT.prevLayout );  
+                        MKON.LAYOUT.generate( MKON.LAYOUT.prevLayout, false);  
 
                         if (MKON.debug) { console.log('Generating layout.'); };
                     }  
@@ -743,6 +748,7 @@ MKON = {
         remove: function(target) {
 
             this.gridster.remove_widget(target);
+            alertify.log("<i class='fa fa-check-circle'></i> &nbsp; REMOVED MODULE", "", 1200);
        
         },
 
@@ -796,6 +802,8 @@ MKON = {
             this.checkLogo();
             
             MKON.CONTENT.activeVariables = [];
+
+            alertify.log("<i class='fa fa-check-circle'></i> &nbsp; LAYOUT CLEARED", "", 1200);
         },
 
         // Converts the current layout into serial form for saving/exporting
@@ -813,11 +821,15 @@ MKON = {
         },
 
         // Generates a new layout using JSON input
-        generate: function(data) {
+        generate: function(data, clear) {
 
-            this.clear();            
+            if (clear) {
+                this.clear();            
+            }
+
             MKON.allowSave = false;
             var requests = [];
+            
 
             for (var item in data) {
 
@@ -843,10 +855,13 @@ MKON = {
             function success() {
                 MKON.allowSave = true;
                 MKON.LAYOUT.save();
-                MKON.LAYOUT.unlock();
+                MKON.LAYOUT.unlock();   
+
+                alertify.log("<i class='fa fa-check-circle'></i> &nbsp; GENERATION COMPLETE", "", 1200);
 
                 if (MKON.debug) {
                     console.log('Cache modules successfully retrieved.')
+
                 }
             }    
 
@@ -898,6 +913,8 @@ MKON = {
         },
 
         lock: function() {
+
+            alertify.log("<i class='fa fa-lock'></i> &nbsp; LAYOUT LOCKED", "", 1200);
 
             this.lockAnimation('lock');
             this.locked = true;
@@ -1279,6 +1296,24 @@ MKON = {
 
     // Miscellaneous Math & Utility Functions
     FNC: {
+
+        bookmark: function(title, url) {
+
+            if (window.sidebar) {// firefox
+                window.sidebar.addPanel(title, url, "");
+            }
+            else if(window.opera && window.print) { // opera
+                var elem = document.createElement('a');
+                elem.setAttribute('href',url);
+                elem.setAttribute('title',title);
+                elem.setAttribute('rel','sidebar');
+                elem.click();
+            } 
+            else if(document.all) {// ie
+                window.external.AddFavorite(url, title);
+            } 
+
+        },
 
         zeroPad: function(num, places) {
 

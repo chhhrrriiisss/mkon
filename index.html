@@ -24,7 +24,7 @@
             manifest = [
               'img/sprites@2x.png', 
               'img/logo@2x.png', 
-              'modules/th/thumbnails@2x.jpg',
+              'modules/th/thumbnails.jpg',
               'img/noise.png',
               'img/grid.png'
             ];
@@ -45,17 +45,23 @@
             var donePercent = Math.floor((100 / this.queue.length) * this.completed.length);
             console.log(donePercent + '% completed');
             var statusText = document.getElementById('statusText');
-            var text = donePercent + '%';
-            statusText.innerHTML = text;
+            statusText.innerHTML = donePercent + '%';
           },
           onComplete: function(loaded, errors){
-            console.log('Preloaded: ', loaded);
-            errors && errros.length && console.log('Failed to load: ', errors);
-            var wrapper = document.getElementById('wrapper'); 
-            wrapper.className = wrapper.className + ' loaded';
+            console.log('Preloaded: ', loaded);            
 
-            var status = document.getElementById('status');
-            status.className = 'hide';
+            if (errors) {
+                errors && errors.length && console.log('Failed to load: ', errors);               
+                var statusText = document.getElementById('statusText');
+                statusText.innerHTML = 'ERROR';
+            }
+            else { // Continue to load
+                var wrapper = document.getElementById('wrapper'); 
+                wrapper.className = wrapper.className + ' loaded';
+                var status = document.getElementById('status');
+                status.className = 'hide';
+            }
+            
           }
         });
 
@@ -628,7 +634,7 @@
         </div>
 
         <script src="js/vendor/jquery-2.1.0.min.js"></script>
-        <script src="js/plugins.min.js"></script>
+        <script src="js/src/plugins.js"></script>
         <script src="js/src/main.js"></script>
 
     </body>
