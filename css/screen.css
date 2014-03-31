@@ -1264,6 +1264,20 @@ header:focus .hitbox {
   margin-top: 65px;
   height: 100%;
   overflow-y: hidden !important;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  -moz-perspective: 1000;
+  -ms-perspective: 1000;
+  perspective: 1000;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  /* Other transform properties here */
 }
 #moduleList .addModule ul li.item {
   width: 15.966666666666669%;
@@ -1296,24 +1310,26 @@ header:focus .hitbox {
   vertical-align: top;
   font-size: 16px;
   font-size: 1rem;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  /* Required to make elements draggable in old WebKit */
-  -khtml-user-drag: element;
-  -webkit-user-drag: element;
   cursor: default;
-  background-image: url('../modules/th/thumbnails.jpg');
+  background: url('../modules/th/thumbnails.jpg');
+  background-position: 0px 0px;
   background-repeat: no-repeat;
-}
-@media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-resolution: 1.5dppx) {
-  #moduleList .addModule ul li.item {
-    background-image: url("../modules/th/thumbnails@2x.jpg");
-    background-size: 888px 1554px;
-  }
+  background-width: 888px;
+  background-height: 1776px;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  -moz-perspective: 1000;
+  -ms-perspective: 1000;
+  perspective: 1000;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  /* Other transform properties here */
 }
 #moduleList .addModule ul li.item:hover,
 #moduleList .addModule ul li.item:focus {
@@ -4769,16 +4785,6 @@ header:focus .hitbox {
   .n {
     background-image: url("../img/numbers@2x.png");
     background-size: 88px 714px;
-  }
-}
-.t {
-  background-image: url('../modules/th/thumbnails.jpg');
-  background-repeat: no-repeat;
-}
-@media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-resolution: 1.5dppx) {
-  .t {
-    background-image: url("../modules/th/thumbnails@2x.jpg");
-    background-size: 888px 1554px;
   }
 }
 /* Striped Gradients */
