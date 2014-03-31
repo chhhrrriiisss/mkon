@@ -15,10 +15,7 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
 
 $(document).ready(function() {
 
-
-
     MKON.init();
-
     alertify.set({ buttonReverse: true });
 
     // Add Modules Open Button
