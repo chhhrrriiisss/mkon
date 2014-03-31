@@ -15,8 +15,9 @@ MKON is a completely modular control panel UI for [Telemachus](http://forum.kerb
 ## Installation
 
 - You need to download and install the latest release of [Telemachus](https://github.com/richardbunt/Telemachus/releases)
+- Download the latest version of [MKON](https://github.com/chrisnic/mkon/releases)
 - Go to your KSP Folder/Game Data/Telemachus/Plugins/PluginData/Telemachus folder and delete or move the existing contents to another folder.
-- Copy the contents of the MkON zip file into the above folder.
+- Copy the contents of the MkON zip into the above folder.
 - Load up KSP and open Telemachus as you would normally - follow the [Telemachus user guide](https://github.com/richardbunt/Telemachus/wiki/User-Guide).
 
 ## How to use
