@@ -1,6 +1,6 @@
 ![MkON](/logo.png "MkON")
 
-MKON is a completely modular control panel UI for [Telemachus](http://forum.kerbalspaceprogram.com/threads/24594-0-23-Telemachus-%E2%80%93-Telemetry-and-Flight-Control-in-the-Web-Browser-(2014-1-11)) (see below) and Kerbal Space Program.  The UI is designed to work on tablets and second monitors as an auxiliary display and is styled in the KSP aesthetic. It also allows a degree of control using pressable buttons, dials, meters and lots of data for number junkies.
+MkON is a completely modular control panel UI for [Telemachus](http://forum.kerbalspaceprogram.com/threads/24594-0-23-Telemachus-%E2%80%93-Telemetry-and-Flight-Control-in-the-Web-Browser-(2014-1-11)) (see below) and Kerbal Space Program.  The UI is designed to work on tablets and second monitors as an auxiliary display and is styled in the KSP aesthetic. It also allows a degree of control using pressable buttons, dials, meters and lots of data for number junkies.
 
 * [Telemachus](http://forum.kerbalspaceprogram.com/threads/24594-0-23-Telemachus-%E2%80%93-Telemetry-and-Flight-Control-in-the-Web-Browser-(2014-1-11)) is a plugin by [Richard Bunt](https://github.com/richardbunt) for Kerbal Space Program that allows real-time in game telemetry to be viewed in the browser. It's pretty awesome, actually.
 
@@ -16,7 +16,7 @@ MKON is a completely modular control panel UI for [Telemachus](http://forum.kerb
 
 - You need to download and install the latest release of [Telemachus](https://github.com/richardbunt/Telemachus/releases)
 - Download the latest version of [MKON](https://github.com/chrisnic/mkon/releases)
-- Go to your KSP Folder/Game Data/Telemachus/Plugins/PluginData/Telemachus folder and delete or move the existing contents to another folder.
+- Go to your KSP Folder/Game Data/Telemachus/Plugins/PluginData/Telemachus folder and delete or move the existing contents to a backup folder.
 - Copy the contents of the MkON zip into the above folder.
 - Load up KSP and open Telemachus as you would normally - follow the [Telemachus user guide](https://github.com/richardbunt/Telemachus/wiki/User-Guide).
 
