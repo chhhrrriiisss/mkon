@@ -32,7 +32,7 @@ function init(config) {
 		t.find('.data-tta').html(tta);
 		t.find('.data-ttp').html(ttp);
 		t.find('.data-inc').html(inc + '&deg;');
-		t.find('.data-ecc').html(ecc + '&deg;');
+		t.find('.data-ecc').html(ecc);
 		t.find('.data-vel').html(vel);			
 	}
 	);
@@ -47,7 +47,7 @@ function init(config) {
                     <div class="item"> <h4>PERIAPSIS</h4> <span class="data data-per">0m</span> </div>\
                     <div class="item"> <h4>TIME TO PERIAPSIS</span></h4> <span class="data data-ttp">0s</span> </div>\
                     <div class="item"> <h4>INCLINATION</h4> <span class="data data-inc">0.25deg</span> </div>\
-                    <div class="item"> <h4>ECCENTRICITY</span></h4> <span class="data data-ecc">0.25deg</span> </div>\
+                    <div class="item"> <h4>ECCENTRICITY</span></h4> <span class="data data-ecc">0.25</span> </div>\
                     <div class="item"> <h4>ORBITAL VELOCITY</span></h4> <span class="data data-vel">1200m/s</span></div>\
                     <h3>ORBITAL</h3>\
                 	</div>\
