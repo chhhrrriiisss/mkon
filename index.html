@@ -8,9 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Telemachus / MkON</title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1">      
-
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->        
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1">           
 
         <link rel="Shortcut Icon" href="favicon.ico" type="image/x-icon" />
         <link rel="stylesheet" href="css/screen.css"> 
@@ -41,7 +39,6 @@
         new preLoader(manifest, {
 
           onProgress: function(src, element, index){
-            // output some stats
             var donePercent = Math.floor((100 / this.queue.length) * this.completed.length);
             console.log(donePercent + '% completed');
             var statusText = document.getElementById('statusText');
@@ -55,7 +52,7 @@
                 var statusText = document.getElementById('statusText');
                 statusText.innerHTML = 'ERROR';
             }
-            else { // Continue to load
+            else { 
                 var wrapper = document.getElementById('wrapper'); 
                 wrapper.className = wrapper.className + ' loaded';
                 var status = document.getElementById('status');

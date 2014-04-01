@@ -22,9 +22,9 @@ MkON is a completely modular control panel UI for [Telemachus](http://forum.kerb
 
 ## How to use
 
-To be added.
+Please see the [wiki](https://github.com/chrisnic/mkon/wiki).
 
-## Coming Soon...
+## Coming Soon
 
 - Working 3D Navball, with touch support.
 - Draggable throttle control.
