@@ -253,7 +253,7 @@ var MKON = new Object();
 MKON = { 
 
     // Config
-    debug: false, // only if you like seeing console spam
+    debug: true, // only if you like seeing console spam
     controls: true, // set to false to disable remote control
     rate: 75, // set the starting recieve rate for data   
     cacheString: 'MKON', // change to a new string to start a new cache
@@ -1054,7 +1054,7 @@ MKON = {
         // Loops through received data and determines what has changed
         filterData: function(data) {
 
-            this.newData = $.parseJSON(data);
+            this.newData = $.parseJSON(data.replace(/:nan,/g,':0,'));
 
             this.rawData = this.newData;
 
@@ -1067,7 +1067,7 @@ MKON = {
         // Loops through active modules and triggers handleData events for each
         handleData: function() {
 
-            if (MKON.COMMS.active && MKON.LAYOUT.locked && this.activeModules.length > 0) {
+            if (MKON.COMMS.active && this.activeModules.length > 0) {
             
                 for(var item in this.activeModules) {
                     if (typeof this.activeModules[item] !== 'undefined') {                               
