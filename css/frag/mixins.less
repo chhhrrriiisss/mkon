@@ -303,6 +303,15 @@
         user-select: none;
 }
 
+.no-select() {
+         -webkit-touch-callout: none;
+        -webkit-user-select:;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select:;
+}
+
 .stemGradient() {
 background: -moz-linear-gradient(top, rgba(79,82,89,1) 0%, rgba(121,127,137,1) 78%, rgba(133,140,150,0.66) 100%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(79,82,89,1)), color-stop(78%,rgba(121,127,137,1)), color-stop(100%,rgba(133,140,150,0.66))); /* Chrome,Safari4+ */
@@ -369,8 +378,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#66ffffff', e
 }
 
 .displayStyle() {
-
-   .no-select();
+   
     font-family:@display-font;
     border-radius: 5px;
     background: rgba(255,255,255, .35);
