@@ -91,7 +91,7 @@ function init(config) {
 		var body = MKON.CONTENT.getVariable(req[4]);
 		
 		var bodyradius = getVBodyRadius(body);
-		var bodyradiuswithatmo = bodyradius + (2*getVBodyAtmo(body));
+		var bodyradiuswithatmo = bodyradius + getVBodyAtmo(body);
 
 		var ratio = (2*maxradius / (per + apo + (2*bodyradius))); //do not round this 
 		var shipangle = -(trueano/190)* Math.PI; //in radians
