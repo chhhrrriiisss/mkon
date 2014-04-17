@@ -53,7 +53,7 @@ function init(config) {
          
 	// content for insertion to gridster
 	var content =   '<li id="' + id + '" data-row="1" data-col="1" data-link="' + url + '" data-sizex="1" data-sizey="1">\
-					<div class="options"><div class="remove"><i class="fa fa-times"></i></div></div>\
+					<div class="options"><div class="remove"><i class="fa fa-close"></i></div></div>\
 					<div class="content"><div class="roll control-bar"><h3>ROLL</H3><div class="control s"><div class="marker s data-roll"></div></div></div></div></li>';
 
 	content = { html: content, x:2, y:1, col: col, row: row };

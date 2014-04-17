@@ -89,12 +89,11 @@
 
                   <ul id="menu" class="clearfix">
                       
-                      <li id="openList" class="link openList"><a class="lightText"><i class="fa fa-plus-square"></i> &nbsp; ADD MODULES</a></li>
-                      <li id="lockUnlock" data-state="unlocked" class="link lockUnlock"><a class="lightText"><i id="lockUnlockBtnIcon" class="fa fa-unlock fa-lg"></i></a></li>
-                      <li id="exportModules" class="link exportOverlay"><a class="lightText"><i class="fa fa-long-arrow-down"></i><i class="fa fa-long-arrow-up"></i> &nbsp; IMPORT / EXPORT</a></li>
-                      <li id="clearModules" class="link clearOverlay"><a class="lightText"><i class="fa fa-times-circle"></i>&nbsp; CLEAR</a></li>
-                      <li id="settingsButton" class="link" style="display:none !important;"><a class="lightText"><i class="fa fa-cogs"></i>&nbsp; SETTINGS</a></li>
-                      <li id="mobileMenu" class="link mobile"><a class="lightText"><i class="fa fa-bars openMobile"></i><i class="fa fa-angle-double-up fa-lg closeMobile"></i></a></li>
+                      <li id="openList" class="link openList"><a class="lightText"><i class="fa-add"></i> &nbsp; ADD MODULES</a></li>
+                      <li id="lockUnlock" data-state="unlocked" class="link lockUnlock"><a class="lightText"><i id="lockUnlockBtnIcon" class="fa-unlock fa-lg"></i></a></li>
+                      <li id="exportModules" class="link exportOverlay"><a class="lightText"><i class="fa-import-export"></i> &nbsp; IMPORT / EXPORT</a></li>
+                      <li id="clearModules" class="link clearOverlay"><a class="lightText"><i class="fa-clear"></i>&nbsp; CLEAR</a></li>                      
+                      <li id="mobileMenu" class="link mobile"><a class="lightText"><i class="fa-menu openMobile"></i><i class="fa-angle-double-up fa-lg closeMobile"></i></a></li>
 
                   </ul>
                   
@@ -126,13 +125,13 @@
 
           <!-- AddModule Dialog -->
           <div id="moduleList" style="display:none;">          
-            <a id="closeButton" class="closeButton button lightText large square red no-toggle" data-defaultClass="red"><i class="fa fa-times"></i></a>
+            <a id="closeButton" class="closeButton button lightText large square red no-toggle" data-defaultClass="red"><i class="fa fa-close"></i></a>
             <div id="addModule" class="addModule">            
 
                    <div class="moduleHeader">
 
                      <div class="filterWrapper">
-                         <h3><i class="fa fa-caret-square-o-down"></i>&nbsp; FILTER &nbsp; </H3> 
+                         <h3><i class="fa fa-filter"></i>&nbsp; FILTER &nbsp; </H3> 
                          <div class="moduleFilter">
                               <select id="filterButton" class="filterButton" name="filterButton">
                               <option value="all">All</option>
@@ -646,7 +645,7 @@
 
         <script src="js/vendor/jquery-2.1.0.min.js"></script>
         <script src="js/plugins.min.js"></script>
-        <script src="js/main.min.js"></script>
+        <script src="js/src/main.js"></script>
 
     </body>
 </html>

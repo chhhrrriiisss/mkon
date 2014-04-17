@@ -64,7 +64,7 @@ function init(config) {
 
 	// content for insertion to gridster
 	var content =   '<li id="' + id + '" data-row="1" data-col="1" data-link="' + url + '" data-sizex="1" data-sizey="1">\
-					<div class="options"><div class="remove"><i class="fa fa-times"></i></div></div>\
+					<div class="options"><div class="remove"><i class="fa fa-close"></i></div></div>\
 					<div class="content"><div class="connection screen data-connection"><div class="radio"></div><div class="indicator green data-indicator"><span class="inner"><span class="highlight"></span></span></div><h3 class="data-status">NO SIGNAL</h3></div></li>';
 
 	content = { html: content, x: 2, y: 2, col: col, row: row };

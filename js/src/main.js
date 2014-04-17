@@ -17,7 +17,7 @@ $(document).ready(function() {
 
     MKON.init();
     alertify.set({ buttonReverse: true });
-    FastClick.attach(document.body);
+    
 
     // Add Modules Open Button
     $('#openList').fastClick(function() {
@@ -50,7 +50,7 @@ $(document).ready(function() {
             cancel : "CANCEL"
         } });
 
-        alertify.prompt("<i class=\"fa fa-long-arrow-down\"></i><i class=\"fa fa-long-arrow-up\"></i> &nbsp; IMPORT / EXPORT", function (e,str) {
+        alertify.prompt("<i class=\"fa fa-import-export\"></i> &nbsp; IMPORT / EXPORT", function (e,str) {
             if (e) {
                 MKON.LAYOUT.closeOverlay();   
 
@@ -86,7 +86,7 @@ $(document).ready(function() {
             // confirm dialog
             MKON.LAYOUT.openOverlay();
 
-            alertify.confirm("<i class=\"fa-times-circle fa\"></i> &nbsp; Clear ALL modules?", function (e) {
+            alertify.confirm("<i class=\"fa-clear fa\"></i> &nbsp; Clear ALL modules?", function (e) {
 
                 if (e) {
                     MKON.LAYOUT.clear();
@@ -346,7 +346,7 @@ MKON = {
 
                                 } else {
                              
-                                    alertify.log("<i class='fa fa-exclamation-triangle'></i> &nbsp; VERSION MISMATCH", "", 1200);
+                                    alertify.log("<i class='fa fa-warning'></i> &nbsp; VERSION MISMATCH", "", 1200);
 
                                     MKON.COMMS.unsubscribe(['a.version']);                               
                                 }
@@ -746,7 +746,7 @@ MKON = {
         remove: function(target) {
 
             this.gridster.remove_widget(target);
-            alertify.log("<i class='fa fa-check-circle'></i> &nbsp; REMOVED MODULE", "", 1200);
+            alertify.log("<i class='fa fa-check'></i> &nbsp; REMOVED MODULE", "", 1200);
        
         },
 
@@ -801,7 +801,7 @@ MKON = {
             
             MKON.CONTENT.activeVariables = [];
 
-            alertify.log("<i class='fa fa-check-circle'></i> &nbsp; LAYOUT CLEARED", "", 1200);
+            alertify.log("<i class='fa fa-check'></i> &nbsp; LAYOUT CLEARED", "", 1200);
         },
 
         // Converts the current layout into serial form for saving/exporting
@@ -855,7 +855,7 @@ MKON = {
                 MKON.LAYOUT.save();
                 MKON.LAYOUT.unlock();   
 
-                alertify.log("<i class='fa fa-check-circle'></i> &nbsp; GENERATION COMPLETE", "", 1200);
+                alertify.log("<i class='fa fa-check'></i> &nbsp; GENERATION COMPLETE", "", 1200);
 
                 if (MKON.debug) {
                     console.log('Cache modules successfully retrieved.')

@@ -39,7 +39,7 @@ function init(config) {
 
 	// content for insertion to gridster
 	var content =  '<li id="' + id + '" data-row="1" data-col="1" data-link="' + url + '" data-sizex="3" data-sizey="1">\
-					<div class="options"><div class="remove"><i class="fa fa-times"></i></div></div>\
+					<div class="options"><div class="remove"><i class="fa fa-close"></i></div></div>\
 					<div class="content">\
 					<div class="surface screen">\
 					<div class="item"> <h4>LATITUDE</h4> <span class="data data-lat">0</span> </div>\

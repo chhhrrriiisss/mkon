@@ -42,9 +42,15 @@ function init(config) {
 		function drawShip(ctx, x0, y0, a, exc, angle) {
 			x0 += a * exc;
 			var r = a * (1 - exc*exc)/(1 + exc * Math.cos(angle));
-			var x = -10 + x0 + r * Math.cos(angle); //center icon on the line
-			var y = -10 + y0 + r * Math.sin(angle); //center icon on the line
-			ctx.drawImage(minimapicons,0,0,20,20,x,y,20,20);
+			var x = x0 + r * Math.cos(angle); //center icon on the line
+			var y = y0 + r * Math.sin(angle); //center icon on the line
+			
+			// No need for a bitmap! Go vectors!
+			ctx.save();
+			ctx.translate(x, y);
+			var grd=ctx.createLinearGradient(-6,-1,7,-1);grd.addColorStop(0,"rgba(59,176,42,1)");grd.addColorStop(.2795698928833008,"rgba(175,250,61,1)");grd.addColorStop(.6881719970703125,"rgba(175,250,61,1)");grd.addColorStop(1,"rgba(59,176,42,1)");ctx.fillStyle=grd;ctx.beginPath();ctx.moveTo(-5,0);ctx.lineTo(-1,-6);ctx.lineTo(-1,-9);ctx.lineTo(2,-9);ctx.lineTo(2,-6);ctx.lineTo(6,0);ctx.bezierCurveTo(6,0,8,2,6,4);ctx.lineTo(5,5);ctx.lineTo(-4,5);ctx.bezierCurveTo(-4,5,-5,4,-5,3);ctx.bezierCurveTo(-5,3,-6,1,-5,0);ctx.fill();ctx.fillStyle="rgb(153,153,153)";ctx.beginPath();ctx.moveTo(1,0);ctx.bezierCurveTo(1,0,1,1,0,1);ctx.lineTo(-1,0);ctx.bezierCurveTo(-1,-2,0,-3,0,-3);ctx.bezierCurveTo(1,-3,1,-2,1,0);ctx.fill();ctx.fillStyle="rgb(188,210,187)";ctx.beginPath();ctx.moveTo(1,0);ctx.lineTo(0,0);ctx.lineTo(0,0);ctx.bezierCurveTo(0,-1,0,-1,0,-1);ctx.bezierCurveTo(0,-1,1,-1,1,0);ctx.fill();ctx.fillStyle="rgb(105,202,44)";ctx.fillRect(-1,-6,4,0);ctx.fill()
+			ctx.restore();
+
 		}
 		
 		//draw ap and pe icons
@@ -145,7 +151,7 @@ function init(config) {
 	// I load image there to avoid multiple loadings...
 	var content =  '<li id="' + id + '" data-row="1" data-col="1" data-link="' + url + '" data-sizex="4" data-sizey="4">\
 						<div class="options">\
-							<div class="remove"><i class="fa fa-times"></i>\
+							<div class="remove"><i class="fa fa-close"></i>\
 							</div>\
 						</div>\
 						<div class="content">\

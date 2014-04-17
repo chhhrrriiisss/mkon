@@ -114,7 +114,7 @@ function init(config) {
 
 	// content for insertion to gridster
 	var content =   '<li id="' + id + '" data-row="1" data-col="1" data-link="' + url + '" data-sizex="1" data-sizey="1">\
-					<div class="options"><div class="remove"><i class="fa fa-times"></i></div></div>\
+					<div class="options"><div class="remove"><i class="fa fa-close"></i></div></div>\
 					<div class="content blank"><div class="content blank"><div class="screen"><div class="altitude data-alt">\
 					<span class="slot0 number n" data-last=""></span>\
                         <span class="slot1 number n" data-last=""></span>\

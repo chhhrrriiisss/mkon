@@ -26,7 +26,7 @@ function init(config) {
 
 	// content for insertion to gridster
 	var content =   '<li id="' + id + '" data-row="1" data-col="1" data-link="' + url + '" data-sizex="1" data-sizey="1">\
-					<div class="options"><div class="remove"><i class="fa fa-times"></i></div></div>\
+					<div class="options"><div class="remove"><i class="fa fa-close"></i></div></div>\
 					<div class="content"><div class="met screen"><h3>MET</H3><h3 class="data-time">T+00:00:00</h3></div></li>';
 
 	content = { html: content, x: 3, y: 1, col: col, row: row };
