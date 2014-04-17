@@ -17,6 +17,7 @@ $(document).ready(function() {
 
     MKON.init();
     alertify.set({ buttonReverse: true });
+    FastClick.attach(document.body);
 
     // Add Modules Open Button
     $('#openList').fastClick(function() {

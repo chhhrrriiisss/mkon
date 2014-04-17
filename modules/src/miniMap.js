@@ -1,3 +1,4 @@
+
 function init(config) {  
 
 	var url = config.u;
@@ -48,14 +49,27 @@ function init(config) {
 		
 		//draw ap and pe icons
 		function drawApAndPe(ctx,a) {
+
 			//Pe
 			x = a; //center icon
-			y = -10; //center icon
-			ctx.drawImage(minimapicons,0,40,20,20,x,y,20,20);
+			y = 0; //center icon
+
+			// No need for a bitmap! Go vectors!
+			ctx.save();
+			ctx.translate(x, y);
+			var grd=ctx.createLinearGradient(13,8,13,-11);grd.addColorStop(0,"rgba(113,162,40,1)");grd.addColorStop(.10752686500549316,"rgba(175,250,61,1)");grd.addColorStop(.9032257080078125,"rgba(175,250,61,1)");grd.addColorStop(1,"rgba(113,162,40,1)");ctx.fillStyle=grd;ctx.beginPath();ctx.moveTo(27,-10);ctx.lineTo(11,-10);ctx.lineTo(0,0);ctx.lineTo(11,9);ctx.lineTo(27,9);ctx.lineTo(27,-10);ctx.fill();ctx.fillStyle="rgb(0,0,0)";ctx.beginPath();ctx.moveTo(17,-3);ctx.lineTo(17,-1);ctx.bezierCurveTo(17,0,17,0,15,0);ctx.lineTo(14,0);ctx.lineTo(14,4);ctx.lineTo(12,4);ctx.lineTo(12,-5);ctx.lineTo(15,-5);ctx.bezierCurveTo(17,-5,17,-4,17,-3);ctx.fill();var grd=ctx.createLinearGradient(14,-2,15,-2);grd.addColorStop(0,"rgba(113,162,40,1)");grd.addColorStop(.10752686500549316,"rgba(175,250,61,1)");grd.addColorStop(.9032257080078125,"rgba(175,250,61,1)");grd.addColorStop(1,"rgba(113,162,40,1)");ctx.fillStyle=grd;ctx.beginPath();ctx.moveTo(14,-4);ctx.lineTo(14,0);ctx.lineTo(15,0);ctx.bezierCurveTo(15,0,16,0,16,-1);ctx.lineTo(16,-3);ctx.bezierCurveTo(16,-4,15,-4,15,-4);ctx.lineTo(14,-4);ctx.fill();ctx.fillStyle="rgb(0,0,0)";ctx.beginPath();ctx.moveTo(20,-1);ctx.lineTo(22,-1);ctx.lineTo(22,0);ctx.lineTo(20,0);ctx.lineTo(20,3);ctx.lineTo(23,3);ctx.lineTo(23,4);ctx.lineTo(18,4);ctx.lineTo(18,-5);ctx.lineTo(23,-5);ctx.lineTo(23,-4);ctx.lineTo(20,-4);ctx.lineTo(20,-1);ctx.fill()
+			ctx.restore();
+
 			//Ap
-			x = -20 - a; //center icon
-			y = -10; //center icon
-			ctx.drawImage(minimapicons,0,20,20,20,x,y,20,20);
+			x = -a; //center icon
+			y = 0; //center icon
+
+			// No need for a bitmap! Go vectors!
+			ctx.save();
+			ctx.translate(x, y);
+			var grd=ctx.createLinearGradient(-13,9,-12,-10);grd.addColorStop(0,"rgba(113,162,40,1)");grd.addColorStop(.10752686500549316,"rgba(175,250,61,1)");grd.addColorStop(.9032257080078125,"rgba(175,250,61,1)");grd.addColorStop(1,"rgba(113,162,40,1)");ctx.fillStyle=grd;ctx.beginPath();ctx.moveTo(-27,-10);ctx.lineTo(-11,-10);ctx.lineTo(0,0);ctx.lineTo(-11,9);ctx.lineTo(-27,9);ctx.lineTo(-27,-10);ctx.fill();ctx.fillStyle="rgb(0,0,0)";ctx.beginPath();ctx.moveTo(-17,4);ctx.lineTo(-19,4);ctx.lineTo(-19,2);ctx.lineTo(-21,2);ctx.lineTo(-22,4);ctx.lineTo(-23,4);ctx.lineTo(-21,-5);ctx.lineTo(-19,-5);ctx.lineTo(-17,4);ctx.fill();var grd=ctx.createLinearGradient(-21,-1,-19,-1);grd.addColorStop(0,"rgba(113,162,40,1)");grd.addColorStop(.10752686500549316,"rgba(175,250,61,1)");grd.addColorStop(.9032257080078125,"rgba(175,250,61,1)");grd.addColorStop(1,"rgba(113,162,40,1)");ctx.fillStyle=grd;ctx.beginPath();ctx.moveTo(-21,1);ctx.lineTo(-19,1);ctx.lineTo(-20,-3);ctx.lineTo(-21,1);ctx.fill();ctx.fillStyle="rgb(0,0,0)";ctx.beginPath();ctx.moveTo(-12,-3);ctx.lineTo(-12,-1);ctx.bezierCurveTo(-12,0,-13,0,-14,0);ctx.lineTo(-15,0);ctx.lineTo(-15,4);ctx.lineTo(-17,4);ctx.lineTo(-17,-5);ctx.lineTo(-14,-5);ctx.bezierCurveTo(-13,-5,-12,-4,-12,-3);ctx.fill();var grd=ctx.createLinearGradient(-15,-2,-13,-2);grd.addColorStop(0,"rgba(113,162,40,1)");grd.addColorStop(.10752686500549316,"rgba(175,250,61,1)");grd.addColorStop(.9032257080078125,"rgba(175,250,61,1)");grd.addColorStop(1,"rgba(113,162,40,1)");ctx.fillStyle=grd;ctx.beginPath();ctx.moveTo(-15,-4);ctx.lineTo(-15,0);ctx.lineTo(-14,0);ctx.bezierCurveTo(-14,0,-13,0,-13,-1);ctx.lineTo(-13,-3);ctx.lineTo(-14,-4);ctx.lineTo(-15,-4);ctx.fill();
+			ctx.restore();
+
 		}
 		
 		// I could use telemachus to get them but... 
@@ -79,7 +93,7 @@ function init(config) {
 			return 0;
 		}
 		var t = $('#'+this.id);
-		var maxradius=180; //this is the max radius of the drawn orbit.
+		var maxradius=170; //this is the max radius of the drawn orbit.
 	
 		var Plane = document.getElementById("canvas"+this.id);
 		var Context = Plane.getContext('2d');
@@ -88,7 +102,7 @@ function init(config) {
 		var per = MKON.CONTENT.getVariable(req[1]);
 		var trueano = MKON.CONTENT.getVariable(req[2]);
 		var ecc = MKON.CONTENT.getVariable(req[3]);
-		var body = MKON.CONTENT.getVariable(req[4]);
+		var body = MKON.CONTENT.getVariable(req[4]) || 'NOTHING';
 		
 		var bodyradius = getVBodyRadius(body);
 		var bodyradiuswithatmo = bodyradius + getVBodyAtmo(body);
