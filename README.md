@@ -5,7 +5,7 @@ MkON is a completely modular control panel UI for [Telemachus](http://forum.kerb
 * [Telemachus](http://forum.kerbalspaceprogram.com/threads/24594-0-23-Telemachus-%E2%80%93-Telemetry-and-Flight-Control-in-the-Web-Browser-(2014-1-11)) is a plugin by [Richard Bunt](https://github.com/richardbunt) for Kerbal Space Program that allows real-time in game telemetry to be viewed in the browser. It's pretty awesome, actually.
 
 <br />
-![MkON](/preview.jpg "MkON in action")
+![MkON](https://github.com/chrisnic/mkon/blob/master/preview.jpg "MkON in action")
 _MkON controls on a touch tablet, with a second monitor showing resource information._
 
 ## Features
